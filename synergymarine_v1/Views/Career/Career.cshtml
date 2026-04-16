@@ -1,0 +1,252 @@
+﻿@{
+    ViewData["Title"] = "Career";
+}
+
+<style>
+    /* ── HERO SECTION ── */
+    .cp-hero {
+        position: relative;
+        width: 100vw;
+        margin-left: calc(-50vw + 50%);
+        height: 380px;
+        overflow: hidden;
+        display: flex;
+        align-items: flex-end;
+        padding-bottom: 2.5rem;
+    }
+
+    .cp-hero-bg {
+        position: absolute;
+        inset: 0;
+        background: url('/images/6.jpg') center center / cover no-repeat;
+        filter: brightness(0.85);
+        transform: scale(1.03);
+        transition: transform 8s ease;
+    }
+
+    .cp-hero:hover .cp-hero-bg {
+        transform: scale(1.0);
+    }
+
+    .cp-hero-overlay {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(to bottom, rgba(10,20,50,0.2) 0%, rgba(10,20,50,0.75) 100%);
+    }
+
+    .cp-hero-content {
+        position: relative;
+        z-index: 2;
+        padding: 0 2rem;
+        max-width: 1140px;
+        margin: 0 auto;
+        width: 100%;
+    }
+
+    .cp-breadcrumb {
+        font-size: 12px;
+        font-weight: 600;
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+        color: #60a5fa;
+        margin-bottom: 0.75rem;
+    }
+
+    .cp-hero-title {
+        font-size: clamp(2rem, 4vw, 3rem);
+        font-weight: 700;
+        color: #ffffff;
+        letter-spacing: -0.5px;
+        line-height: 1.15;
+        margin: 0;
+    }
+
+    /* ── CONTENT SECTION ── */
+    .cp-content-wrapper {
+        background: #ffffff;
+        border-radius: 16px 16px 0 0;
+        margin-top: -2rem;
+        position: relative;
+        z-index: 3;
+        box-shadow: 0 -4px 30px rgba(0,0,0,0.08);
+        padding: 3rem 2rem 4rem;
+        max-width: 1140px;
+        margin-left: auto;
+        margin-right: auto;
+        width: 100%;
+    }
+
+    .cp-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 3.5rem;
+        align-items: start;
+    }
+
+    .cp-lead-heading {
+        font-size: 1.35rem;
+        font-weight: 700;
+        color: #1e293b;
+        line-height: 1.4;
+        margin-bottom: 1.5rem;
+        border-left: 4px solid #dc2626;
+        padding-left: 1rem;
+    }
+
+    .cp-body-text {
+        font-size: 0.95rem;
+        color: #4b5563;
+        line-height: 1.85;
+        margin-bottom: 1.25rem;
+    }
+
+    .cp-divider {
+        border: none;
+        border-top: 1px solid #e5e7eb;
+        margin: 1.75rem 0;
+    }
+
+    /* Vision / Mission blocks */
+    .vm-block {
+        background: #f8fafc;
+        border: 1px solid #e5e7eb;
+        border-radius: 12px;
+        padding: 1.75rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .vm-block-icon {
+        font-size: 1.5rem;
+        margin-bottom: 0.75rem;
+    }
+
+    .vm-block-title {
+        font-size: 1.1rem;
+        font-weight: 700;
+        color: #1a365d;
+        margin-bottom: 0.75rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+        .vm-block-title span.badge-label {
+            background: #2563eb;
+            color: #fff;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            border-radius: 4px;
+            padding: 0.2rem 0.6rem;
+        }
+
+    .vm-block-text {
+        font-size: 0.92rem;
+        color: #4b5563;
+        line-height: 1.85;
+        margin: 0;
+    }
+
+    /* Right: image */
+    .cp-image-col {
+        position: sticky;
+        top: 100px;
+    }
+
+    .cp-img-main {
+        width: 100%;
+        border-radius: 12px;
+        object-fit: cover;
+        height: 320px;
+        box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+        display: block;
+    }
+
+    .cp-img-caption {
+        font-size: 12px;
+        color: #9ca3af;
+        text-align: center;
+        margin-top: 0.6rem;
+        letter-spacing: 0.3px;
+    }
+
+    /* Responsive */
+    @@media (max-width: 768px) {
+        .cp-hero {
+            height: 280px;
+        }
+
+        .cp-grid {
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+
+        .cp-image-col {
+            position: static;
+        }
+
+        .cp-img-main {
+            height: 240px;
+        }
+
+        .cp-content-wrapper {
+            padding: 2rem 1.25rem 3rem;
+        }
+    }
+</style>
+
+<!-- ── HERO ── -->
+<div class="cp-hero">
+    <div class="cp-hero-bg"></div>
+    <div class="cp-hero-overlay"></div>
+    <div class="cp-hero-content">
+        <p class="cp-breadcrumb">Career</p>
+        <h1 class="cp-hero-title">Career</h1>
+    </div>
+</div>
+
+<!-- ── MAIN CONTENT ── -->
+<div class="cp-content-wrapper">
+    <div class="cp-grid">
+
+        <!-- LEFT: Text -->
+        <div class="cp-text-col">
+            <p class="cp-lead-heading">
+                Vacancy at Synergy Marine
+            </p>
+
+
+        
+            <!-- Mission Block -->
+            <div class="vm-block">
+                
+                <p class="vm-block-text">
+                    A career at Synergy Marine offers a global and collaborative experience working with some of the best and brightest in the marine industry.
+
+                    We’re looking for our next crew – someone who’s good for the role, good for Synergy Marine and good at lots of things. Things move quickly around here. At Internet speed. That means we have to be nimble, both in how we work and how we hire. We look for people who are great at lots of things, love big challenges and welcome big changes. We can’t have too many specialists in just one particular area. We’re looking for people who are good for Synergy Marine—and not just for right now, but for the long term.
+
+                    Along the way, you will be challenged to better develop your skills, pursue new goals and contribute to our pursuit of being an employer of choice for professional mariners worldwide. The individuals we seek are career minded, self-motivated, dedicated to superior performance and customer service, and committed to preserving our high operating and safety standards.
+
+                    <br /><br />Be a part of Synergy Mariners!
+
+                    <br /><br />Drop your resume at :
+                    <a href="mailto:vacancy@synergymarine.com.my" style="color:#dc2626; text-decoration:none;">
+                        vacancy@synergymarine.com.my
+                    </a>
+                    /
+                    <a href="mailto:crewing@synergymarine.com.my" style="color:#dc2626; text-decoration:none;">
+                        crewing@synergymarine.com.my
+                    </a>
+                </p>
+            </div>
+        </div>
+
+        <!-- RIGHT: Image -->
+        <div class="cp-image-col">
+            <img src="/images/workers.jpg" alt="Synergy Aurora Vessel" class="cp-img-main" />
+            <p class="cp-img-caption">MV Synergy Aurora — part of our operational fleet</p>
+        </div>
+
+    </div>
+</div>

@@ -1,0 +1,479 @@
+﻿@{
+    ViewData["Title"] = "Company Profile";
+}
+
+<style>
+    /* ── HERO SECTION ── */
+    .cp-hero {
+        position: relative;
+        width: 100vw;
+        margin-left: calc(-50vw + 50%);
+        height: 380px;
+        overflow: hidden;
+        display: flex;
+        align-items: flex-end;
+        padding-bottom: 2.5rem;
+    }
+
+    .cp-hero-bg {
+        position: absolute;
+        inset: 0;
+        background: url('/images/compimg.jpg') center center / cover no-repeat;
+        filter: brightness(0.85);
+        transform: scale(1.03);
+        transition: transform 8s ease;
+    }
+
+    .cp-hero:hover .cp-hero-bg {
+        transform: scale(1.0);
+    }
+
+    .cp-hero-overlay {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(to bottom, rgba(10,20,50,0.2) 0%, rgba(10,20,50,0.75) 100%);
+    }
+
+    .cp-hero-content {
+        position: relative;
+        z-index: 2;
+        padding: 0 2rem;
+        max-width: 1140px;
+        margin: 0 auto;
+        width: 100%;
+    }
+
+    .cp-breadcrumb {
+        font-size: 12px;
+        font-weight: 600;
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+        color: #60a5fa;
+        margin-bottom: 0.75rem;
+    }
+
+    .cp-hero-title {
+        font-size: clamp(2rem, 4vw, 3rem);
+        font-weight: 700;
+        color: #ffffff;
+        letter-spacing: -0.5px;
+        line-height: 1.15;
+        margin: 0;
+    }
+
+    /* ── CONTENT SECTION ── */
+    .cp-content-wrapper {
+        background: #ffffff;
+        border-radius: 16px 16px 0 0;
+        margin-top: -2rem;
+        position: relative;
+        z-index: 3;
+        box-shadow: 0 -4px 30px rgba(0,0,0,0.08);
+        padding: 3rem 2rem 4rem;
+        max-width: 1140px;
+        margin-left: auto;
+        margin-right: auto;
+        width: 100%;
+    }
+
+    /* ── CHANGED: stack image on top, content below ── */
+    .cp-grid {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 2.5rem;
+    }
+
+    /* Left: Text */
+    .cp-text-col {
+        width: 100%;
+        max-width: 860px;
+    }
+
+    .cp-lead-heading {
+        font-size: 1.35rem;
+        font-weight: 700;
+        color: #1e293b;
+        line-height: 1.4;
+        margin-bottom: 1.5rem;
+        border-left: 4px solid #dc2626;
+        padding-left: 1rem;
+    }
+
+    .cp-body-text {
+        font-size: 0.95rem;
+        color: #4b5563;
+        line-height: 1.85;
+        margin-bottom: 1.25rem;
+    }
+
+    .cp-divider {
+        border: none;
+        border-top: 1px solid #e5e7eb;
+        margin: 1.75rem 0;
+    }
+
+    /* Vessel service tags */
+    .cp-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        margin-top: 1.25rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .cp-tag {
+        background: #eff6ff;
+        color: #dc2626;
+        border: 1px solid #dc2626;
+        border-radius: 6px;
+        font-size: 12px;
+        font-weight: 600;
+        padding: 0.3rem 0.75rem;
+        letter-spacing: 0.3px;
+    }
+
+    /* ── CHANGED: image column now full-width centered ── */
+    .cp-image-col {
+        width: 100%;
+        max-width: 860px;
+        position: static;
+    }
+
+    .cp-img-main {
+        width: 100%;
+        border-radius: 12px;
+        object-fit: cover;
+        height: 420px;
+        box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+        display: block;
+    }
+
+    .cp-img-caption {
+        font-size: 12px;
+        color: #9ca3af;
+        text-align: center;
+        margin-top: 0.6rem;
+        letter-spacing: 0.3px;
+    }
+
+    /* Stats row */
+    .cp-stats {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1rem;
+        margin-top: 1.5rem;
+        padding-top: 1.5rem;
+    }
+
+    .cp-stat {
+        text-align: center;
+    }
+
+    .cp-stat-number {
+        font-size: 1.75rem;
+        font-weight: 800;
+        color: #1a365d;
+        line-height: 1;
+        display: block;
+    }
+
+    .cp-stat-label {
+        font-size: 11px;
+        color: #6b7280;
+        text-transform: uppercase;
+        letter-spacing: 0.8px;
+        font-weight: 500;
+        margin-top: 0.3rem;
+        display: block;
+    }
+
+    /* ── DIRECTORS SECTION ── */
+    .dir-section {
+        margin-top: 4rem;
+        padding-top: 3rem;
+    }
+
+    .dir-section-label {
+        font-size: 12px;
+        font-weight: 600;
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+        color: #2563eb;
+        margin-bottom: 0.5rem;
+    }
+
+    .dir-section-title {
+        font-size: 1.6rem;
+        font-weight: 700;
+        color: #1e293b;
+        margin-bottom: 0.5rem;
+    }
+
+    .dir-section-subtitle {
+        font-size: 0.95rem;
+        color: #6b7280;
+        margin-bottom: 2.5rem;
+        max-width: 540px;
+    }
+
+    .dir-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 3rem;
+        align-items: start;
+    }
+
+    .dir-card {
+        background: #ffffff;
+        border-radius: 16px;
+        overflow: visible;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        transition: transform 0.3s ease;
+    }
+
+        .dir-card:hover {
+            transform: translateY(-4px);
+        }
+
+    .dir-card-img-wrap {
+        width: 100%;
+        height: 380px;
+        overflow: hidden;
+        border-radius: 12px;
+        box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+    }
+
+        .dir-card-img-wrap img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: top center;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+
+    .dir-card:hover .dir-card-img-wrap img {
+        transform: scale(1.03);
+    }
+
+    .dir-card-body {
+        width: 100%;
+        padding: 1.75rem 0.25rem 2rem;
+        border-top: 3px solid #dc2626;
+        margin-top: 1.25rem;
+    }
+
+    .dir-name {
+        font-size: 1.15rem;
+        font-weight: 700;
+        color: #1e293b;
+        margin-bottom: 0.2rem;
+    }
+
+    .dir-role {
+        font-size: 12px;
+        font-weight: 600;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        color: #2563eb;
+        margin-bottom: 1.25rem;
+    }
+
+    .dir-bio {
+        font-size: 0.9rem;
+        color: #4b5563;
+        line-height: 1.85;
+    }
+
+    /* ── Fun "fun fact" highlight pill inside director cards ── */
+    .dir-highlight {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+        background: #f0fdf4;
+        border: 1px solid #bbf7d0;
+        color: #15803d;
+        border-radius: 999px;
+        font-size: 11px;
+        font-weight: 600;
+        padding: 0.25rem 0.75rem;
+        margin-bottom: 1rem;
+        letter-spacing: 0.3px;
+    }
+
+        .dir-highlight::before {
+            content: "⚓";
+            font-size: 12px;
+        }
+
+    /* ── Responsive ── */
+    @@media (max-width: 768px) {
+        .cp-hero {
+            height: 280px;
+        }
+
+        .cp-img-main {
+            height: 240px;
+        }
+
+        .cp-content-wrapper {
+            padding: 2rem 1.25rem 3rem;
+        }
+
+        .dir-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .dir-card-img-wrap {
+            height: 280px;
+        }
+    }
+</style>
+
+<!-- ── HERO ── -->
+<div class="cp-hero">
+    <div class="cp-hero-bg"></div>
+    <div class="cp-hero-overlay"></div>
+    <div class="cp-hero-content">
+        <p class="cp-breadcrumb">About Us / Company Overview</p>
+        <h1 class="cp-hero-title">Company Overview</h1>
+    </div>
+</div>
+
+<!-- ── MAIN CONTENT ── -->
+<div class="cp-content-wrapper">
+    <div class="cp-grid">
+
+        <!-- TOP: Image (moved above text) -->
+        <div class="cp-image-col">
+            <p class="cp-lead-heading">
+                Synergy Marine (M) Sdn Bhd was established on 2012 as a Bumiputera company.
+            </p>
+            <video src="/videos/FINAL.mp4" class="cp-img-main" autoplay muted loop playsinline></video>
+            <p class="cp-img-caption">MV Synergy Aurora — part of our operational fleet</p>
+        </div>
+
+        <!-- BOTTOM: Text -->
+        <div class="cp-text-col">
+
+
+            <p class="cp-body-text">
+                We are registered company under Companies Commission of Malaysia (1019421-T) and Ministry of Finance
+                that specialized in rendering customized products and services to the oil &amp; gas industry.
+            </p>
+
+            <p class="cp-body-text">
+                We provide comprehensive vessel services including:
+            </p>
+
+            <div class="cp-tags">
+                <span class="cp-tag">Anchor Handling Tug Supply Vessel (AHTS)</span>
+                <span class="cp-tag">Platform Supply Vessel (PSV)</span>
+                <span class="cp-tag">Straight Supply Vessel (SSV)</span>
+                <span class="cp-tag">Utility Vessel (UV)</span>
+                <span class="cp-tag">Safety Standby Vessel (SV)</span>
+                <span class="cp-tag">Diving Support Vessel (DSV)</span>
+                <span class="cp-tag">Accommodation Workboat / Workbarge (AWB)</span>
+            </div>
+
+            <p class="cp-body-text">
+                We are able to provide comprehensive service with combined experience of the management team.
+            </p>
+
+            <p class="cp-body-text">
+                Besides that, we also have clients in offshore engineering and services contractors, ship owners and
+                managers, logistic support companies, yards, drilling and offshore services companies and general
+                offshore contractors. We are committed to provide good service to our clients.
+            </p>
+
+            <p class="cp-body-text">
+                In Synergy Marine (M) Sdn Bhd, our management team has a significant number of years of experience
+                in the marine services industry. This allows us to provide our clients with the most appropriate
+                offshore support vessel and other services.
+            </p>
+
+            <!-- Stats -->
+            <div class="cp-stats">
+                <div class="cp-stat">
+                    <span class="cp-stat-number">2012</span>
+                    <span class="cp-stat-label">Established</span>
+                </div>
+                <div class="cp-stat">
+                    <span class="cp-stat-number">7+</span>
+                    <span class="cp-stat-label">Vessel Types</span>
+                </div>
+                <div class="cp-stat">
+                    <span class="cp-stat-number">O&G</span>
+                    <span class="cp-stat-label">Industry Focus</span>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- ── DIRECTORS SECTION ── -->
+    <div class="dir-section">
+        <center>
+            <p class="dir-section-label">Leadership</p>
+            <h2 class="dir-section-title">Meet the Captains of the Ship </h2>
+            <p class="dir-section-subtitle">
+                Every great voyage needs a great crew at the helm. Meet the experienced duo steering Synergy Marine
+                through the waves of the oil &amp; gas industry — decade after decade.
+            </p>
+        </center>
+        <div class="dir-grid">
+
+            <!-- Director 1 -->
+            <div class="dir-card">
+                <div class="dir-card-img-wrap">
+                    <img src="/images/Dato-Dr-Roslan-Ahmad.jpg" alt="Dato' Dr. Roslan Ahmad" />
+                </div>
+                <div class="dir-card-body">
+                    <span class="dir-highlight">34+ Years at Sea (Industry-wise!)</span>
+                    <p class="dir-name">Dato' Dr. Roslan Ahmad</p>
+                    <p class="dir-role">Managing Director & Founder</p>
+                    <p class="dir-bio">
+                        The man who started it all. YBhg. Dato' Dr. Roslan Bin Ahmad is a seasoned entrepreneur with
+                        over 34 years across developments, engineering, transportation, services, and maritime. Since
+                        2002, he has been deeply embedded in OSV chartering and operations — serving major oil companies
+                        across Malaysia, Thailand, and the Middle East.
+                    </p>
+                    <p class="dir-bio" style="margin-top:0.75rem;">
+                        Beyond Synergy Marine, he's an active voice in the industry: Vice President of MOSVA
+                        (Malaysia OSV Owners' Association) 2025/2026, lifetime member of MASTRA, and a member of
+                        IAMSP (UK), IMSML, and the Malaysia Norway Business Council. Basically, if there's a room
+                        where maritime decisions are being made — he's in it.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Director 2 -->
+            <div class="dir-card">
+                <div class="dir-card-img-wrap">
+                    <img src="/images/Mohd-Asmawi-Ilias.jpg" alt="Mohd Asmawi Ilias" />
+                </div>
+                <div class="dir-card-body">
+                    <span class="dir-highlight">20+ Years in Oil & Gas Finance</span>
+                    <p class="dir-name">Mohd Asmawi Ilias</p>
+                    <p class="dir-role">Finance Director</p>
+                    <p class="dir-bio">
+                        The financial backbone of Synergy Marine. With over 20 years of experience in the oil and gas
+                        industry and a 50% stake in the company, Mohd Asmawi doesn't just manage the numbers — he
+                        owns them. From accounting and treasury to taxation, audit, and investor relations, he keeps
+                        the company's financial engines running smooth.
+                    </p>
+                    <p class="dir-bio" style="margin-top:0.75rem;">
+                        But his role doesn't stop at the spreadsheet. He also oversees facilities and overall
+                        operations, making sure the whole organization runs like a well-oiled (pun intended) machine.
+                        The kind of person who makes sure the ship is always stocked before it sets sail.
+                    </p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>

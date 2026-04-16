@@ -1,0 +1,439 @@
+﻿@{
+    ViewData["Title"] = "HSE";
+}
+
+<style>
+    /* ── HERO SECTION ── */
+    .cp-hero {
+        position: relative;
+        width: 100vw;
+        margin-left: calc(-50vw + 50%);
+        height: 380px;
+        overflow: hidden;
+        display: flex;
+        align-items: flex-end;
+        padding-bottom: 2.5rem;
+    }
+
+    .cp-hero-bg {
+        position: absolute;
+        inset: 0;
+        background: url('/images/comp4.jpg') center center / cover no-repeat;
+        filter: brightness(0.85);
+        transform: scale(1.03);
+        transition: transform 8s ease;
+    }
+
+    .cp-hero:hover .cp-hero-bg {
+        transform: scale(1.0);
+    }
+
+    .cp-hero-overlay {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(to bottom, rgba(10,20,50,0.2) 0%, rgba(10,20,50,0.75) 100%);
+    }
+
+    .cp-hero-content {
+        position: relative;
+        z-index: 2;
+        padding: 0 2rem;
+        max-width: 1140px;
+        margin: 0 auto;
+        width: 100%;
+    }
+
+    .cp-breadcrumb {
+        font-size: 12px;
+        font-weight: 600;
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+        color: #60a5fa;
+        margin-bottom: 0.75rem;
+    }
+
+    .cp-hero-title {
+        font-size: clamp(2rem, 4vw, 3rem);
+        font-weight: 700;
+        color: #ffffff;
+        letter-spacing: -0.5px;
+        line-height: 1.15;
+        margin: 0;
+    }
+
+    /* ── CONTENT WRAPPER ── */
+    .cp-content-wrapper {
+        background: #ffffff;
+        border-radius: 16px 16px 0 0;
+        margin-top: -2rem;
+        position: relative;
+        z-index: 3;
+        box-shadow: 0 -4px 30px rgba(0,0,0,0.08);
+        padding: 3rem 2rem 4rem;
+        max-width: 1140px;
+        margin-left: auto;
+        margin-right: auto;
+        width: 100%;
+    }
+
+    .cp-lead-heading {
+        font-size: 1.35rem;
+        font-weight: 700;
+        color: #1e293b;
+        line-height: 1.4;
+        margin-bottom: 0.5rem;
+        border-left: 4px solid #dc2626;
+        padding-left: 1rem;
+    }
+
+    .cp-sub-text {
+        font-size: 0.95rem;
+        color: #6b7280;
+        margin-bottom: 2rem;
+        padding-left: 1.25rem;
+    }
+
+    .cp-divider {
+        border: none;
+        border-top: 1px solid #e5e7eb;
+        margin-bottom: 2rem;
+    }
+
+    /* ── TAB BUTTONS ── */
+    .tab-buttons {
+        display: flex;
+        flex-wrap: wrap;
+        background-color: #f1f5f9;
+        border: 1px solid #e2e8f0;
+        border-radius: 10px;
+        padding: 8px;
+        gap: 6px;
+        margin-bottom: 1.5rem;
+    }
+
+    .tab-btn {
+        background-color: transparent;
+        border: none;
+        padding: 10px 18px;
+        font-size: 0.88rem;
+        font-weight: 600;
+        color: #64748b;
+        cursor: pointer;
+        border-radius: 6px;
+        transition: all 0.2s ease;
+        flex-grow: 1;
+        text-align: center;
+        white-space: nowrap;
+    }
+
+        .tab-btn:hover {
+            background-color: #e2e8f0;
+            color: #1e293b;
+        }
+
+        .tab-btn.active {
+            background-color: #1a365d;
+            color: #ffffff;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+        }
+
+    /* ── TAB CONTENT ── */
+    .hse-container {
+        background: #ffffff;
+        border: 1px solid #e5e7eb;
+        border-radius: 12px;
+        overflow: hidden;
+    }
+
+    .tab-content {
+        display: none;
+        animation: fadeInTab 0.35s ease;
+        min-height: 420px;
+    }
+
+        .tab-content.active {
+            display: flex;
+        }
+
+    @@keyframes fadeInTab {
+        from {
+            opacity: 0;
+            transform: translateY(6px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    /* Image Side */
+    .policy-image {
+        width: 38%;
+        background-color: #f8fafc;
+        flex-shrink: 0;
+    }
+
+        .policy-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            min-height: 400px;
+            display: block;
+        }
+
+    /* Text Side */
+    .policy-desc {
+        width: 62%;
+        padding: 2.5rem 2.5rem 2.5rem 2.5rem;
+        overflow-y: auto;
+        max-height: 560px;
+    }
+
+        .policy-desc h3 {
+            color: #1a365d;
+            margin-bottom: 0.4rem;
+            font-size: 1.3rem;
+            font-weight: 700;
+        }
+
+        .policy-desc .policy-tag {
+            display: inline-block;
+            background: #eff6ff;
+            color: #dc2626;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            border-radius: 4px;
+            padding: 0.2rem 0.6rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .policy-desc p {
+            font-size: 0.93rem;
+            line-height: 1.85;
+            color: #4b5563;
+            margin-bottom: 1.25rem;
+        }
+
+    /* ── RESPONSIVE ── */
+    @@media (max-width: 768px) {
+        .cp-hero {
+            height: 280px;
+        }
+
+        .tab-content.active {
+            flex-direction: column;
+        }
+
+        .policy-image,
+        .policy-desc {
+            width: 100%;
+        }
+
+            .policy-image img {
+                min-height: 220px;
+                max-height: 260px;
+            }
+
+        .policy-desc {
+            padding: 1.5rem;
+            max-height: none;
+        }
+
+        .cp-content-wrapper {
+            padding: 2rem 1.25rem 3rem;
+        }
+
+        .tab-btn {
+            font-size: 0.8rem;
+            padding: 8px 10px;
+        }
+    }
+</style>
+
+<!-- ── HERO ── -->
+<div class="cp-hero">
+    <div class="cp-hero-bg"></div>
+    <div class="cp-hero-overlay"></div>
+    <div class="cp-hero-content">
+        <p class="cp-breadcrumb">About Us / HSE Policies</p>
+        <h1 class="cp-hero-title">Health, Safety & Environment</h1>
+    </div>
+</div>
+
+<!-- ── MAIN CONTENT ── -->
+<div class="cp-content-wrapper">
+
+    <p class="cp-lead-heading">We provides for safe practices in ship operation</p>
+    <p class="cp-sub-text">Ensuring the highest standards of safety, health, and environmental care in all our operations.</p>
+    
+
+    <!-- Tab Buttons -->
+    <div class="tab-buttons">
+        <button class="tab-btn active" onclick="openPolicy(event, 'policy1')">Health & Safety</button>
+        <button class="tab-btn" onclick="openPolicy(event, 'policy2')">Anti-Corruption</button>
+        <button class="tab-btn" onclick="openPolicy(event, 'policy3')">Drug & Alcohol</button>
+        <button class="tab-btn" onclick="openPolicy(event, 'policy4')">Environment</button>
+        <button class="tab-btn" onclick="openPolicy(event, 'policy5')">Ethics</button>
+        <button class="tab-btn" onclick="openPolicy(event, 'policy6')">Personnel</button>
+        <button class="tab-btn" onclick="openPolicy(event, 'policy7')">Security</button>
+        <button class="tab-btn" onclick="openPolicy(event, 'policy8')">Stop Work</button>
+    </div>
+
+    <!-- Tab Contents -->
+    <div class="hse-container">
+
+        <div id="policy1" class="tab-content active">
+            <div class="policy-image">
+                <img src="~/images/hse/health&safetypolicy.jpg" alt="Health and Safety" />
+            </div>
+            <div class="policy-desc">
+                <h3>Health & Safety Policy</h3>
+                <span class="policy-tag">HSE</span>
+                <p>SYNERGY MARINE consider health and safety to be equal in importance to all other primary business objectives. Company management, to the most senior level, are fully committed to creating and maintaining a safe and healthy working environment, ensuring safety at sea and the prevention of human injury or loss of life.</p>
+                <p>Within the Company's Safety Management System (SMS) has been developed for the onshore and offshore management of vessels in compliance with the ISM Code, international and flag state legislation and all other applicable mandatory rules and regulations.</p>
+                <p>Our SMS provides for safe practices in ship operation and preparation for responding to emergency situations. We have identified clear lines of communication between shore based and shipboard personnel and throughout the organisation.</p>
+                
+                <p>By establishing practical safeguards against all identified risks, the number of accidents, incidents and hazardous occurrences or situations is minimised. All such events are reported, lessons learned, and appropriate steps taken to avoid recurrence.</p>
+                <p>Through a process of internal communication and auditing, the Company will ensure that all employees are made aware of this Policy and that they familiarise themselves with, understand, and comply with Company health and safety instructions and procedures relevant to their own roles and responsibilities.</p>
+                <p>All employees from the Managing Director to each individual at the work site, including any contractor or other person employed, are responsible for the effect that their own actions and omissions have on the health and safety of themselves and others.</p>
+                <p>The effectiveness and suitability of our Safety Management System, and those operating it, are regularly reviewed by all levels of management and a process for continual improvement implemented and maintained.</p>
+            </div>
+        </div>
+
+        <div id="policy2" class="tab-content">
+            <div class="policy-image">
+                <img src="~/images/hse/health&safetypolicy.jpg" alt="Anti Corruption" />
+            </div>
+            <div class="policy-desc">
+                <h3>Global Anti-Corruption Policy</h3>
+                <span class="policy-tag">Ethics</span>
+                <p>SYNERGY MARINE is committed to the highest standards of ethics and integrity and it is our policy to fully comply with global anti-corruption and anti-bribery laws. This Global Anti-Corruption Policy supports the Synergy Marine's Code of Conduct and provides clear rules and guidance for handling situations that may involve corruption.</p>
+                <p>The Policy applies to all individuals working for, or on behalf of, Synergy Marine. Compliance with this Policy is mandatory, and failure to comply may result in disciplinary action up to termination of employment.</p>
+                
+                
+                <br />
+                <p><b>ANTI-CORRUPTION LAW</b></p><p>
+                 
+                    Synergy Marine has a legal and ethical obligation to reject corruption in all its forms. This means that we must actively seek to comply with the anti-corruption laws in all of the countries where we conduct business. Where local laws conflict, the higher standard must be followed.
+
+                    Synergy Marine and its personnel worldwide are subject to numerous anti-corruption and anti-bribery laws, including the Norwegian Penal Code, the Singapore Prevention of Corruption Act (“PCA”), the UK Bribery Act 2010 (“UKBA”) and the US Foreign Corrupt Practices Act (“FCPA”).
+                </p>
+            </div>
+        </div>
+
+        <div id="policy3" class="tab-content">
+            <div class="policy-image">
+                <img src="~/images/hse/health&safetypolicy.jpg" alt="Drug and Alcohol" />
+            </div>
+            <div class="policy-desc">
+                <h3>Drug & Alcohol Policy</h3>
+                <span class="policy-tag">Safety</span>
+                <p>Our health, safety and welfare can be seriously affected by the consumption of alcohol and/or controlled drugs. The use, consumption, supply, possession, concealment, transportation, purchase, manufacture, promotion or sale of, or being under the influence of 'Prohibited Substances' is forbidden.</p>
+                <p>The consumption of alcohol on-board ship is forbidden, as is being sufficiently under the influence of alcohol so as to potentially compromise the safety of self or others. This applies to all persons who work, visit and/or perform services on vessels owned or managed by the company.</p>
+                
+                <p>A violation of this Policy by any individual of the Company is likely to result in the individual being summarily dismissed. A violation by third party personnel will result in the offending party or parties being removed from the vessel.</p>
+                <p>
+                    The Company has the right to conduct breath testing, blood analysis and/or urine testing and/or search a person and their personal possessions at any time.
+
+                   
+                   
+                </p>
+                <p>
+                    The Company has provided a procedure ‘Drug and Alcohol Control’, detailing the enforcement of this Policy in SMS Section 06.
+                </p>
+                <p>
+                    SYNERGY MARINE has a policy of routine, random and “with cause” drug and alcohol testing.
+                </p>
+            </div>
+        </div>
+
+        <div id="policy4" class="tab-content">
+            <div class="policy-image">
+                <img src="~/images/hse/health&safetypolicy.jpg" alt="Environmental Protection" />
+            </div>
+            <div class="policy-desc">
+                <h3>Environmental Protection Policy</h3>
+                <span class="policy-tag">Environment</span>
+                <p>SYNERGY MARINE is fully committed to the prevention of damage to the environment, incorporating legislative requirements and information about significant impacts, in particular to the marine environment. We achieve this by minimising harmful operational indirect and accidental discharges and controlling our consumption of natural resources.</p>
+                <p>We focus on areas of our operations where our actions have the greatest potential for adverse environmental impact and we minimise this potential by evaluating environmental risks, segregating garbage and waste, planning voyages carefully, and providing pollution response equipment.</p>
+                
+           
+                <p>All employees from the Managing Director to each individual at the work site, including any contractor or other person employed, are responsible for the impact that their own actions and omissions have on the environment.</p>
+           
+            
+            </div>
+        </div>
+
+        <div id="policy5" class="tab-content">
+            <div class="policy-image">
+                <img src="~/images/hse/health&safetypolicy.jpg" alt="Ethics" />
+            </div>
+            <div class="policy-desc">
+                <h3>Ethics Policy</h3>
+                <span class="policy-tag">Integrity</span>
+                <p>It is our company policy to conduct business in an honest and ethical way, and without the use of corrupt practices or acts of bribery to obtain an unfair advantage, ensuring our activities remain consistent with the applicable laws and regulations of the countries in which we operate.</p>
+                <p>We will maintain a culture of openness, trust and integrity in all our business objectives. Bribery and corruption harm the societies in which the acts are committed. Such behaviour undermines the economy, brings disorder to the markets and curtails development.</p>
+                <p>All employees are expected to be honest in their dealings with our clients, vendors, all other stakeholders and with each other, respecting individual rights and ensuring that their actions are free from discrimination, corruption, libel, slander or harassment.</p>
+                <p>This is not only our cultural commitment but is also a legal requirement.</p>
+            </div>
+        </div>
+
+        <div id="policy6" class="tab-content">
+            <div class="policy-image">
+                <img src="~/images/hse/health&safetypolicy.jpg" alt="Personnel" />
+            </div>
+            <div class="policy-desc">
+                <h3>Personnel Policy</h3>
+                <span class="policy-tag">People</span>
+                <p>SYNERGY MARINE is fully committed to maintaining its reputation as a 'company of choice' for people wishing to work in the marine industry. We provide an environment where quality, integrity, innovation and excellence are rewarded by career development opportunities.</p>
+                <p>Within the Company's SMS, a Human Resources Department has been developed in line with 'best practices' and in compliance with regulatory, legal and customer requirements. We provide a competent, motivated and stable workforce by recruiting qualified individuals.</p>
+                <p>All employees are treated fairly and with respect at all times and ensure that there is no discrimination on grounds of sex, race, age, religion, sexuality and disability.</p>
+            </div>
+        </div>
+
+        <div id="policy7" class="tab-content">
+            <div class="policy-image">
+                <img src="~/images/hse/health&safetypolicy.jpg" alt="Security" />
+            </div>
+            <div class="policy-desc">
+                <h3>Security Policy</h3>
+                <span class="policy-tag">Security</span>
+                <p>SYNERGY MARINE is committed to ensuring that effective security measures are implemented on-board company owned and managed ships in compliance with the International Maritime Organisation's (IMO) amendments to Safety of Life at Sea (SOLAS) Chapter XI-2 and Parts A&amp;B of the International Ship and Port Facility Security Code (ISPS).</p>
+                <p>The Company has appointed a land based Company Security Officer who has the responsibility and authority to develop, implement and maintain effective security practices. The Master has the overriding authority and responsibility to make decisions regarding the security of the ship.</p>
+            </div>
+        </div>
+
+        <div id="policy8" class="tab-content">
+            <div class="policy-image">
+                <img src="~/images/hse/health&safetypolicy.jpg" alt="Stop Work Authority" />
+            </div>
+            <div class="policy-desc">
+                <h3>Stop Work Authority</h3>
+                <span class="policy-tag">Safety</span>
+                <p>Stop Work Authority (SWA) is the right and duty of each employee to stop a job that is unsafe or that is felt to be unsafe. Any employee can shut down or suspend any job if it is thought that an unsafe working condition exists at any time or at any place.</p>
+                <p>If you or any employee is in doubt whether any health, safety or environmental aspect of any operation is proceeding properly, it is your duty to stop the operation immediately until the condition can be improved or the doubt is resolved. Stopping unsafe work prevents people from being injured and helps avoid accidents.</p>
+                <p>SYNERGY MARINE will fully support any good faith use of the SWA.</p>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script>
+    function openPolicy(evt, policyName) {
+        document.querySelectorAll('.tab-content').forEach(el => {
+            el.style.display = 'none';
+            el.classList.remove('active');
+        });
+        document.querySelectorAll('.tab-btn').forEach(btn => {
+            btn.classList.remove('active');
+        });
+        const target = document.getElementById(policyName);
+        target.style.display = 'flex';
+        target.classList.add('active');
+        evt.currentTarget.classList.add('active');
+    }
+</script>

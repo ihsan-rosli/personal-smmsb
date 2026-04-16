@@ -1,0 +1,712 @@
+﻿@{
+    ViewData["Title"] = "Licenses & Recognition";
+}
+
+<style>
+    /* ── HERO ── */
+    .lr-hero {
+        position: relative;
+        width: 100vw;
+        margin-left: calc(-50vw + 50%);
+        height: 380px;
+        overflow: hidden;
+        display: flex;
+        align-items: flex-end;
+        padding-bottom: 2.5rem;
+    }
+
+    .lr-hero-bg {
+        position: absolute;
+        inset: 0;
+        background: url('/images/5.jpg') center center / cover no-repeat;
+        filter: brightness(0.85);
+        transform: scale(1.03);
+        transition: transform 8s ease;
+    }
+
+    .lr-hero:hover .lr-hero-bg {
+        transform: scale(1.0);
+    }
+
+    .lr-hero-overlay {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(to bottom, rgba(10,20,50,0.2) 0%, rgba(10,20,50,0.78) 100%);
+    }
+
+    .lr-hero-content {
+        position: relative;
+        z-index: 2;
+        padding: 0 2rem;
+        max-width: 1140px;
+        margin: 0 auto;
+        width: 100%;
+    }
+
+    .lr-breadcrumb {
+        font-size: 12px;
+        font-weight: 600;
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+        color: #60a5fa;
+        margin-bottom: 0.75rem;
+    }
+
+    .lr-hero-title {
+        font-size: clamp(2rem, 4vw, 3rem);
+        font-weight: 700;
+        color: #ffffff;
+        letter-spacing: -0.5px;
+        line-height: 1.15;
+        margin: 0 0 0.4rem;
+    }
+
+    .lr-hero-sub {
+        font-size: 0.92rem;
+        color: rgba(255,255,255,0.55);
+        font-weight: 300;
+    }
+
+    /* ── CONTENT WRAPPER ── */
+    .lr-content-wrapper {
+        background: #f9fafb;
+        border-radius: 16px 16px 0 0;
+        margin-top: -2rem;
+        position: relative;
+        z-index: 3;
+        box-shadow: 0 -4px 30px rgba(0,0,0,0.08);
+        padding: 3.5rem 2rem 5rem;
+        max-width: 1140px;
+        margin-left: auto;
+        margin-right: auto;
+        width: 100%;
+    }
+
+    /* ── SECTION HEADER ── */
+    .lr-section-header {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        margin-bottom: 2rem;
+    }
+
+    .lr-section-icon {
+        width: 44px;
+        height: 44px;
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.3rem;
+        flex-shrink: 0;
+    }
+
+        .lr-section-icon.blue {
+            background: #eff6ff;
+            border: 1px solid #bfdbfe;
+        }
+
+        .lr-section-icon.gold {
+            background: #fffbeb;
+            border: 1px solid #fde68a;
+        }
+
+    .lr-section-title {
+        font-size: 1.3rem;
+        font-weight: 700;
+        color: #1e293b;
+        margin: 0;
+        line-height: 1.2;
+    }
+
+    .lr-section-desc {
+        font-size: 0.82rem;
+        color: #94a3b8;
+        margin-top: 0.2rem;
+    }
+
+    .lr-section-line {
+        flex: 1;
+        height: 1px;
+        background: linear-gradient(to right, #e2e8f0, transparent);
+    }
+
+    .lr-section-divider {
+        border: none;
+        border-top: 2px solid #e2e8f0;
+        margin: 3.5rem 0;
+    }
+
+    /* ── CARD GRID ── */
+    .lr-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.25rem;
+    }
+
+    /* ── LICENSE CARD ── */
+    .lr-lic-card {
+        background: #ffffff;
+        border: 1px solid #e2e8f0;
+        border-radius: 14px;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        transition: box-shadow 0.2s, transform 0.2s, border-color 0.2s;
+        cursor: pointer;
+    }
+
+        .lr-lic-card:hover {
+            box-shadow: 0 10px 32px rgba(37,99,235,0.1);
+            border-color: #bfdbfe;
+            transform: translateY(-3px);
+        }
+
+    .lr-lic-thumb-wrap {
+        position: relative;
+        width: 100%;
+        height: 200px;
+        overflow: hidden;
+        background: #f1f5f9;
+    }
+
+    .lr-lic-thumb {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: top center;
+        transition: transform 0.4s ease;
+    }
+
+    .lr-lic-card:hover .lr-lic-thumb {
+        transform: scale(1.04);
+    }
+
+    .lr-lic-overlay-btn {
+        position: absolute;
+        inset: 0;
+        background: rgba(15,37,87,0.0);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: background 0.2s;
+    }
+
+    .lr-lic-card:hover .lr-lic-overlay-btn {
+        background: rgba(15,37,87,0.45);
+    }
+
+    .lr-lic-view-label {
+        background: rgba(255,255,255,0.95);
+        color: #1e40af;
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        padding: 0.4rem 1rem;
+        border-radius: 20px;
+        opacity: 0;
+        transform: translateY(6px);
+        transition: opacity 0.2s, transform 0.2s;
+    }
+
+    .lr-lic-card:hover .lr-lic-view-label {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    .lr-lic-body {
+        padding: 1.1rem 1.25rem 1.25rem;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 0.3rem;
+    }
+
+    .lr-lic-issuer {
+        font-size: 10px;
+        font-weight: 700;
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+        color: #2563eb;
+    }
+
+    .lr-lic-name {
+        font-size: 0.88rem;
+        font-weight: 700;
+        color: #1e293b;
+        line-height: 1.35;
+    }
+
+    .lr-lic-meta {
+        font-size: 0.78rem;
+        color: #6b7280;
+        margin-top: 0.2rem;
+    }
+
+    .lr-lic-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.3rem;
+        background: #f0fdf4;
+        border: 1px solid #bbf7d0;
+        color: #15803d;
+        font-size: 10px;
+        font-weight: 700;
+        padding: 0.2rem 0.6rem;
+        border-radius: 20px;
+        margin-top: 0.5rem;
+        width: fit-content;
+    }
+
+        .lr-lic-badge::before {
+            content: '';
+            width: 5px;
+            height: 5px;
+            background: #22c55e;
+            border-radius: 50%;
+        }
+
+    /* ── AWARD CARD ── */
+    .lr-awd-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.25rem;
+    }
+
+    .lr-awd-card {
+        background: #ffffff;
+        border: 1px solid #e2e8f0;
+        border-radius: 14px;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        transition: box-shadow 0.2s, transform 0.2s, border-color 0.2s;
+        cursor: pointer;
+    }
+
+        .lr-awd-card:hover {
+            box-shadow: 0 10px 32px rgba(234,179,8,0.15);
+            border-color: #fde68a;
+            transform: translateY(-3px);
+        }
+
+    .lr-awd-thumb-wrap {
+        position: relative;
+        width: 100%;
+        height: 220px;
+        overflow: hidden;
+        background: #fafaf0;
+    }
+
+    .lr-awd-thumb {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center top;
+        transition: transform 0.4s ease;
+    }
+
+    .lr-awd-card:hover .lr-awd-thumb {
+        transform: scale(1.05);
+    }
+
+    .lr-awd-overlay-btn {
+        position: absolute;
+        inset: 0;
+        background: rgba(0,0,0,0);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: background 0.2s;
+    }
+
+    .lr-awd-card:hover .lr-awd-overlay-btn {
+        background: rgba(0,0,0,0.4);
+    }
+
+    .lr-awd-view-label {
+        background: rgba(255,255,255,0.95);
+        color: #92400e;
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        padding: 0.4rem 1rem;
+        border-radius: 20px;
+        opacity: 0;
+        transform: translateY(6px);
+        transition: opacity 0.2s, transform 0.2s;
+    }
+
+    .lr-awd-card:hover .lr-awd-view-label {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    .lr-awd-body {
+        padding: 1.1rem 1.25rem 1.25rem;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 0.3rem;
+    }
+
+    .lr-awd-issuer {
+        font-size: 10px;
+        font-weight: 700;
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+        color: #d97706;
+    }
+
+    .lr-awd-name {
+        font-size: 0.88rem;
+        font-weight: 700;
+        color: #1e293b;
+        line-height: 1.35;
+    }
+
+    .lr-awd-year {
+        font-size: 0.78rem;
+        color: #6b7280;
+        margin-top: 0.2rem;
+    }
+
+    .lr-awd-tier {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.3rem;
+        font-size: 10px;
+        font-weight: 700;
+        padding: 0.2rem 0.7rem;
+        border-radius: 20px;
+        margin-top: 0.5rem;
+        width: fit-content;
+    }
+
+        .lr-awd-tier.gold {
+            background: #fffbeb;
+            border: 1px solid #fde68a;
+            color: #92400e;
+        }
+
+        .lr-awd-tier.silver {
+            background: #f8fafc;
+            border: 1px solid #cbd5e1;
+            color: #475569;
+        }
+
+        .lr-awd-tier.award {
+            background: #eff6ff;
+            border: 1px solid #bfdbfe;
+            color: #1d4ed8;
+        }
+
+    /* ── LIGHTBOX ── */
+    .lr-lightbox {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(0,0,0,0.88);
+        z-index: 9999;
+        align-items: center;
+        justify-content: center;
+        padding: 1.5rem;
+    }
+
+        .lr-lightbox.active {
+            display: flex;
+        }
+
+    .lr-lightbox-img {
+        max-width: 90vw;
+        max-height: 88vh;
+        border-radius: 10px;
+        box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+        object-fit: contain;
+    }
+
+    .lr-lightbox-close {
+        position: fixed;
+        top: 1.25rem;
+        right: 1.5rem;
+        background: rgba(255,255,255,0.15);
+        border: 1px solid rgba(255,255,255,0.2);
+        color: #fff;
+        font-size: 1.4rem;
+        width: 42px;
+        height: 42px;
+        border-radius: 50%;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: background 0.2s;
+        line-height: 1;
+    }
+
+        .lr-lightbox-close:hover {
+            background: rgba(255,255,255,0.28);
+        }
+
+    /* ── RESPONSIVE ── */
+    @@media (max-width: 900px) {
+        .lr-grid,
+        .lr-awd-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+
+    @@media (max-width: 560px) {
+        .lr-grid,
+        .lr-awd-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .lr-hero {
+            height: 280px;
+        }
+
+        .lr-content-wrapper {
+            padding: 2rem 1.25rem 3.5rem;
+        }
+    }
+</style>
+
+<!-- ── HERO ── -->
+<div class="lr-hero">
+    <div class="lr-hero-bg"></div>
+    <div class="lr-hero-overlay"></div>
+    <div class="lr-hero-content">
+        <p class="lr-breadcrumb">Licenses &amp; Certifications</p>
+        <h1 class="lr-hero-title">Licenses &amp; Certifications</h1>
+        @* <p class="lr-hero-sub">Our credentials, memberships, and industry achievements.</p> *@
+    </div>
+</div>
+
+<!-- ── MAIN CONTENT ── -->
+<div class="lr-content-wrapper">
+
+    <!-- ════ SECTION 1: LICENSES & CERTIFICATIONS ════ -->
+    <div class="lr-section-header">
+       @*  <div class="lr-section-icon blue">📄</div> *@
+        <div>
+            <h2 class="lr-section-title">Licenses</h2>
+            <div class="lr-section-desc">Registrations, memberships &amp; compliance documents</div>
+        </div>
+        <div class="lr-section-line"></div>
+    </div>
+
+    <div class="lr-grid">
+
+        <!-- MASA -->
+        <div class="lr-lic-card lr-lightbox-trigger">
+            <div class="lr-lic-thumb-wrap">
+                <img src="/images/license/certficate_of_membership_masa.jpg" alt="MASA Certificate" class="lr-lic-thumb lr-lightbox-img-src" />
+                <div class="lr-lic-overlay-btn"><span class="lr-lic-view-label">View Certificate</span></div>
+            </div>
+            <div class="lr-lic-body">
+                <div class="lr-lic-issuer">MASA</div>
+                <div class="lr-lic-name">Certificate of Membership — Malaysia Shipowners' Association</div>
+                <div class="lr-lic-meta">Membership No. MO080/25 &nbsp;·&nbsp; Jan 2025 – Dec 2025</div>
+                <span class="lr-lic-badge">Active</span>
+            </div>
+        </div>
+
+        <!-- MOSVA -->
+        <div class="lr-lic-card lr-lightbox-trigger">
+            <div class="lr-lic-thumb-wrap">
+                <img src="/images/license/certificate_of_membership_mosva.jpg" alt="MOSVA Certificate" class="lr-lic-thumb lr-lightbox-img-src" />
+                <div class="lr-lic-overlay-btn"><span class="lr-lic-view-label">View Certificate</span></div>
+            </div>
+            <div class="lr-lic-body">
+                <div class="lr-lic-issuer">MOSVA</div>
+                <div class="lr-lic-name">Certificate of Membership — Malaysia OSV Owners' Association</div>
+                <div class="lr-lic-meta">Membership No. OM050 &nbsp;·&nbsp; Member since 22 May 2020</div>
+                <span class="lr-lic-badge">Active</span>
+            </div>
+        </div>
+
+        <!-- Document of Compliance -->
+        <div class="lr-lic-card lr-lightbox-trigger">
+            <div class="lr-lic-thumb-wrap">
+                <img src="/images/license/doc_of_compliance.jpg" alt="Document of Compliance" class="lr-lic-thumb lr-lightbox-img-src" />
+                <div class="lr-lic-overlay-btn"><span class="lr-lic-view-label">View Certificate</span></div>
+            </div>
+            <div class="lr-lic-body">
+                <div class="lr-lic-issuer">Government of Malaysia</div>
+                <div class="lr-lic-name">Document of Compliance — ISM Code (SOLAS 1974)</div>
+                <div class="lr-lic-meta">DOC: 047/6062–NF/2025 &nbsp;·&nbsp; Valid until 17 Dec 2030</div>
+                <span class="lr-lic-badge">Active</span>
+            </div>
+        </div>
+
+        <!-- Kementerian Kewangan -->
+        <div class="lr-lic-card lr-lightbox-trigger">
+            <div class="lr-lic-thumb-wrap">
+                <img src="/images/license/kementerian_kewangan_malaysia.jpg" alt="Kementerian Kewangan" class="lr-lic-thumb lr-lightbox-img-src" />
+                <div class="lr-lic-overlay-btn"><span class="lr-lic-view-label">View Certificate</span></div>
+            </div>
+            <div class="lr-lic-body">
+                <div class="lr-lic-issuer">Kementerian Kewangan Malaysia</div>
+                <div class="lr-lic-name">Sijil Akuan Pendaftaran Syarikat Bumiputera</div>
+                <div class="lr-lic-meta">No. Sijil: BP65934330173642287 &nbsp;·&nbsp; Valid until 08 Dec 2026</div>
+                <span class="lr-lic-badge">Active</span>
+            </div>
+        </div>
+
+        <!-- MOGSC -->
+        <div class="lr-lic-card lr-lightbox-trigger">
+            <div class="lr-lic-thumb-wrap">
+                <img src="/images/license/mogsc.jpg" alt="MOGSC Certificate" class="lr-lic-thumb lr-lightbox-img-src" />
+                <div class="lr-lic-overlay-btn"><span class="lr-lic-view-label">View Certificate</span></div>
+            </div>
+            <div class="lr-lic-body">
+                <div class="lr-lic-issuer">MOGSC</div>
+                <div class="lr-lic-name">Certificate of Membership — Malaysian Oil &amp; Gas Services Council</div>
+                <div class="lr-lic-meta">Membership No. 781 &nbsp;·&nbsp; Member since February 2018</div>
+                <span class="lr-lic-badge">Active</span>
+            </div>
+        </div>
+
+        <!-- PETRONAS -->
+        <div class="lr-lic-card lr-lightbox-trigger">
+            <div class="lr-lic-thumb-wrap">
+                <img src="/images/license/petronas.jpg" alt="PETRONAS License" class="lr-lic-thumb lr-lightbox-img-src" />
+                <div class="lr-lic-overlay-btn"><span class="lr-lic-view-label">View Certificate</span></div>
+            </div>
+            <div class="lr-lic-body">
+                <div class="lr-lic-issuer">PETRONAS</div>
+                <div class="lr-lic-name">License to Supply Product/Service — Exploration &amp; Oil/Gas Companies</div>
+                <div class="lr-lic-meta">Issued 26 May 2025 &nbsp;·&nbsp; Valid until 07 Jun 2028</div>
+                <span class="lr-lic-badge">Active</span>
+            </div>
+        </div>
+
+    </div>
+
+    <hr class="lr-section-divider" />
+
+    <!-- ════ SECTION 2: AWARDS & RECOGNITION ════ -->
+    <div class="lr-section-header">
+       @*  <div class="lr-section-icon gold">🏆</div> *@
+        <div>
+            <h2 class="lr-section-title">Awards &amp; Recognition</h2>
+            <div class="lr-section-desc">Industry honours and safety achievements</div>
+        </div>
+        <div class="lr-section-line"></div>
+    </div>
+
+    <div class="lr-awd-grid">
+
+        <!-- CPOC Gold 2021 -->
+        <div class="lr-awd-card lr-lightbox-trigger">
+            <div class="lr-awd-thumb-wrap">
+                <img src="/images/license/reg_hse_gold award.jpg" alt="CPOC HSE Gold 2021" class="lr-awd-thumb lr-lightbox-img-src" />
+                <div class="lr-awd-overlay-btn"><span class="lr-awd-view-label">View Award</span></div>
+            </div>
+            <div class="lr-awd-body">
+                <div class="lr-awd-issuer">CPOC — Carigali-PTTEPI Operating Company</div>
+                <div class="lr-awd-name">HSE Achievement 2021 — Gold Award</div>
+                <div class="lr-awd-year">Awarded to Synergy Marine (M) Sdn Bhd</div>
+                <span class="lr-awd-tier gold">🥇 Gold Award</span>
+            </div>
+        </div>
+
+        <!-- CPOC Silver 2020 -->
+        <div class="lr-awd-card lr-lightbox-trigger">
+            <div class="lr-awd-thumb-wrap">
+                <img src="/images/license/reg_cpoc.jpg" alt="CPOC HSE Silver 2020" class="lr-awd-thumb lr-lightbox-img-src" />
+                <div class="lr-awd-overlay-btn"><span class="lr-awd-view-label">View Award</span></div>
+            </div>
+            <div class="lr-awd-body">
+                <div class="lr-awd-issuer">CPOC — Carigali-PTTEPI Operating Company</div>
+                <div class="lr-awd-name">HSE Achievement 2020 — Silver Award</div>
+                <div class="lr-awd-year">Awarded to Synergy Marine (M) Sdn Bhd</div>
+                <span class="lr-awd-tier silver">🥈 Silver Award</span>
+            </div>
+        </div>
+
+        <!-- Shell / PETRONAS -->
+        <div class="lr-awd-card lr-lightbox-trigger">
+            <div class="lr-awd-thumb-wrap">
+                <img src="/images/license/reg_shell.jpg" alt="Shell PETRONAS Award" class="lr-awd-thumb lr-lightbox-img-src" />
+                <div class="lr-awd-overlay-btn"><span class="lr-awd-view-label">View Award</span></div>
+            </div>
+            <div class="lr-awd-body">
+                <div class="lr-awd-issuer">Shell &amp; PETRONAS Collaboration</div>
+                <div class="lr-awd-name">FORC Wells — 1,000,000 Man-Hours LTI Free</div>
+                <div class="lr-awd-year">2nd August 2015</div>
+                <span class="lr-awd-tier award">⚓ Safety Milestone</span>
+            </div>
+        </div>
+
+        <!-- HESS -->
+        <div class="lr-awd-card lr-lightbox-trigger">
+            <div class="lr-awd-thumb-wrap">
+                <img src="/images/license/reg_hess.jpg" alt="HESS Safety Recognition" class="lr-awd-thumb lr-lightbox-img-src" />
+                <div class="lr-awd-overlay-btn"><span class="lr-awd-view-label">View Award</span></div>
+            </div>
+            <div class="lr-awd-body">
+                <div class="lr-awd-issuer">HESS Malaysia Logistics</div>
+                <div class="lr-awd-name">2017 Logistics Safety Recognition</div>
+                <div class="lr-awd-year">LTI Free Operations &amp; Good Safety Performance</div>
+                <span class="lr-awd-tier award">🛡 Safety Recognition</span>
+            </div>
+        </div>
+
+        <!-- BrandLaureate -->
+        <div class="lr-awd-card lr-lightbox-trigger">
+            <div class="lr-awd-thumb-wrap">
+                <img src="/images/license/reg_trophy.jpg" alt="BrandLaureate Trophy" class="lr-awd-thumb lr-lightbox-img-src" />
+                <div class="lr-awd-overlay-btn"><span class="lr-awd-view-label">View Award</span></div>
+            </div>
+            <div class="lr-awd-body">
+                <div class="lr-awd-issuer">The BrandLaureate</div>
+                <div class="lr-awd-name">SMEs Best Brands Award — Signature Brand, Oil &amp; Gas Solutions</div>
+                <div class="lr-awd-year">2018 – 2019</div>
+                <span class="lr-awd-tier gold">⭐ Best Brand Award</span>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+<!-- ── LIGHTBOX ── -->
+<div class="lr-lightbox" id="lrLightbox" onclick="closeLightbox(event)">
+    <button class="lr-lightbox-close" onclick="closeLightboxBtn(); event.stopPropagation();">✕</button>
+    <img src="" alt="Certificate Preview" class="lr-lightbox-img" id="lrLightboxImg" />
+</div>
+
+<script>
+    // Read src directly from the thumbnail img inside each card — no duplicate paths needed
+    document.querySelectorAll('.lr-lightbox-trigger').forEach(function (card) {
+        card.addEventListener('click', function () {
+            var imgEl = card.querySelector('.lr-lightbox-img-src');
+            if (!imgEl) return;
+            var lb    = document.getElementById('lrLightbox');
+            var lbImg = document.getElementById('lrLightboxImg');
+            lbImg.src = imgEl.src;          // uses the already-resolved absolute URL
+            lb.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+    });
+
+    function closeLightboxBtn() {
+        var lb = document.getElementById('lrLightbox');
+        lb.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+
+    // Click the dark backdrop to close
+    document.getElementById('lrLightbox').addEventListener('click', function (e) {
+        if (e.target === this) closeLightboxBtn();
+    });
+
+    // Esc key to close
+    document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') closeLightboxBtn();
+    });
+</script>

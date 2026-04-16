@@ -1,0 +1,1182 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="icon" type="image/x-icon" href="~/images/favicon.ico" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Synergy Marine</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/SM.styles.css" asp-append-version="true" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <style>
+
+        :root {
+            --primary-color: #1a365d;
+            --secondary-color: #2563eb;
+            --accent-color: #3b82f6;
+            --text-dark: #1e293b;
+            --text-light: #64748b;
+            --bg-light: #f8fafc;
+            --border-color: #e2e8f0;
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.05);
+            --shadow-md: 0 4px 6px rgba(0,0,0,0.07);
+            --shadow-lg: 0 10px 25px rgba(0,0,0,0.1);
+            --nav-height: 70px;
+        }
+
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            height: 100%;
+            width: 100%;
+        }
+
+        input, textarea {
+            user-select: text !important;
+            -webkit-user-select: text !important;
+        }
+
+        .cp-content-wrapper {
+            text-align: justify;
+        }
+
+        body {
+            font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            color: var(--text-dark);
+            background-color: #ffffff;
+            line-height: 1.6;
+            overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+            user-select: none;
+            -webkit-user-select: none;
+            -ms-user-select: none;
+        }
+
+        /* ════════════════════════════════
+                   TOP INFO BAR
+                   ════════════════════════════════ */
+        .topbar {
+            background-color: #1a365d;
+            color: rgba(255,255,255,0.95);
+            font-size: 12px;
+            padding: 0.5rem 0;
+            width: 100%;
+            position: relative;
+            z-index: 1001;
+            display: block !important;
+            visibility: visible !important;
+            border-bottom: 1px solid rgba(255,255,255,0.12);
+        }
+
+            .topbar .container-fluid {
+                max-width: 1400px;
+                margin: 0 auto;
+                padding: 0 1.5rem;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                gap: 0.5rem;
+            }
+
+        .topbar-left {
+            display: flex;
+            align-items: center;
+            gap: 1.25rem;
+            flex-wrap: wrap;
+            min-width: 0;
+        }
+
+        .topbar-item {
+            display: flex;
+            align-items: center;
+            gap: 0.35rem;
+            color: rgba(255,255,255,0.9);
+            text-decoration: none;
+            transition: color 0.2s;
+            white-space: nowrap;
+            font-size: 12px;
+        }
+
+            .topbar-item:hover {
+                color: #ffffff;
+            }
+
+            .topbar-item i {
+                font-size: 11px;
+                color: #bfdbfe;
+                flex-shrink: 0;
+            }
+
+        .topbar-right {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            flex-shrink: 0;
+        }
+
+        .topbar-social {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 26px;
+            height: 26px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.15);
+            color: rgba(255,255,255,0.9);
+            text-decoration: none;
+            font-size: 12px;
+            transition: all 0.2s;
+        }
+
+            .topbar-social:hover {
+                background: rgba(255,255,255,0.3);
+                color: #fff;
+                transform: translateY(-1px);
+            }
+
+        /* ════════════════════════════════
+                   NAVBAR
+                   ════════════════════════════════ */
+        .navbar-corporate {
+            background: #ffffff;
+            padding: 0;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+            transition: box-shadow 0.3s;
+            width: 100%;
+            border-bottom: 1px solid #e5e7eb;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+            .navbar-corporate.scrolled {
+                box-shadow: 0 2px 12px rgba(0,0,0,0.1);
+            }
+
+            .navbar-corporate .container-fluid {
+                max-width: 1400px;
+                margin: 0 auto;
+                padding: 0 1.5rem;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                width: 100%;
+            }
+
+        .navbar-brand {
+            font-weight: 700;
+            color: #1a365d !important;
+            transition: opacity 0.2s;
+            padding: 0.75rem 0;
+            margin: 0;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+        }
+
+        .navbar-logo {
+            height: 42px;
+            width: auto;
+        }
+
+        .navbar-brand:hover {
+            opacity: 0.8;
+        }
+
+        .navbar-nav {
+            align-items: center;
+            flex-direction: row;
+            gap: 0;
+        }
+
+        .navbar-collapse {
+            flex-grow: 0;
+        }
+
+        .navbar-nav .nav-link {
+            color: #1f2937 !important;
+            font-weight: 500;
+            font-size: 14px;
+            padding: 1.4rem 0.7rem !important;
+            border-bottom: 3px solid transparent;
+            transition: all 0.2s;
+            white-space: nowrap;
+            position: relative;
+        }
+
+            .navbar-nav .nav-link:hover,
+            .navbar-nav .nav-link.active {
+                color: #dc2626 !important;
+                border-bottom-color: #dc2626;
+            }
+
+        .navbar-nav .dropdown-menu {
+            border-radius: 12px;
+            box-shadow: 0 8px 28px rgba(0,0,0,0.12);
+            padding: 0.5rem 0;
+            margin-top: 0;
+            min-width: 220px;
+            border: 1px solid #e5e7eb;
+            background: #ffffff;
+            overflow: hidden;
+        }
+
+        .navbar-nav .dropdown-item {
+            color: #1f2937;
+            font-weight: 500;
+            font-size: 14px;
+            padding: 0.75rem 1.25rem;
+            transition: all 0.15s;
+            background: transparent;
+            display: block;
+        }
+
+            .navbar-nav .dropdown-item:hover,
+            .navbar-nav .dropdown-item:focus {
+                background: #fff5f5;
+                color: #dc2626;
+                padding-left: 1.5rem;
+            }
+
+            .navbar-nav .dropdown-item + .dropdown-item {
+                border-top: 1px solid #f1f5f9;
+            }
+
+        .navbar-nav .dropdown-toggle::after {
+            display: none;
+        }
+
+        .navbar-nav .dropdown > a::after {
+            content: '';
+            display: inline-block;
+            margin-left: 0.3rem;
+            vertical-align: 0.1rem;
+            border-top: 0.28em solid;
+            border-right: 0.28em solid transparent;
+            border-left: 0.28em solid transparent;
+            transition: transform 0.2s;
+        }
+
+        .navbar-nav .dropdown.show > a::after {
+            transform: rotate(180deg);
+        }
+
+        .navbar-toggler {
+            border: 1px solid #d1d5db;
+            padding: 0.45rem 0.65rem;
+            border-radius: 8px;
+            background: transparent;
+        }
+
+            .navbar-toggler:focus {
+                box-shadow: 0 0 0 3px rgba(37,99,235,0.15);
+                border-color: #2563eb;
+            }
+
+        .navbar-toggler-icon {
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%2831,41,55,1%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+        }
+
+        /* ════════════════════════════════
+                   MAIN
+                   ════════════════════════════════ */
+        .main-container {
+            flex: 1 0 auto;
+            padding: 0;
+            margin: 0;
+            width: 100%;
+            background: #ffffff;
+        }
+
+        main {
+            animation: pgFadeIn 0.45s ease;
+        }
+
+        @@keyframes pgFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(8px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ════════════════════════════════
+                   FOOTER
+                   ════════════════════════════════ */
+        .footer-corporate {
+            flex-shrink: 0;
+            background-color: #1a365d;
+            color: rgba(255,255,255,0.8);
+            padding: 3.5rem 0 0;
+            width: 100%;
+        }
+
+            .footer-corporate .footer-inner {
+                max-width: 1400px;
+                margin: 0 auto;
+                padding: 0 2rem;
+            }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1.5fr;
+            gap: 2.5rem;
+            margin-bottom: 2.5rem;
+            align-items: start;
+        }
+
+        .footer-section h5 {
+            color: #ffffff;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            font-size: 1rem;
+        }
+
+        .footer-section h6 {
+            color: rgba(255,255,255,0.9);
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-section p,
+        .footer-section a {
+            color: rgba(255,255,255,0.65);
+            text-decoration: none;
+            display: block;
+            margin-bottom: 0.4rem;
+            transition: all 0.2s;
+            line-height: 1.75;
+            font-size: 13px;
+        }
+
+            .footer-section a:hover {
+                color: #93c5fd;
+                padding-left: 4px;
+            }
+
+        .footer-section ul {
+            color: rgba(255,255,255,0.65);
+            font-size: 13px;
+            padding-left: 1.1rem;
+            margin-bottom: 0.75rem;
+        }
+
+            .footer-section ul li {
+                margin-bottom: 0.25rem;
+                line-height: 1.7;
+            }
+
+        .footer-social-icons {
+            display: flex;
+            gap: 0.6rem;
+            margin-top: 1rem;
+        }
+
+        .footer-social-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.15);
+            color: rgba(255,255,255,0.9);
+            font-size: 14px;
+            text-decoration: none;
+            transition: all 0.2s;
+            flex-shrink: 0;
+        }
+
+            .footer-social-btn:hover {
+                background: rgba(255,255,255,0.3);
+                color: #ffffff;
+                transform: translateY(-2px);
+            }
+
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.5rem;
+            margin-bottom: 0.65rem;
+        }
+
+            .contact-item span {
+                flex-shrink: 0;
+                margin-top: 1px;
+            }
+
+            .contact-item p {
+                margin: 0;
+                color: rgba(255,255,255,0.65);
+                font-size: 13px;
+                line-height: 1.6;
+            }
+
+        .footer-map {
+            border-radius: 10px;
+            overflow: hidden;
+            height: 220px;
+            margin-top: 0.75rem;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+            .footer-map iframe {
+                width: 100%;
+                height: 100%;
+                border: 0;
+                filter: brightness(0.85) contrast(1.1);
+            }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,0.08);
+            padding: 1.25rem 2rem;
+            text-align: center;
+            font-size: 12px;
+            background: rgba(0,0,0,0.18);
+            color: rgba(255,255,255,0.6);
+        }
+
+            .footer-bottom a {
+                color: #60a5fa;
+                text-decoration: none;
+            }
+
+                .footer-bottom a:hover {
+                    color: #93c5fd;
+                }
+
+        /* Cards & Buttons */
+        .card {
+            border: none;
+            border-radius: 12px;
+            box-shadow: var(--shadow-sm);
+            transition: all 0.3s ease;
+        }
+
+            .card:hover {
+                box-shadow: var(--shadow-lg);
+                transform: translateY(-4px);
+            }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--secondary-color), var(--accent-color));
+            border: none;
+            padding: 0.75rem 2rem;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+            .btn-primary:hover {
+                transform: translateY(-2px);
+                box-shadow: var(--shadow-md);
+            }
+
+        /* ════════════════════════════════
+                   PAGE LOADER
+                   ════════════════════════════════ */
+        .page-loader {
+            position: fixed;
+            inset: 0;
+            background: #1a365d;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            transition: opacity 0.2s ease;
+        }
+
+            .page-loader.hidden {
+                opacity: 0;
+                pointer-events: none;
+            }
+
+        .loader-spinner {
+            width: 46px;
+            height: 46px;
+            border: 3px solid rgba(255,255,255,0.2);
+            border-top-color: #ffffff;
+            border-radius: 50%;
+            animation: spin 0.9s linear infinite;
+        }
+
+        @@keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* ════════════════════════════════
+                   MUSIC TOGGLE BUTTON
+                   ════════════════════════════════ */
+        .music-btn {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            z-index: 9998;
+            width: 46px;
+            height: 46px;
+            border-radius: 50%;
+            background: #1a365d;
+            color: #ffffff;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.25);
+            transition: all 0.25s ease;
+            outline: none;
+        }
+
+            .music-btn:hover {
+                background: #2563eb;
+                transform: translateY(-2px) scale(1.06);
+                box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+            }
+
+            .music-btn:active {
+                transform: scale(0.95);
+            }
+
+            .music-btn.playing::before {
+                content: '';
+                position: absolute;
+                inset: -4px;
+                border-radius: 50%;
+                border: 2px solid rgba(37, 99, 235, 0.5);
+                animation: musicPulse 1.8s ease-out infinite;
+            }
+
+        @@keyframes musicPulse {
+            0%   { transform: scale(1);   opacity: 0.8; }
+            100% { transform: scale(1.5); opacity: 0;   }
+        }
+
+        /* ════════════════════════════════
+                   COPY PROTECTION TOAST
+                   ════════════════════════════════ */
+        #copy-warning-toast {
+            position: fixed;
+            bottom: 80px;
+            left: 50%;
+            transform: translateX(-50%) translateY(20px);
+            background: #dc2626;
+            color: #fff;
+            padding: 0.7rem 1.4rem;
+            border-radius: 10px;
+            font-size: 14px;
+            font-weight: 500;
+            font-family: 'DM Sans', sans-serif;
+            box-shadow: 0 6px 24px rgba(220,38,38,0.35);
+            z-index: 99999;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.25s ease, transform 0.25s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.55rem;
+            white-space: nowrap;
+        }
+
+        #copy-warning-toast.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        #copy-warning-toast i {
+            font-size: 13px;
+        }
+
+        /* ════ Responsive ════ */
+        @@media (max-width: 1200px) {
+            .footer-content {
+                grid-template-columns: 1fr 1fr;
+                gap: 2rem;
+            }
+        }
+
+        @@media (max-width: 1024px) {
+            .navbar-nav .nav-link {
+                font-size: 13px;
+                padding: 1.4rem 0.55rem !important;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr 1fr;
+                gap: 2rem;
+            }
+        }
+
+        @@media (max-width: 991px) {
+            .navbar-corporate .container-fluid {
+                flex-wrap: wrap;
+                padding: 0.5rem 1rem;
+            }
+
+            .navbar-brand {
+                padding: 0.5rem 0;
+            }
+
+            .navbar-logo {
+                height: 36px;
+            }
+
+            .navbar-collapse {
+                width: 100%;
+                background: #fff;
+                border-top: 1px solid #e5e7eb;
+                max-height: 75vh;
+                overflow-y: auto;
+                -webkit-overflow-scrolling: touch;
+            }
+
+            .navbar-nav {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 0;
+                padding: 0.5rem 0;
+            }
+
+                .navbar-nav .nav-link {
+                    padding: 0.8rem 1.25rem !important;
+                    border-bottom: none !important;
+                    border-left: 3px solid transparent !important;
+                    font-size: 15px;
+                }
+
+                    .navbar-nav .nav-link:hover, .navbar-nav .nav-link.active {
+                        color: #dc2626 !important;
+                        border-left-color: #dc2626 !important;
+                        background: #fff5f5;
+                    }
+
+                .navbar-nav .dropdown-menu {
+                    border: none;
+                    box-shadow: none;
+                    border-radius: 0;
+                    padding: 0;
+                    min-width: 100%;
+                    background: #f8fafc;
+                    margin: 0;
+                    overflow: visible;
+                }
+
+                .navbar-nav .dropdown-item {
+                    font-size: 14px;
+                    padding: 0.65rem 1.75rem;
+                    border-top: 1px solid #e5e7eb;
+                    color: #374151;
+                }
+
+                    .navbar-nav .dropdown-item:hover {
+                        color: #2563eb;
+                        background: #eff6ff;
+                        padding-left: 2rem;
+                    }
+
+                .navbar-nav .dropdown > a::after {
+                    float: right;
+                    margin-top: 0.4rem;
+                }
+        }
+
+        @@media (max-width: 768px) {
+            .topbar-item.topbar-addr {
+                display: none;
+            }
+
+            .topbar .container-fluid {
+                padding: 0 1rem;
+            }
+
+            .footer-corporate {
+                padding: 2.5rem 0 0;
+            }
+
+                .footer-corporate .footer-inner {
+                    padding: 0 1.25rem;
+                }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 1.75rem;
+            }
+
+            .footer-map {
+                height: 180px;
+            }
+
+            .footer-bottom {
+                padding: 1rem 1.25rem;
+                font-size: 11px;
+            }
+
+            .music-btn {
+                bottom: 16px;
+                right: 16px;
+                width: 42px;
+                height: 42px;
+                font-size: 16px;
+            }
+
+            #copy-warning-toast {
+                font-size: 13px;
+                padding: 0.6rem 1.1rem;
+                white-space: normal;
+                text-align: center;
+                max-width: 90vw;
+            }
+        }
+
+        @@media (max-width: 480px) {
+            .topbar-item.topbar-email {
+                display: none;
+            }
+
+            .topbar-left {
+                gap: 0.75rem;
+            }
+
+            .topbar-item span {
+                font-size: 11px;
+            }
+
+            .navbar-logo {
+                height: 32px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Page Loader -->
+    <div class="page-loader" id="pageLoader">
+        <div class="loader-spinner"></div>
+    </div>
+
+    <!-- Copy Protection Toast -->
+    <div id="copy-warning-toast">
+        <i class="fas fa-lock"></i> Content is protected and cannot be copied.
+    </div>
+
+    <!--
+        ══════════════════════════════════════════
+        HIDDEN VIDEO ELEMENT FOR BACKGROUND MUSIC
+        - autoplay + muted   → browser allows it
+        - JS unmutes it immediately on 'playing'  
+        - Result: sound plays automatically!
+        - Place audio.mp3 in: wwwroot/audio/
+        ══════════════════════════════════════════
+    -->
+    <video id="bgMusic" autoplay muted loop playsinline
+           style="position:fixed;width:0;height:0;opacity:0;pointer-events:none;overflow:hidden;top:-9999px;left:-9999px;">
+        <source src="~/audio/audio.mp3" type="audio/mpeg">
+    </video>
+
+    <!-- Floating Music Toggle Button -->
+    <button class="music-btn" id="musicBtn" title="Mute music">
+        <i class="fas fa-volume-up" id="musicIcon"></i>
+    </button>
+
+    <!-- ── TOP INFO BAR ── -->
+    <div class="topbar">
+        <div class="container-fluid">
+            <div class="topbar-left">
+                <a href="tel:60355108260" class="topbar-item">
+                    <i class="fas fa-phone"></i>
+                    <span>603-55108260 / 8261</span>
+                </a>
+                <a href="mailto:Enquiry@synergymarine.com.my" class="topbar-item topbar-email">
+                    <i class="fas fa-envelope"></i>
+                    <span>Enquiry@synergymarine.com.my</span>
+                </a>
+                <span class="topbar-item topbar-addr">
+                    <i class="fas fa-location-dot"></i>
+                    <span>Seksyen 15, 40200 Shah Alam, Selangor</span>
+                </span>
+            </div>
+            <div class="topbar-right">
+                <a href="https://www.linkedin.com/company/synergy-marine-m-sdn-bhd/" target="_blank" rel="noopener noreferrer" class="topbar-social" title="LinkedIn">
+                    <i class="fab fa-linkedin-in"></i>
+                </a>
+                <a href="https://www.facebook.com/people/Synergy-Marine-M-Sdn-Bhd/61581695814415/" target="_blank" rel="noopener noreferrer" class="topbar-social" title="Facebook">
+                    <i class="fab fa-facebook-f"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- ── NAVBAR ── -->
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-corporate" id="mainNavbar">
+            <div class="container-fluid">
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Home">
+                    <img src="~/images/image-removebg-preview.png" alt="Synergy Marine" class="navbar-logo" />
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#navbarMain" aria-controls="navbarMain"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarMain">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Home">Home</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="aboutDropdown" role="button"
+                               data-bs-toggle="dropdown" aria-expanded="false">About Us</a>
+                            <ul class="dropdown-menu" aria-labelledby="aboutDropdown">
+                                <li><a class="dropdown-item" asp-area="" asp-controller="About" asp-action="CompanyProfile">Company Profile</a></li>
+                                <li><a class="dropdown-item" asp-area="" asp-controller="About" asp-action="MdMeeting">MD's Greeting</a></li>
+                                <li><a class="dropdown-item" asp-area="" asp-controller="About" asp-action="VisionMission">Vision &amp; Mission</a></li>
+                                <li><a class="dropdown-item" asp-area="" asp-controller="About" asp-action="CoreValues">Core Values</a></li>
+                                <li><a class="dropdown-item" asp-area="" asp-controller="About" asp-action="HSE">HSE</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="servicesDropdown" role="button"
+                               data-bs-toggle="dropdown" aria-expanded="false">Service</a>
+                            <ul class="dropdown-menu" aria-labelledby="servicesDropdown">
+                                <li><a class="dropdown-item" asp-area="" asp-controller="Service" asp-action="CapabilitySpectrum">Capability Spectrum</a></li>
+                                <li><a class="dropdown-item" asp-area="" asp-controller="Service" asp-action="Clients">Clients</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="fleetDropdown" role="button"
+                               data-bs-toggle="dropdown" aria-expanded="false">Fleet</a>
+                            <ul class="dropdown-menu" aria-labelledby="fleetDropdown">
+                                <li><a class="dropdown-item" asp-area="" asp-controller="Fleet" asp-action="FleetOverview">Fleet Overview</a></li>
+                                <li><a class="dropdown-item" asp-area="" asp-controller="Fleet" asp-action="OurFleetSpecifications">Fleet Specifications</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-controller="ESG" asp-action="ESG">ESG</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="mediaDropdown" role="button"
+                               data-bs-toggle="dropdown" aria-expanded="false">Media</a>
+                            <ul class="dropdown-menu" aria-labelledby="mediaDropdown">
+                                <li><a class="dropdown-item" asp-area="" asp-controller="News" asp-action="News">News</a></li>
+@*                                 <li><a class="dropdown-item" asp-area="" asp-controller="News" asp-action="VesselOperations">Vessel Operations</a></li>
+ *@                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-controller="License_Cert" asp-action="License">License &amp; Cert</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-controller="Career" asp-action="Career">Career</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-controller="ContactUs" asp-action="ContactUs">Contact</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- ── MAIN ── -->
+    <div class="main-container">
+        <main role="main">
+            @RenderBody()
+        </main>
+    </div>
+
+    <!-- ── FOOTER ── -->
+    <footer class="footer-corporate">
+        <div class="footer-inner">
+            <div class="footer-content">
+
+                <!-- Col 1: About + Social -->
+                <div class="footer-section">
+                    <h5>About Company</h5>
+                    <p>
+                        Synergy Marine (M) Sdn. Bhd. was established in 2012 as a Bumiputera company.
+                        We are registered under the Companies Commission of Malaysia (1019421-T) and the
+                        Ministry of Finance, specialising in marine transportation services for the oil &amp; gas industry.
+                    </p>
+                    <div style="display:flex; gap:0.6rem; margin-top:1rem;">
+                        <a href="https://www.linkedin.com/company/synergy-marine-m-sdn-bhd/"
+                           target="_blank" rel="noopener noreferrer" title="LinkedIn"
+                           style="display:flex;align-items:center;justify-content:center;width:34px;height:34px;
+                                  border-radius:50%;background:rgba(255,255,255,0.15);color:rgba(255,255,255,0.9);
+                                  font-size:14px;text-decoration:none;transition:all 0.2s;flex-shrink:0;">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="https://www.facebook.com/people/Synergy-Marine-M-Sdn-Bhd/61581695814415/"
+                           target="_blank" rel="noopener noreferrer" title="Facebook"
+                           style="display:flex;align-items:center;justify-content:center;width:34px;height:34px;
+                                  border-radius:50%;background:rgba(255,255,255,0.15);color:rgba(255,255,255,0.9);
+                                  font-size:14px;text-decoration:none;transition:all 0.2s;flex-shrink:0;">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Col 2: Quick Links -->
+                <div class="footer-section">
+                    <h5>Quick Links</h5>
+                    <a asp-area="" asp-controller="Home" asp-action="Home">Home</a>
+                    <a asp-area="" asp-controller="About" asp-action="CompanyProfile">Company Profile</a>
+                    <a asp-area="" asp-controller="About" asp-action="VisionMission">Vision &amp; Mission</a>
+                    <a asp-area="" asp-controller="About" asp-action="CoreValues">Core Values</a>
+                    <a asp-area="" asp-controller="Service" asp-action="CapabilitySpectrum">Capability Spectrum</a>
+                    <a asp-area="" asp-controller="Fleet" asp-action="FleetOverview">Fleet Overview</a>
+                    <a asp-area="" asp-controller="ESG" asp-action="ESG">ESG</a>
+                    <a asp-area="" asp-controller="News" asp-action="News">News</a>
+                    <a asp-area="" asp-controller="License_Cert" asp-action="License">License &amp; Cert</a>
+                    <a asp-area="" asp-controller="Career" asp-action="Career">Career</a>
+                    <a asp-area="" asp-controller="ContactUs" asp-action="ContactUs">Contact</a>
+                </div>
+
+                <!-- Col 3: Contact Details -->
+                <div class="footer-section">
+                    <h5>Contact Details</h5>
+                    <div class="contact-item">
+                        <span>📍</span>
+                        <p>No. 21, Jalan Tukul P 15/P, Seksyen 15, 40200 Shah Alam, Selangor</p>
+                    </div>
+                    <div class="contact-item">
+                        <span>📞</span>
+                        <p>603-5510 8260 / 8261</p>
+                    </div>
+                    <div class="contact-item">
+                        <span>📠</span>
+                        <p>603-55234431</p>
+                    </div>
+                    <div class="contact-item">
+                        <span>✉️</span>
+                        <p>Enquiry@synergymarine.com.my</p>
+                    </div>
+                </div>
+
+                <!-- Col 4: Map -->
+                <div class="footer-section">
+                    <h5>Our Location</h5>
+                    <div class="footer-map">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3984.11277371547!2d101.52130701059669!3d3.0645129968983564!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31cc4d62befc493f%3A0x63d36791f4cb87fd!2sSynergy%20Marine%20(M)%20Sdn%20Bhd!5e0!3m2!1sen!2smy!4v1773639439239!5m2!1sen!2smy"
+                                width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                                referrerpolicy="no-referrer-when-downgrade" title="Synergy Marine Office Location"></iframe>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="footer-bottom">
+            Copyright &copy; Synergy Marine Sdn. Bhd. 2012. All Rights Reserved.
+        </div>
+    </footer>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+    <script>
+        // ── Page Loader ──
+        window.addEventListener('load', function () {
+            setTimeout(function () {
+                document.getElementById('pageLoader').classList.add('hidden');
+            }, 100);
+        });
+
+        // ── Navbar scroll shadow ──
+        window.addEventListener('scroll', function () {
+            document.getElementById('mainNavbar').classList.toggle('scrolled', window.scrollY > 50);
+        }, { passive: true });
+
+        // ── Smooth scroll ──
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+            });
+        });
+
+        // ── Active nav link ──
+        document.addEventListener('DOMContentLoaded', function () {
+            const path = window.location.pathname.toLowerCase();
+            document.querySelectorAll('.navbar-nav .nav-link').forEach(link => {
+                const href = (link.getAttribute('href') || '').toLowerCase();
+                if (href && href !== '#' && path.includes(href)) link.classList.add('active');
+            });
+        });
+
+        // ══════════════════════════════════════════════════════════════
+        //  BACKGROUND MUSIC — Hidden <video> autoplay trick
+        // ══════════════════════════════════════════════════════════════
+        (function () {
+            const video = document.getElementById('bgMusic');
+            const btn   = document.getElementById('musicBtn');
+            const icon  = document.getElementById('musicIcon');
+
+            const savedMuted = sessionStorage.getItem('musicMuted') === 'true';
+            const savedTime  = parseFloat(sessionStorage.getItem('musicTime') || '0');
+
+            function updateBtn(muted) {
+                if (muted) {
+                    icon.className = 'fas fa-volume-mute';
+                    btn.classList.remove('playing');
+                    btn.title = 'Play music';
+                } else {
+                    icon.className = 'fas fa-volume-up';
+                    btn.classList.add('playing');
+                    btn.title = 'Mute music';
+                }
+            }
+
+            setInterval(function () {
+                if (!video.paused) {
+                    sessionStorage.setItem('musicTime', video.currentTime);
+                }
+            }, 500);
+
+            window.addEventListener('beforeunload', function () {
+                sessionStorage.setItem('musicTime', video.currentTime);
+                sessionStorage.setItem('musicMuted', video.muted);
+            });
+
+            video.addEventListener('playing', function onFirstPlay() {
+                video.removeEventListener('playing', onFirstPlay);
+                if (savedTime > 0) { video.currentTime = savedTime; }
+                video.muted = savedMuted;
+                video.volume = 1;
+                updateBtn(savedMuted);
+            });
+
+            setTimeout(function () {
+                if (video.paused) {
+                    updateBtn(true);
+                    var events = ['click', 'scroll', 'touchstart', 'keydown', 'mousemove'];
+                    function tryPlay() {
+                        video.muted = false;
+                        video.volume = 1;
+                        video.play().then(function () {
+                            updateBtn(savedMuted);
+                            video.muted = savedMuted;
+                            events.forEach(function (ev) { document.removeEventListener(ev, tryPlay); });
+                        }).catch(function () {});
+                    }
+                    events.forEach(function (ev) { document.addEventListener(ev, tryPlay, { passive: true }); });
+                }
+            }, 1000);
+
+            btn.addEventListener('click', function (e) {
+                e.stopPropagation();
+                var nowMuted = !video.muted;
+                video.muted = nowMuted;
+                sessionStorage.setItem('musicMuted', nowMuted);
+                updateBtn(nowMuted);
+                if (video.paused) { video.play().catch(function () {}); }
+            });
+
+            updateBtn(savedMuted);
+        })();
+    </script>
+
+    <script>
+        // ════════════════════════════════
+        //  CONTENT PROTECTION + COPY WARNING TOAST
+        // ════════════════════════════════
+
+        (function () {
+            const toast = document.getElementById('copy-warning-toast');
+            let toastTimer = null;
+
+            // Show the red warning toast
+            function showWarning() {
+                clearTimeout(toastTimer);
+                toast.classList.add('show');
+                toastTimer = setTimeout(function () {
+                    toast.classList.remove('show');
+                }, 2800);
+            }
+
+            // Disable right-click context menu
+            document.addEventListener('contextmenu', function (e) {
+                e.preventDefault();
+                showWarning();
+            });
+
+            // Disable copy
+            document.addEventListener('copy', function (e) {
+                e.preventDefault();
+                showWarning();
+            });
+
+            // Disable cut
+            document.addEventListener('cut', function (e) {
+                e.preventDefault();
+                showWarning();
+            });
+
+            // Disable paste on non-form elements
+            document.addEventListener('paste', function (e) {
+                if (!e.target.matches('input, textarea, [contenteditable]')) {
+                    e.preventDefault();
+                }
+            });
+
+            // Disable drag-to-copy on non-form elements
+            document.addEventListener('dragstart', function (e) {
+                if (!e.target.matches('input, textarea, img, a')) {
+                    e.preventDefault();
+                }
+            });
+
+            // Disable keyboard shortcuts
+            document.addEventListener('keydown', function (e) {
+                const key = e.key.toLowerCase();
+
+                // Ctrl / Cmd combinations
+                if (e.ctrlKey || e.metaKey) {
+                    // Block: C (copy), A (select all), U (view source), S (save), P (print)
+                    if (['c', 'a', 'u', 's', 'p'].includes(key)) {
+                        e.preventDefault();
+                        showWarning();
+                        return;
+                    }
+                }
+
+                // Ctrl + Shift + I / J / C (DevTools)
+                if ((e.ctrlKey || e.metaKey) && e.shiftKey && ['i', 'j', 'c'].includes(key)) {
+                    e.preventDefault();
+                    return;
+                }
+
+                // F12 (DevTools)
+                if (e.key === 'F12') {
+                    e.preventDefault();
+                    return;
+                }
+
+                // Print Screen
+                if (e.key === 'PrintScreen') {
+                    e.preventDefault();
+                    showWarning();
+                    return;
+                }
+            });
+
+        })();
+    </script>
+
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

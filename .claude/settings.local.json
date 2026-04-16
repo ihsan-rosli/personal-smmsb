@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(find \"C:\\\\_localrepo\\\\personal\\\\personal-synergy-marine\" -type f -name \"*.env*\" -o -name \"*.config\" -o -name \"appsettings*\" -o -name \"web.config\" -o -name \"*secret*\" -o -name \"*credentials*\" -o -name \"*.key\" 2>/dev/null | head -50)",
+      "Bash(find \"C:\\\\_localrepo\\\\personal\\\\personal-synergy-marine\" -type f \\\\\\( -name \"*.json\" -o -name \"*.config\" -o -name \"*.xml\" \\\\\\) ! -path \"*/node_modules/*\" ! -path \"*/.vs/*\" ! -path \"*/bin/*\" ! -path \"*/obj/*\" ! -path \"*/wwwroot/lib/*\" 2>/dev/null | head -30)",
+      "Bash(find \"C:\\\\_localrepo\\\\personal\\\\personal-synergy-marine\" -type f \\\\\\( -name \"*.cs\" -o -name \"*.csproj\" \\\\\\) ! -path \"*/bin/*\" ! -path \"*/obj/*\" ! -path \"*/.vs/*\" 2>/dev/null | head -20)",
+      "Bash(grep -r \"localhost\\\\|127\\\\.0\\\\.0\\\\.1\\\\|192\\\\.168\\\\|10\\\\.0\\\\|172\\\\.1[6-9]\\\\|172\\\\.2[0-9]\\\\|172\\\\.3[0-1]\" \"C:\\\\_localrepo\\\\personal\\\\personal-synergy-marine\" --include=\"*.json\" --include=\"*.config\" --include=\"*.cs\" 2>/dev/null | grep -v \"wwwroot/lib\" | grep -v \".vs\" | head -20)",
+      "Bash(grep -r \"\\\\.env\\\\|SECRET\\\\|API_KEY\\\\|API.KEY\\\\|APIKEY\\\\|DB_PASSWORD\\\\|PASSWORD=\\\\|PASSWD=\\\\|PWD=\" \"C:\\\\_localrepo\\\\personal\\\\personal-synergy-marine\" --include=\"*.cs\" --include=\"*.json\" --include=\"*.config\" --include=\"*.xml\" 2>/dev/null | grep -v \"wwwroot/lib\" | grep -v \".vs\" | grep -v \"bin/\" | grep -v \"obj/\")"
+    ]
+  }
+}

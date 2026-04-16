@@ -1,0 +1,1013 @@
+﻿@{
+    ViewData["Title"] = "News";
+}
+
+<style>
+    /* ── HERO ── */
+    .ni-hero {
+        position: relative;
+        width: 100vw;
+        margin-left: calc(-50vw + 50%);
+        height: 380px;
+        overflow: hidden;
+        display: flex;
+        align-items: flex-end;
+        padding-bottom: 2.5rem;
+    }
+
+    .ni-hero-bg {
+        position: absolute;
+        inset: 0;
+        background: url('/images/3.jpg') center center / cover no-repeat;
+        filter: brightness(0.85);
+        /* removed transform scale – saves a composite layer on load */
+        transition: transform 8s ease;
+        will-change: transform;
+    }
+
+    .ni-hero:hover .ni-hero-bg { transform: scale(1.03); }
+
+    .ni-hero-overlay {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(to bottom, rgba(10,20,50,0.2) 0%, rgba(10,20,50,0.78) 100%);
+    }
+
+    .ni-hero-content {
+        position: relative;
+        z-index: 2;
+        padding: 0 2rem;
+        max-width: 1140px;
+        margin: 0 auto;
+        width: 100%;
+    }
+
+    .ni-breadcrumb {
+        font-size: 12px;
+        font-weight: 600;
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+        color: #60a5fa;
+        margin-bottom: 0.75rem;
+    }
+
+    .ni-hero-title {
+        font-size: clamp(2rem, 4vw, 3rem);
+        font-weight: 700;
+        color: #ffffff;
+        letter-spacing: -0.5px;
+        line-height: 1.15;
+        margin: 0 0 0.4rem;
+    }
+
+    /* ── CONTENT WRAPPER ── */
+    .ni-content-wrapper {
+        background: #f9fafb;
+        border-radius: 16px 16px 0 0;
+        margin-top: -2rem;
+        position: relative;
+        z-index: 3;
+        box-shadow: 0 -4px 30px rgba(0,0,0,0.08);
+        padding: 3rem 2rem 5rem;
+        max-width: 1140px;
+        margin-left: auto;
+        margin-right: auto;
+        width: 100%;
+    }
+
+    /* ── FILTER BAR ── */
+    .ni-filter-bar {
+        display: flex;
+        align-items: center;
+        gap: 0.6rem;
+        flex-wrap: wrap;
+        margin-bottom: 2.5rem;
+        padding-bottom: 1.5rem;
+        border-bottom: 1px solid #e2e8f0;
+    }
+
+    .ni-filter-label {
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 1.2px;
+        text-transform: uppercase;
+        color: #94a3b8;
+        margin-right: 0.5rem;
+    }
+
+    .ni-filter-btn {
+        background: #ffffff;
+        border: 1px solid #e2e8f0;
+        color: #475569;
+        font-size: 12px;
+        font-weight: 600;
+        padding: 0.4rem 1rem;
+        border-radius: 20px;
+        cursor: pointer;
+        transition: background 0.15s, border-color 0.15s, color 0.15s;
+    }
+
+        .ni-filter-btn:hover,
+        .ni-filter-btn.active {
+            background: #1d4ed8;
+            border-color: #1d4ed8;
+            color: #fff;
+        }
+
+    /* ── FEATURED ── */
+    .ni-featured {
+        display: grid;
+        grid-template-columns: 1.4fr 1fr;
+        gap: 1.5rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .ni-card-featured {
+        background: #ffffff;
+        border: 1px solid #e2e8f0;
+        border-radius: 14px;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        text-decoration: none;
+        transition: box-shadow 0.2s, transform 0.2s, border-color 0.2s;
+        cursor: pointer;
+        /* GPU-composited layer only on hover, not by default */
+    }
+
+        .ni-card-featured:hover {
+            box-shadow: 0 12px 40px rgba(37,99,235,0.12);
+            border-color: #bfdbfe;
+            transform: translateY(-3px);
+            text-decoration: none;
+        }
+
+        .ni-card-featured .ni-thumb-wrap { height: 300px; }
+        .ni-card-featured .ni-card-body  { padding: 1.75rem; }
+        .ni-card-featured .ni-card-title { font-size: 1.2rem; }
+
+    /* ── CARD GRID ── */
+    .ni-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.25rem;
+        margin-bottom: 1.5rem;
+    }
+
+    /* ── CARD ── */
+    .ni-card {
+        background: #ffffff;
+        border: 1px solid #e2e8f0;
+        border-radius: 14px;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        text-decoration: none;
+        transition: box-shadow 0.2s, transform 0.2s, border-color 0.2s;
+        /*
+         * content-visibility: auto lets the browser skip layout/paint
+         * for off-screen cards until they scroll into view.
+         */
+        content-visibility: auto;
+        contain-intrinsic-size: 0 340px; /* approximate card height */
+    }
+
+        .ni-card:hover {
+            box-shadow: 0 10px 32px rgba(37,99,235,0.1);
+            border-color: #bfdbfe;
+            transform: translateY(-3px);
+            text-decoration: none;
+        }
+
+    /* Thumb */
+    .ni-thumb-wrap {
+        position: relative;
+        width: 100%;
+        height: 200px;
+        overflow: hidden;
+        background: #f1f5f9;
+        flex-shrink: 0;
+    }
+
+    .ni-thumb {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: top center;
+        transition: transform 0.45s ease;
+        display: block;
+        /* avoids layout-shift jank while the image loads */
+        will-change: transform;
+    }
+
+    .ni-card:hover .ni-thumb,
+    .ni-card-featured:hover .ni-thumb { transform: scale(1.05); }
+
+    /* Category pill */
+    .ni-cat-pill {
+        position: absolute;
+        top: 0.85rem;
+        left: 0.85rem;
+        font-size: 10px;
+        font-weight: 700;
+        letter-spacing: 1.2px;
+        text-transform: uppercase;
+        padding: 0.3rem 0.75rem;
+        border-radius: 20px;
+        color: #fff;
+        /* pills don't need their own layer */
+    }
+
+        .ni-cat-pill.award   { background: #d97706; }
+        .ni-cat-pill.media   { background: #0f766e; }
+        .ni-cat-pill.event   { background: #7c3aed; }
+        .ni-cat-pill.company { background: #1d4ed8; }
+        .ni-cat-pill.press   { background: #be185d; }
+        .ni-cat-pill.csr     { background: #15803d; }
+
+    /* Read-more overlay – use opacity only (cheaper than background repaint) */
+    .ni-hover-overlay {
+        position: absolute;
+        inset: 0;
+        background: rgba(15,37,87,0);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: background 0.2s;
+    }
+
+    .ni-card:hover .ni-hover-overlay,
+    .ni-card-featured:hover .ni-hover-overlay { background: rgba(15,37,87,0.42); }
+
+    .ni-read-label {
+        background: rgba(255,255,255,0.95);
+        color: #1e40af;
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        padding: 0.4rem 1.1rem;
+        border-radius: 20px;
+        opacity: 0;
+        transform: translateY(6px);
+        transition: opacity 0.2s, transform 0.2s;
+    }
+
+    .ni-card:hover .ni-read-label,
+    .ni-card-featured:hover .ni-read-label { opacity: 1; transform: translateY(0); }
+
+    /* Card body */
+    .ni-card-body {
+        padding: 1.1rem 1.25rem 1.35rem;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 0.35rem;
+    }
+
+    .ni-card-meta {
+        display: flex;
+        align-items: center;
+        gap: 0.6rem;
+        font-size: 0.75rem;
+        color: #94a3b8;
+        font-weight: 500;
+    }
+
+    .ni-card-meta-dot {
+        width: 3px;
+        height: 3px;
+        border-radius: 50%;
+        background: #cbd5e1;
+    }
+
+    .ni-card-source {
+        font-size: 10px;
+        font-weight: 700;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        color: #2563eb;
+    }
+
+    .ni-card-title {
+        font-size: 0.92rem;
+        font-weight: 700;
+        color: #1e293b;
+        line-height: 1.4;
+        flex: 1;
+    }
+
+    .ni-card-excerpt {
+        font-size: 0.8rem;
+        color: #6b7280;
+        line-height: 1.6;
+        margin-top: 0.2rem;
+    }
+
+    .ni-card-cta {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.35rem;
+        font-size: 11px;
+        font-weight: 700;
+        color: #2563eb;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        margin-top: 0.6rem;
+        transition: gap 0.15s;
+    }
+
+    .ni-card:hover .ni-card-cta,
+    .ni-card-featured:hover .ni-card-cta { gap: 0.6rem; }
+
+    /* Section label */
+    .ni-section-label {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        margin-bottom: 1.25rem;
+        margin-top: 2.5rem;
+    }
+
+    .ni-section-label-text {
+        font-size: 10px;
+        font-weight: 700;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: #94a3b8;
+        white-space: nowrap;
+    }
+
+    .ni-section-label-line {
+        flex: 1;
+        height: 1px;
+        background: #e2e8f0;
+    }
+
+    /* Responsive */
+    @@media (max-width: 960px) {
+        .ni-featured { grid-template-columns: 1fr; }
+        .ni-grid     { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @@media (max-width: 600px) {
+        .ni-grid { grid-template-columns: 1fr; }
+        .ni-hero { height: 280px; }
+        .ni-content-wrapper { padding: 2rem 1.25rem 3.5rem; }
+    }
+</style>
+
+<!-- ── HERO ── -->
+<div class="ni-hero">
+    <div class="ni-hero-bg"></div>
+    <div class="ni-hero-overlay"></div>
+    <div class="ni-hero-content">
+        <p class="ni-breadcrumb">News</p>
+        <h1 class="ni-hero-title">News</h1>
+    </div>
+</div>
+
+<!-- ── MAIN CONTENT ── -->
+<div class="ni-content-wrapper">
+
+    <!-- Filter Bar -->
+    <div class="ni-filter-bar">
+        <span class="ni-filter-label">Filter:</span>
+        <button class="ni-filter-btn active" data-filter="All">All</button>
+        <button class="ni-filter-btn" data-filter="Awards">Awards</button>
+        <button class="ni-filter-btn" data-filter="Media Coverage">Media Coverage</button>
+        <button class="ni-filter-btn" data-filter="Company News">Company News</button>
+        <button class="ni-filter-btn" data-filter="Events">Events</button>
+        <button class="ni-filter-btn" data-filter="CSR">CSR</button>
+    </div>
+
+    <!-- ── FEATURED ── -->
+    <div class="ni-section-label" data-section="featured">
+        <span class="ni-section-label-text">Featured</span>
+        <div class="ni-section-label-line"></div>
+    </div>
+
+    <div class="ni-featured" data-grid="featured">
+
+        <!-- CPOC Award -->
+        <a href="/News/PTTEPI" class="ni-card-featured" data-category="award">
+            <div class="ni-thumb-wrap">
+                <img src="/images/news/carigali_PTTEPI_CPOC.jpg"
+                     alt="CPOC HSE Achievement"
+                     class="ni-thumb"
+                     width="760" height="300"
+                     fetchpriority="high"
+                     decoding="async" />
+                <span class="ni-cat-pill award">🏆 Award</span>
+                <div class="ni-hover-overlay"><span class="ni-read-label">Read More →</span></div>
+            </div>
+            <div class="ni-card-body">
+                <div class="ni-card-source">CPOC</div>
+                <div class="ni-card-meta">
+                    <span>September 8, 2022</span>
+                    <div class="ni-card-meta-dot"></div>
+                    <span>Awards &amp; Recognition</span>
+                </div>
+                <div class="ni-card-title">Synergy Marine Receives HSE Achievement Award from Carigali – PTTEPI Operating Company Sdn Bhd (CPOC)</div>
+                <div class="ni-card-excerpt">Presented by CPOC General Manager Kanchanan Panananda at the Contractors HSE Achievement Ceremony in recognition of outstanding safety performance.</div>
+                <span class="ni-card-cta">Read Full Story →</span>
+            </div>
+        </a>
+
+        <!-- Synergy Aurora -->
+        <a href="/News/SynergyAurora" class="ni-card-featured" data-category="company">
+            <div class="ni-thumb-wrap">
+                <img src="/images/news/imgwelcometoaurora.jpeg"
+                     alt="Synergy Aurora"
+                     class="ni-thumb"
+                     width="540" height="300"
+                     fetchpriority="high"
+                     decoding="async" />
+                <span class="ni-cat-pill company">🚢 Fleet</span>
+                <div class="ni-hover-overlay"><span class="ni-read-label">Read More →</span></div>
+            </div>
+            <div class="ni-card-body">
+                <div class="ni-card-source">Synergy Marine</div>
+                <div class="ni-card-meta">
+                    <span>October 13, 2025</span>
+                    <div class="ni-card-meta-dot"></div>
+                    <span>Company News</span>
+                </div>
+                <div class="ni-card-title">Introducing Synergy Aurora — Strength in Motion</div>
+                <div class="ni-card-excerpt">Unveiling our latest fleet addition — Synergy Aurora, a powerful AHTS offshore support vessel demonstrated at Songkhla Supply Base.</div>
+                <span class="ni-card-cta">Read Full Story →</span>
+            </div>
+        </a>
+
+    </div>
+
+    <!-- ── COMPANY NEWS ── -->
+    <div class="ni-section-label" data-section="company-news">
+        <span class="ni-section-label-text">Company News</span>
+        <div class="ni-section-label-line"></div>
+    </div>
+
+    <div class="ni-grid" data-grid="company-news">
+
+      @*   <a href="/News/OfficiallyOnline" class="ni-card" data-category="company">
+            <div class="ni-thumb-wrap">
+                <img src="/images/twinsfleet.png"
+                     alt="Synergy Marine Online Launch"
+                     class="ni-thumb"
+                     width="400" height="200"
+                     loading="lazy"
+                     decoding="async" />
+                <span class="ni-cat-pill company">📢 Company</span>
+                <div class="ni-hover-overlay"><span class="ni-read-label">Read More →</span></div>
+            </div>
+            <div class="ni-card-body">
+                <div class="ni-card-source">Synergy Marine</div>
+                <div class="ni-card-meta"><span>September 29, 2025</span></div>
+                <div class="ni-card-title">We're Officially Online!</div>
+                <div class="ni-card-excerpt">Welcome to the official page of Synergy Marine (M) Sdn Bhd — committed to safe, reliable, and sustainable marine support services for the oil &amp; gas industry.</div>
+                <span class="ni-card-cta">Read More →</span>
+            </div>
+        </a> *@
+
+        <a href="/News/OSVOperations" class="ni-card" data-category="company">
+            <div class="ni-thumb-wrap">
+                <img src="/images/image slide 1.jpg"
+                     alt="OSV Business and Operations"
+                     class="ni-thumb"
+                     width="400" height="200"
+                     loading="lazy"
+                     decoding="async" />
+                <span class="ni-cat-pill company">⚓ Operations</span>
+                <div class="ni-hover-overlay"><span class="ni-read-label">Read More →</span></div>
+            </div>
+            <div class="ni-card-body">
+                <div class="ni-card-source">Synergy Marine</div>
+                <div class="ni-card-meta"><span>November 28, 2025</span></div>
+                <div class="ni-card-title">Our Perspective: The OSV Business &amp; Operations</div>
+                <div class="ni-card-excerpt">At Synergy Marine, OSV operations represent a balance of precision, people, and performance — supported by safety management, preventive maintenance, and ESG principles.</div>
+                <span class="ni-card-cta">Read More →</span>
+            </div>
+        </a>
+
+        <a href="/News/HSECompliance" class="ni-card" data-category="company">
+            <div class="ni-thumb-wrap">
+                <img src="/images/news/hsecompliance.png"
+                     alt="HSE Compliance"
+                     class="ni-thumb"
+                     width="400" height="200"
+                     loading="lazy"
+                     decoding="async" />
+                <span class="ni-cat-pill company">🦺 Safety</span>
+                <div class="ni-hover-overlay"><span class="ni-read-label">Read More →</span></div>
+            </div>
+            <div class="ni-card-body">
+                <div class="ni-card-source">Synergy Marine</div>
+                <div class="ni-card-meta"><span>December 8, 2025</span></div>
+                <div class="ni-card-title">HSE Compliance: A Continuous Commitment at Sea and Onshore</div>
+                <div class="ni-card-excerpt">Our HSE team conducts scheduled and ad-hoc vessel inspections, onboard briefings, competency refreshers, and safety forums to maintain the highest standards.</div>
+                <span class="ni-card-cta">Read More →</span>
+            </div>
+        </a>
+
+        <a href="/News/SynergyExplorerMaintenance" class="ni-card" data-category="company">
+            <div class="ni-thumb-wrap">
+                <img src="/images/news/synergyexplorermaintenance.png"
+                     alt="MV Synergy Explorer Maintenance"
+                     class="ni-thumb"
+                     width="400" height="200"
+                     loading="lazy"
+                     decoding="async" />
+                <span class="ni-cat-pill company">🔧 Fleet</span>
+                <div class="ni-hover-overlay"><span class="ni-read-label">Read More →</span></div>
+            </div>
+            <div class="ni-card-body">
+                <div class="ni-card-source">Synergy Marine</div>
+                <div class="ni-card-meta"><span>December 18, 2025</span></div>
+                <div class="ni-card-title">MV Synergy Explorer – Maintenance Works</div>
+                <div class="ni-card-excerpt">MV Synergy Explorer underwent planned maintenance covering inspections, servicing, and essential repairs — attended by Managing Director and Finance Director.</div>
+                <span class="ni-card-cta">Read More →</span>
+            </div>
+        </a>
+
+        <a href="/News/CorporateProcedures2025" class="ni-card" data-category="company">
+            <div class="ni-thumb-wrap">
+                <img src="/images/news/jakarta.jpg"
+                     alt="Corporate Procedures Enhancement Jakarta"
+                     class="ni-thumb"
+                     width="400" height="200"
+                     loading="lazy"
+                     decoding="async" />
+                <span class="ni-cat-pill company">🏛️ Governance</span>
+                <div class="ni-hover-overlay"><span class="ni-read-label">Read More →</span></div>
+            </div>
+            <div class="ni-card-body">
+                <div class="ni-card-source">Synergy Marine</div>
+                <div class="ni-card-meta"><span>October 28, 2025</span></div>
+                <div class="ni-card-title">Enhancing Corporate Procedures Through Engagement &amp; Exposure — Jakarta 2025</div>
+                <div class="ni-card-excerpt">Synergy Marine held its Corporate Procedures Enhancement 2025 program in Jakarta, strengthening internal governance, streamlining processes, and reinforcing operational excellence.</div>
+                <span class="ni-card-cta">Read More →</span>
+            </div>
+        </a>
+
+    </div>
+
+    <!-- ── EVENTS & ENGAGEMENTS ── -->
+    <div class="ni-section-label" data-section="events">
+        <span class="ni-section-label-text">Events &amp; Engagements</span>
+        <div class="ni-section-label-line"></div>
+    </div>
+
+    <div class="ni-grid" data-grid="events">
+
+        <a href="/News/TotalEnergiesSuppliersDay2025" class="ni-card" data-category="event">
+            <div class="ni-thumb-wrap">
+                <img src="/images/news/totalenergies2025.png"
+                     alt="TotalEnergies Suppliers Day 2025"
+                     class="ni-thumb"
+                     width="400" height="200"
+                     loading="lazy"
+                     decoding="async" />
+                <span class="ni-cat-pill event">📌 Event</span>
+                <div class="ni-hover-overlay"><span class="ni-read-label">Read More →</span></div>
+            </div>
+            <div class="ni-card-body">
+                <div class="ni-card-source">TotalEnergies EP Malaysia</div>
+                <div class="ni-card-meta"><span>September 30, 2025</span></div>
+                <div class="ni-card-title">TotalEnergies Suppliers Day 2025 — Grand Hyatt Kuala Lumpur</div>
+                <div class="ni-card-excerpt">Synergy Marine participated in TotalEnergies Suppliers Day, engaging with industry partners on sustainability, HSSE, compliance, and procurement opportunities.</div>
+                <span class="ni-card-cta">Read More →</span>
+            </div>
+        </a>
+
+        <a href="/News/LocktonMarineSeminar2025" class="ni-card" data-category="event">
+            <div class="ni-thumb-wrap">
+                <img src="/images/news/lockton.png"
+                     alt="Lockton Marine Seminar 2025"
+                     class="ni-thumb"
+                     width="400" height="200"
+                     loading="lazy"
+                     decoding="async" />
+                <span class="ni-cat-pill event">📌 Event</span>
+                <div class="ni-hover-overlay"><span class="ni-read-label">Read More →</span></div>
+            </div>
+            <div class="ni-card-body">
+                <div class="ni-card-source">Lockton</div>
+                <div class="ni-card-meta"><span>October 8, 2025</span></div>
+                <div class="ni-card-title">Synergy Marine at Lockton Marine Seminar 2025</div>
+                <div class="ni-card-excerpt">Attending the Lockton Marine Seminar at Renaissance Hotel KL, covering key updates on P&amp;I and H&amp;M insurance — vital for safeguarding offshore and shipping operations.</div>
+                <span class="ni-card-cta">Read More →</span>
+            </div>
+        </a>
+
+        <a href="/News/ESGForum2025" class="ni-card" data-category="event">
+            <div class="ni-thumb-wrap">
+                <img src="/images/news/esgforum.png"
+                     alt="ESG Forum 2025"
+                     class="ni-thumb"
+                     width="400" height="200"
+                     loading="lazy"
+                     decoding="async" />
+                <span class="ni-cat-pill event">📌 Event</span>
+                <div class="ni-hover-overlay"><span class="ni-read-label">Read More →</span></div>
+            </div>
+            <div class="ni-card-body">
+                <div class="ni-card-source">SME Ventures ASEAN 2025</div>
+                <div class="ni-card-meta"><span>October 19, 2025</span></div>
+                <div class="ni-card-title">ESG Forum 2025: Navigating the Future of Sustainability Reporting</div>
+                <div class="ni-card-excerpt">Synergy Marine joined industry professionals at ESG Forum 2025 to discuss transforming ESG reporting into real-world action — for our people, planet, and partners.</div>
+                <span class="ni-card-cta">Read More →</span>
+            </div>
+        </a>
+
+        <a href="/News/MOSVAForum2025" class="ni-card" data-category="event">
+            <div class="ni-thumb-wrap">
+                <img src="/images/news/mosvaforum2025.png"
+                     alt="MOSVA Forum 2025"
+                     class="ni-thumb"
+                     width="400" height="200"
+                     loading="lazy"
+                     decoding="async" />
+                <span class="ni-cat-pill event">📌 Event</span>
+                <div class="ni-hover-overlay"><span class="ni-read-label">Read More →</span></div>
+            </div>
+            <div class="ni-card-body">
+                <div class="ni-card-source">MOSVA</div>
+                <div class="ni-card-meta">
+                    <span>November 1, 2025</span>
+                    <div class="ni-card-meta-dot"></div>
+                    <span>InterContinental KL</span>
+                </div>
+                <div class="ni-card-title">MOSVA Forum 2025 — Charting the Course for Offshore Synergy</div>
+                <div class="ni-card-excerpt">Led by MD Dato' Dr. Roslan Ahmad (MOSVA Vice President), Synergy Marine joined industry leaders for impactful sessions on fleet renewal, decarbonization, and digitalization.</div>
+                <span class="ni-card-cta">Read More →</span>
+            </div>
+        </a>
+
+        <a href="/News/OGSEBlueprintForum2025" class="ni-card" data-category="event">
+            <div class="ni-thumb-wrap">
+                <img src="/images/news/ogse2025.jpg"
+                     alt="National OGSE Blueprint Forum 2025"
+                     class="ni-thumb"
+                     width="400" height="200"
+                     loading="lazy"
+                     decoding="async" />
+                <span class="ni-cat-pill event">📌 Event</span>
+                <div class="ni-hover-overlay"><span class="ni-read-label">Read More →</span></div>
+            </div>
+            <div class="ni-card-body">
+                <div class="ni-card-source">MPRC</div>
+                <div class="ni-card-meta">
+                    <span>November 14, 2025</span>
+                    <div class="ni-card-meta-dot"></div>
+                    <span>Sime Darby Convention Centre</span>
+                </div>
+                <div class="ni-card-title">National OGSE Blueprint Forum 2025 — Safeguarding OGSE of the Future</div>
+                <div class="ni-card-excerpt">Synergy Marine attended the National OGSE Blueprint Forum, featuring key insights on energy transition, climate change legislation, and Malaysia's OGSE sector outlook.</div>
+                <span class="ni-card-cta">Read More →</span>
+            </div>
+        </a>
+
+        <a href="/News/MASATehTarik2025" class="ni-card" data-category="event">
+            <div class="ni-thumb-wrap">
+                <img src="/images/news/tehtarik.jpg"
+                     alt="MASA Teh Tarik Session 2025"
+                     class="ni-thumb"
+                     width="400" height="200"
+                     loading="lazy"
+                     decoding="async" />
+                <span class="ni-cat-pill event">📌 Event</span>
+                <div class="ni-hover-overlay"><span class="ni-read-label">Read More →</span></div>
+            </div>
+            <div class="ni-card-body">
+                <div class="ni-card-source">MASA</div>
+                <div class="ni-card-meta">
+                    <span>December 10, 2025</span>
+                    <div class="ni-card-meta-dot"></div>
+                    <span>Hyatt Place Bukit Jalil</span>
+                </div>
+                <div class="ni-card-title">MASA Teh Tarik Session: Networking &amp; Dialogue with Authorities</div>
+                <div class="ni-card-excerpt">Dato' Dr. Roslan Ahmad represented MOSVA and Synergy Marine, raising important questions on OSV regulations during a productive dialogue with APMM and industry leaders.</div>
+                <span class="ni-card-cta">Read More →</span>
+            </div>
+        </a>
+
+        <a href="/News/IKM" class="ni-card" data-category="event">
+            <div class="ni-thumb-wrap">
+                <img src="/images/news/Ikhtisas_Kelautan_Malaysia.jpg"
+                     alt="Ikhtisas Kelautan Malaysia"
+                     class="ni-thumb"
+                     width="400" height="200"
+                     loading="lazy"
+                     decoding="async" />
+                <span class="ni-cat-pill event">📌 Event</span>
+                <div class="ni-hover-overlay"><span class="ni-read-label">Read More →</span></div>
+            </div>
+            <div class="ni-card-body">
+                <div class="ni-card-source">Ikhtisas Kelautan Malaysia</div>
+                <div class="ni-card-meta"><span>Industry Event</span></div>
+                <div class="ni-card-title">Synergy Marine's Participation in Ikhtisas Kelautan Malaysia</div>
+                <div class="ni-card-excerpt">Representatives from Synergy Marine attended and participated in a high-level maritime industry gathering in Malaysia.</div>
+                <span class="ni-card-cta">Read More →</span>
+            </div>
+        </a>
+
+        <a href="/News/UPEN" class="ni-card" data-category="event">
+            <div class="ni-thumb-wrap">
+                <img src="/images/news/UPEN.jpg"
+                     alt="UPEN Visit"
+                     class="ni-thumb"
+                     width="400" height="200"
+                     loading="lazy"
+                     decoding="async" />
+                <span class="ni-cat-pill event">📌 Event</span>
+                <div class="ni-hover-overlay"><span class="ni-read-label">Read More →</span></div>
+            </div>
+            <div class="ni-card-body">
+                <div class="ni-card-source">Unit Perancang Ekonomi</div>
+                <div class="ni-card-meta"><span>Government Engagement</span></div>
+                <div class="ni-card-title">Synergy Marine's Engagement with Unit Perancang Ekonomi (UPEN), Jabatan Perdana Menteri</div>
+                <div class="ni-card-excerpt">A courtesy and engagement visit to UPEN, underscoring Synergy Marine's role in Malaysia's economic planning for the maritime sector.</div>
+                <span class="ni-card-cta">Read More →</span>
+            </div>
+        </a>
+
+    </div>
+
+    <!-- ── MEDIA COVERAGE ── -->
+    <div class="ni-section-label" data-section="media">
+        <span class="ni-section-label-text">Media Coverage</span>
+        <div class="ni-section-label-line"></div>
+    </div>
+
+    <div class="ni-grid" data-grid="media">
+
+        <!-- Berita Harian -->
+        <a href="/News/BH" class="ni-card" data-category="press">
+            <div class="ni-thumb-wrap">
+                <img src="/images/news/Berita_Harian.jpg"
+                     alt="Berita Harian"
+                     class="ni-thumb"
+                     width="400" height="200"
+                     loading="lazy"
+                     decoding="async" />
+                <span class="ni-cat-pill press">📰 Press</span>
+                <div class="ni-hover-overlay"><span class="ni-read-label">Read More →</span></div>
+            </div>
+            <div class="ni-card-body">
+                <div class="ni-card-source">Berita Harian</div>
+                <div class="ni-card-meta"><span>November 15, 2018</span></div>
+                <div class="ni-card-title">Usaha sama bina PSV janaan kuasa LNG, diesel</div>
+                <div class="ni-card-excerpt">Synergy Marine melancarkan pembangunan reka bentuk kapal menggunakan teknologi tiga dimensi (3D).</div>
+                <span class="ni-card-cta">Read More →</span>
+            </div>
+        </a>
+
+        <!-- Bernama -->
+        <a href="/News/Bernama" class="ni-card" data-category="press">
+            <div class="ni-thumb-wrap">
+                <img src="/images/news/Bernama.jpg"
+                     alt="Bernama"
+                     class="ni-thumb"
+                     width="400" height="200"
+                     loading="lazy"
+                     decoding="async" />
+                <span class="ni-cat-pill press">📰 Press</span>
+                <div class="ni-hover-overlay"><span class="ni-read-label">Read More →</span></div>
+            </div>
+            <div class="ni-card-body">
+                <div class="ni-card-source">Bernama</div>
+                <div class="ni-card-meta"><span>November 14, 2018</span></div>
+                <div class="ni-card-title">Synergy Marine invests US$45 mln in LNG-powered vessel</div>
+                <div class="ni-card-excerpt">Synergy Marine (M) Sdn Bhd is investing US$45 million to build its first LNG-powered platform supply vessel.</div>
+                <span class="ni-card-cta">Read More →</span>
+            </div>
+        </a>
+
+        <!-- New Straits Times -->
+        <a href="/News/NewStraitsTimes" class="ni-card" data-category="press">
+            <div class="ni-thumb-wrap">
+                <img src="/images/news/New Straits Time.jpg"
+                     alt="New Straits Times"
+                     class="ni-thumb"
+                     width="400" height="200"
+                     loading="lazy"
+                     decoding="async" />
+                <span class="ni-cat-pill press">📰 Press</span>
+                <div class="ni-hover-overlay"><span class="ni-read-label">Read More →</span></div>
+            </div>
+            <div class="ni-card-body">
+                <div class="ni-card-source">New Straits Times</div>
+                <div class="ni-card-meta"><span>November 2018</span></div>
+                <div class="ni-card-title">Synergy Marine inks RM188.75m vessel supply contract</div>
+                <div class="ni-card-excerpt">Synergy Marine has partnered with MTCMS Design Sdn Bhd and Shin Yang Shipyards Sdn Bhd to build an LNG and diesel platform supply vessel.</div>
+                <span class="ni-card-cta">Read More →</span>
+            </div>
+        </a>
+
+        <!-- Kosmo -->
+        <a href="/News/Kosmo" class="ni-card" data-category="press">
+            <div class="ni-thumb-wrap">
+                <img src="/images/news/Kosmo.jpg"
+                     alt="Kosmo"
+                     class="ni-thumb"
+                     width="400" height="200"
+                     loading="lazy"
+                     decoding="async" />
+                <span class="ni-cat-pill press">📰 Press</span>
+                <div class="ni-hover-overlay"><span class="ni-read-label">Read More →</span></div>
+            </div>
+            <div class="ni-card-body">
+                <div class="ni-card-source">Kosmo</div>
+                <div class="ni-card-meta"><span>November 15, 2018</span></div>
+                <div class="ni-card-title">Bina kapal kargo LNG pertama</div>
+                <div class="ni-card-excerpt">Tiga syarikat tempatan sedia kapal mesra alam bagi sektor minyak dan gas dalam kerjasama bernilai AS$45 juta (RM188.79 juta).</div>
+                <span class="ni-card-cta">Read More →</span>
+            </div>
+        </a>
+
+      @*   <a href="/News/OSJ" class="ni-card" data-category="media">
+            <div class="ni-thumb-wrap">
+                <img src="/images/news/Offshore_Support_Journal.jpg"
+                     alt="Offshore Support Journal"
+                     class="ni-thumb"
+                     width="400" height="200"
+                     loading="lazy"
+                     decoding="async" />
+ *@
+     @*    <!-- Focus Malaysia -->
+        <a href="/News/FM" class="ni-card" data-category="press">
+            <div class="ni-thumb-wrap">
+                <img src="/images/news/Focus Malaysia.jpg" alt="Focus Malaysia" class="ni-thumb" />
+                <span class="ni-cat-pill press">📰 Press</span>
+                <div class="ni-hover-overlay"><span class="ni-read-label">Read More →</span></div>
+            </div>
+            <div class="ni-card-body">
+                <div class="ni-card-source">Focus Malaysia</div>
+                <div class="ni-card-meta">
+                    <span>November 15, 2018</span>
+                </div>
+                <div class="ni-card-title">Malaysia's first LNG-powered vessel shipbuilding</div>
+                <div class="ni-card-excerpt">A milestone moment as Malaysia embarks on building its first LNG-powered platform supply vessel through a three-party collaboration.</div>
+                <span class="ni-card-cta">Read More →</span>
+            </div>
+        </a>
+ *@
+        <!-- Offshore Support Journal -->
+        <a href="/News/OSJ" class="ni-card" data-category="media">
+            <div class="ni-thumb-wrap">
+                <img src="/images/news/Offshore_Support_Journal.jpg" alt="Offshore Support Journal" class="ni-thumb" />
+
+                <span class="ni-cat-pill media">🌐 International</span>
+                <div class="ni-hover-overlay"><span class="ni-read-label">Read More →</span></div>
+            </div>
+            <div class="ni-card-body">
+                <div class="ni-card-source">Offshore Support Journal</div>
+                <div class="ni-card-meta"><span>November 15, 2018</span></div>
+                <div class="ni-card-title">Malaysia steps into LNG sector with shipbuilding MoU</div>
+                <div class="ni-card-excerpt">International coverage of Synergy Marine's landmark MoU signing to develop Malaysia's first LNG dual-fuel offshore vessel.</div>
+                <span class="ni-card-cta">Read More →</span>
+            </div>
+        </a>
+
+        <!-- NGV Journal -->
+        <a href="/News/NGV" class="ni-card" data-category="media">
+            <div class="ni-thumb-wrap">
+                <img src="/images/news/NGV.jpg"
+                     alt="NGV Journal"
+                     class="ni-thumb"
+                     width="400" height="200"
+                     loading="lazy"
+                     decoding="async" />
+                <span class="ni-cat-pill media">🌐 International</span>
+                <div class="ni-hover-overlay"><span class="ni-read-label">Read More →</span></div>
+            </div>
+            <div class="ni-card-body">
+                <div class="ni-card-source">NGV Journal</div>
+                <div class="ni-card-meta"><span>November 22, 2018</span></div>
+                <div class="ni-card-title">Malaysia's first LNG dual fuel vessel under development</div>
+                <div class="ni-card-excerpt">International natural gas publication covers Synergy Marine's groundbreaking initiative to develop Asia's first LNG-powered PSV.</div>
+                <span class="ni-card-cta">Read More →</span>
+            </div>
+        </a>
+
+        <!-- The Edge -->
+        <a href="/news/TheEdge" class="ni-card" data-category="award">
+            <div class="ni-thumb-wrap">
+                <img src="/images/news/The Edge.jpg"
+                     alt="The Edge"
+                     class="ni-thumb"
+                     width="400" height="200"
+                     loading="lazy"
+                     decoding="async" />
+                <span class="ni-cat-pill award">🏆 Award</span>
+                <div class="ni-hover-overlay"><span class="ni-read-label">Read More →</span></div>
+            </div>
+            <div class="ni-card-body">
+                <div class="ni-card-source">The Edge</div>
+                <div class="ni-card-meta"><span>BrandLaureate Awards</span></div>
+                <div class="ni-card-title">Synergy Marine Recognised at SME BrandLaureate Awards 2018–2019</div>
+                <div class="ni-card-excerpt">Synergy Marine featured among Malaysia's top SME brands at The BrandLaureate SMEs Best Brands Awards in the Oil &amp; Gas Solutions category.</div>
+                <span class="ni-card-cta">Read More →</span>
+            </div>
+        </a>
+
+    </div>
+
+    <!-- ── CSR ── -->
+    <div class="ni-section-label" data-section="csr">
+        <span class="ni-section-label-text">CSR &amp; Community</span>
+        <div class="ni-section-label-line"></div>
+    </div>
+
+    <div class="ni-grid" data-grid="csr">
+
+        <a href="/News/CSRSgPinang2026" class="ni-card" data-category="csr">
+            <div class="ni-thumb-wrap">
+                <img src="/images/news/csr2026.jpg"
+                     alt="CSR Visit Sg Pinang"
+                     class="ni-thumb"
+                     width="400" height="200"
+                     loading="lazy"
+                     decoding="async" />
+                <span class="ni-cat-pill csr">💚 CSR</span>
+                <div class="ni-hover-overlay"><span class="ni-read-label">Read More →</span></div>
+            </div>
+            <div class="ni-card-body">
+                <div class="ni-card-source">Synergy Marine</div>
+                <div class="ni-card-meta">
+                    <span>March 13, 2026</span>
+                    <div class="ni-card-meta-dot"></div>
+                    <span>Klang</span>
+                </div>
+                <div class="ni-card-title">CSR Visit &amp; Donation to Pertubuhan Kebajikan Anak-Anak Yatim &amp; Miskin Sg Pinang</div>
+                <div class="ni-card-excerpt">Synergy Marine contributed daily necessities, Duit Raya, and a cash donation to the orphanage in Klang in conjunction with the upcoming Hari Raya celebration.</div>
+                <span class="ni-card-cta">Read More →</span>
+            </div>
+        </a>
+       
+
+    </div>
+
+</div>
+
+<script>
+    // ── FILTER — runs in a single rAF to avoid mid-paint style thrashing ──
+    (function () {
+        var filterMap = {
+            'All':            ['award','press','media','event','company','csr'],
+            'Awards':         ['award'],
+            'Media Coverage': ['press','media'],
+            'Company News':   ['company'],
+            'Events':         ['event'],
+            'CSR':            ['csr']
+        };
+
+        // Cache DOM references once
+        var allCards     = Array.from(document.querySelectorAll('[data-category]'));
+        var allGrids     = Array.from(document.querySelectorAll('[data-grid]'));
+        var allSections  = Array.from(document.querySelectorAll('[data-section]'));
+
+        function applyFilter(cats) {
+            // Batch all reads first, then batch writes (avoids forced reflow)
+            var cardVisibility = allCards.map(function (c) {
+                return cats.indexOf(c.getAttribute('data-category')) !== -1;
+            });
+
+            requestAnimationFrame(function () {
+                // 1. Show / hide cards
+                allCards.forEach(function (card, i) {
+                    if (cardVisibility[i]) {
+                        card.style.display = '';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+
+                // 2. Hide empty grids
+                allGrids.forEach(function (grid) {
+                    var hasVisible = Array.from(
+                        grid.querySelectorAll('[data-category]')
+                    ).some(function (c) { return c.style.display !== 'none'; });
+                    grid.style.display = hasVisible ? '' : 'none';
+                });
+
+                // 3. Hide orphaned section labels
+                allSections.forEach(function (label) {
+                    var sectionName = label.getAttribute('data-section');
+                    var grid = document.querySelector('[data-grid="' + sectionName + '"]');
+                    label.style.display = (grid && grid.style.display !== 'none') ? '' : 'none';
+                });
+            });
+        }
+
+        document.querySelectorAll('.ni-filter-btn').forEach(function (btn) {
+            btn.addEventListener('click', function () {
+                document.querySelectorAll('.ni-filter-btn').forEach(function (b) {
+                    b.classList.remove('active');
+                });
+                btn.classList.add('active');
+                applyFilter(filterMap[btn.dataset.filter] || filterMap['All']);
+            });
+        });
+    })();
+</script>

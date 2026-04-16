@@ -1,0 +1,378 @@
+﻿@{
+    ViewData["Title"] = "MD's Greeting";
+}
+
+<style>
+    /* ── HERO SECTION ── */
+    .cp-hero {
+        position: relative;
+        width: 100vw;
+        margin-left: calc(-50vw + 50%);
+        height: 380px;
+        overflow: hidden;
+        display: flex;
+        align-items: flex-end;
+        padding-bottom: 2.5rem;
+    }
+
+    .cp-hero-bg {
+        position: absolute;
+        inset: 0;
+       background: url('/images/ceo.jpg') center 20% / cover no-repeat;
+        filter: brightness(0.85);
+        transform: scale(1.03);
+        transition: transform 8s ease;
+    }
+
+    .cp-hero:hover .cp-hero-bg {
+        transform: scale(1.0);
+    }
+
+    .cp-hero-overlay {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(to bottom, rgba(10,20,50,0.2) 0%, rgba(10,20,50,0.75) 100%);
+    }
+
+    .cp-hero-content {
+        position: relative;
+        z-index: 2;
+        padding: 0 2rem;
+        max-width: 1140px;
+        margin: 0 auto;
+        width: 100%;
+    }
+
+    .cp-breadcrumb {
+        font-size: 12px;
+        font-weight: 600;
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+        color: #60a5fa;
+        margin-bottom: 0.75rem;
+    }
+
+    .cp-hero-title {
+        font-size: clamp(2rem, 4vw, 3rem);
+        font-weight: 700;
+        color: #ffffff;
+        letter-spacing: -0.5px;
+        line-height: 1.15;
+        margin: 0;
+    }
+
+    /* ── CONTENT WRAPPER ── */
+    .cp-content-wrapper {
+        background: #ffffff;
+        border-radius: 16px 16px 0 0;
+        margin-top: -2rem;
+        position: relative;
+        z-index: 3;
+        box-shadow: 0 -4px 30px rgba(0,0,0,0.08);
+        padding: 3rem 2rem 4rem;
+        max-width: 1140px;
+        margin-left: auto;
+        margin-right: auto;
+        width: 100%;
+    }
+
+    /* ── GREETING LAYOUT ── */
+    .greet-layout {
+        display: grid;
+        grid-template-columns: 300px 1fr;
+        gap: 3rem;
+        align-items: start;
+    }
+
+    /* ── LEFT: PHOTO + NAME CARD ── */
+    .greet-photo-col {
+        position: sticky;
+        top: 2rem;
+    }
+
+    .greet-photo-wrap {
+        width: 100%;
+        border-radius: 14px;
+        overflow: hidden;
+        box-shadow: 0 10px 40px rgba(37,99,235,0.15);
+        border: 3px solid #dc2626;
+    }
+
+        .greet-photo-wrap img {
+            width: 100%;
+            height: 360px;
+            object-fit: cover;
+            object-position: top center;
+            display: block;
+        }
+
+    .greet-name-plate {
+        background: #1e293b;
+        border-radius: 0 0 12px 12px;
+        padding: 1.25rem 1.5rem;
+        text-align: center;
+    }
+
+        .greet-name-plate .gn-name {
+            font-size: 1rem;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 0.2rem;
+        }
+
+        .greet-name-plate .gn-title-line {
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 1.2px;
+            text-transform: uppercase;
+            color: #60a5fa;
+        }
+
+    /* ── ASSOCIATION LOGOS ── */
+    .assoc-logos {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.75rem;
+        margin-top: 1.25rem;
+        justify-content: center;
+    }
+
+    .assoc-logo-item {
+        background: #f8fafc;
+        border: 1px solid #e5e7eb;
+        border-radius: 10px;
+        padding: 0.6rem 0.75rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.4rem;
+        transition: box-shadow 0.2s, transform 0.2s;
+        flex: 1 1 80px;
+        max-width: 100px;
+    }
+
+        .assoc-logo-item:hover {
+            box-shadow: 0 4px 16px rgba(37,99,235,0.12);
+            transform: translateY(-2px);
+        }
+
+        .assoc-logo-item img {
+            width: 52px;
+            height: 52px;
+            object-fit: contain;
+            display: block;
+        }
+
+        .assoc-logo-item span {
+            font-size: 9px;
+            font-weight: 700;
+            letter-spacing: 0.8px;
+            text-transform: uppercase;
+            color: #475569;
+            text-align: center;
+            line-height: 1.3;
+        }
+
+    /* ── RIGHT: GREETING TEXT ── */
+    .greet-text-col {
+    }
+
+    .greet-label {
+        font-size: 12px;
+        font-weight: 600;
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+        color: #dc2626;
+        margin-bottom: 0.5rem;
+    }
+
+    .greet-heading {
+        font-size: 1.75rem;
+        font-weight: 700;
+        color: #1e293b;
+        margin-bottom: 0.5rem;
+        line-height: 1.25;
+    }
+
+    .greet-divider {
+        width: 50px;
+        height: 4px;
+        background: #dc2626;
+        border-radius: 2px;
+        margin: 1rem 0 1.75rem;
+    }
+    }
+
+    .greet-salutation {
+        font-size: 1rem;
+        font-weight: 600;
+        color: #1e293b;
+        margin-bottom: 1.25rem;
+    }
+
+    .greet-para {
+        font-size: 0.935rem;
+        color: #4b5563;
+        line-height: 1.9;
+        margin-bottom: 1.1rem;
+    }
+
+    .greet-sign-block {
+        margin-top: 2rem;
+        padding-top: 1.5rem;
+        border-top: 1px solid #e5e7eb;
+    }
+
+    .greet-sign-name {
+        font-size: 1rem;
+        font-weight: 700;
+        color: #1e293b;
+        margin-bottom: 0.25rem;
+    }
+
+    .greet-sign-post {
+        font-size: 12px;
+        font-weight: 600;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        color: #dc2626;
+        margin-bottom: 0.2rem;
+    }
+
+    .greet-sign-honours {
+        font-size: 0.85rem;
+        color: #6b7280;
+    }
+
+    /* ── RESPONSIVE ── */
+    @@media (max-width: 860px) {
+        .greet-layout {
+            grid-template-columns: 1fr;
+        }
+
+        .greet-photo-col {
+            position: static;
+        }
+
+        .greet-photo-wrap img {
+            height: 300px;
+        }
+    }
+
+    @@media (max-width: 600px) {
+        .cp-hero {
+            height: 260px;
+        }
+
+        .cp-content-wrapper {
+            padding: 2rem 1.25rem 3rem;
+        }
+
+        .greet-heading {
+            font-size: 1.4rem;
+        }
+    }
+</style>
+
+<!-- ── HERO ── -->
+<div class="cp-hero">
+    <div class="cp-hero-bg"></div>
+    <div class="cp-hero-overlay"></div>
+    <div class="cp-hero-content">
+        <p class="cp-breadcrumb">About Us / MD's Greeting</p>
+        <h1 class="cp-hero-title">Managing Director's Greeting</h1>
+    </div>
+</div>
+
+<!-- ── MAIN CONTENT ── -->
+<div class="cp-content-wrapper">
+    <div class="greet-layout">
+
+        <!-- LEFT COLUMN: Photo + Name Plate + Logos -->
+        <div class="greet-photo-col">
+            <div class="greet-photo-wrap">
+                <img src="/images/Dato-Dr-Roslan-Ahmad.jpg" alt="Dato' Dr. Roslan Ahmad" />
+                <div class="greet-name-plate">
+                    <p class="gn-name">Dato' Dr. Roslan Ahmad</p>
+                    <p class="gn-title-line">Managing Director</p>
+                </div>
+            </div>
+
+            <!-- Association Logos -->
+            <div class="assoc-logos">
+                <div class="assoc-logo-item">
+                    <img src="/images/license/iamsp.png" alt="IAMSP Logo" />
+                    <span>IAMSP</span>
+                </div>
+                <div class="assoc-logo-item">
+                    <img src="/images/license/mosva.jpg" alt="MOSVA Logo" />
+                    <span>MOSVA</span>
+                </div>
+                <div class="assoc-logo-item">
+                    <img src="/images/license/mastra.png" alt="MASTRA Logo" />
+                    <span>MASTRA</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- RIGHT COLUMN: Greeting Text -->
+        <div class="greet-text-col">
+            <p class="greet-label">Message from Leadership</p>
+            <h2 class="greet-heading">YBHG DATO' ROSLAN BIN AHMAD</h2>
+            <div class="greet-divider"></div>
+
+            <p class="greet-salutation">Managing Director's Greetings</p>
+
+            <p class="greet-para">
+                My sincerest gratitude to everyone visiting SYNERGY MARINE (M) SDN. BHD. (SMMSB)'s official website.
+            </p>
+
+            <p class="greet-para">
+                As a true-blue Malaysian setup company, it has set its foothold in the market from humble beginnings.
+                Every facet of the company has been structured and perfected through sheer experience, productive and
+                progressive mindsets. Setting the pace with the culture striving for excellence, perfection, high
+                working performance and client satisfaction, SMMSB continue its mission with the same drive and
+                ambition that has established SMMSB as a force to be reckoned with.
+            </p>
+
+            <p class="greet-para">
+                Since our establishment in 2012, we have been exerting our utmost efforts under our customer
+                satisfaction and excellent services ideology. I am happy to note that SMMSB has further been able to
+                contribute to the sustainable growth and development of its business objective in Oil &amp; Gas
+                Industries in the segment of OSV (Offshore Support Vessel) chartering challenge without compromising
+                our core values such as 'Care for the Environment', 'Occupational Health &amp; Safety', and
+                Equality &amp; Quality.
+            </p>
+
+            <p class="greet-para">
+                Sustaining and continuously growing in these challenging years. Towards 2023, four key focus areas:
+                addressing market liquidity; addressing fair and sustainable contracting mechanisms; promoting local
+                industry participation and international expansion; advocating for the energy transition and
+                transformation — we hope to continue our efforts to improve the industry. With the strategic
+                direction previously set.
+            </p>
+
+            <p class="greet-para">
+                We are optimistic that our performance will continue to be strong over the next few years, and we
+                believe the outlook for the oil and gas industry is bright, given the significant improvement in
+                our backlog.
+            </p>
+
+            <p class="greet-para">
+                I would like to acknowledge and express my deepest appreciation to personnel of SMMSB and associates
+                for their generous and magnificent support and contributions to this business journey, which has
+                inspired, touched and illuminated myself through their presence. So let us continue to address the
+                issues facing our industry and work together to prepare it for a brighter and more sustainable future.
+            </p>
+
+            <p class="greet-para" style="font-style: italic; color: #374151;">Thank you.</p>
+
+            <div class="greet-sign-block">
+                <p class="greet-sign-name">YBHG. DATO' ROSLAN BIN AHMAD</p>
+                <p class="greet-sign-post">Managing Director</p>
+                <p class="greet-sign-honours">DIMP, DKSD, PJK.</p>
+            </div>
+        </div>
+
+    </div>
+</div>

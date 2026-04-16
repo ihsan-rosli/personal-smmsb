@@ -1,0 +1,649 @@
+﻿@{
+    ViewData["Title"] = "Berita Harian";
+}
+
+<style>
+    /* ── HERO ── */
+    .news-hero {
+        position: relative;
+        width: 100vw;
+        margin-left: calc(-50vw + 50%);
+        height: 380px;
+        overflow: hidden;
+        display: flex;
+        align-items: flex-end;
+        padding-bottom: 2.5rem;
+    }
+
+    .news-hero-bg {
+        position: absolute;
+        inset: 0;
+        background: url('/images/careerimg.jpg') center center / cover no-repeat;
+        filter: brightness(0.85);
+        transform: scale(1.03);
+        transition: transform 8s ease;
+    }
+
+    .news-hero:hover .news-hero-bg {
+        transform: scale(1.0);
+    }
+
+    .news-hero-overlay {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(to bottom, rgba(10,20,50,0.2) 0%, rgba(10,20,50,0.78) 100%);
+    }
+
+    .news-hero-content {
+        position: relative;
+        z-index: 2;
+        padding: 0 2rem;
+        max-width: 1140px;
+        margin: 0 auto;
+        width: 100%;
+    }
+
+    .news-breadcrumb {
+        font-size: 12px;
+        font-weight: 600;
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+        color: #60a5fa;
+        margin-bottom: 0.75rem;
+    }
+
+        .news-breadcrumb a {
+            color: #60a5fa;
+            text-decoration: none;
+        }
+
+            .news-breadcrumb a:hover {
+                text-decoration: underline;
+            }
+
+    .news-hero-title {
+        font-size: clamp(1.6rem, 3.5vw, 2.6rem);
+        font-weight: 700;
+        color: #ffffff;
+        letter-spacing: -0.5px;
+        line-height: 1.2;
+        margin: 0;
+        max-width: 780px;
+    }
+
+    /* ── CONTENT WRAPPER ── */
+    .news-content-wrapper {
+        background: #f9fafb;
+        border-radius: 16px 16px 0 0;
+        margin-top: -2rem;
+        position: relative;
+        z-index: 3;
+        box-shadow: 0 -4px 30px rgba(0,0,0,0.08);
+        padding: 3rem 2rem 5rem;
+        max-width: 1140px;
+        margin-left: auto;
+        margin-right: auto;
+        width: 100%;
+    }
+
+    /* ── ARTICLE LAYOUT ── */
+    .news-layout {
+        display: grid;
+        grid-template-columns: 1fr 300px;
+        gap: 3rem;
+        align-items: start;
+    }
+
+    /* ── ARTICLE MAIN ── */
+    .news-article {
+        background: #ffffff;
+        border-radius: 14px;
+        overflow: hidden;
+        border: 1px solid #e2e8f0;
+    }
+
+    /* Feature image */
+    .news-feature-img-wrap {
+        width: 100%;
+        height: 420px;
+        overflow: hidden;
+        position: relative;
+        background: #f1f5f9;
+    }
+
+    .news-feature-img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center top;
+        display: block;
+        transition: transform 6s ease;
+    }
+
+    .news-article:hover .news-feature-img {
+        transform: scale(1.02);
+    }
+
+    /* Category tag over image */
+    .news-img-tag {
+        position: absolute;
+        top: 1.25rem;
+        left: 1.25rem;
+        background: #1d4ed8;
+        color: #fff;
+        font-size: 10px;
+        font-weight: 700;
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+        padding: 0.35rem 0.85rem;
+        border-radius: 20px;
+    }
+
+    /* Article body */
+    .news-article-body {
+        padding: 2rem 2.25rem 2.5rem;
+    }
+
+    /* Meta row */
+    .news-meta-row {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 1rem;
+        margin-bottom: 1.5rem;
+        padding-bottom: 1.25rem;
+        border-bottom: 1px solid #f1f5f9;
+    }
+
+    .news-meta-item {
+        display: flex;
+        align-items: center;
+        gap: 0.4rem;
+        font-size: 0.8rem;
+        color: #64748b;
+        font-weight: 500;
+    }
+
+    .news-meta-icon {
+        font-size: 0.9rem;
+    }
+
+    .news-meta-divider {
+        width: 4px;
+        height: 4px;
+        border-radius: 50%;
+        background: #cbd5e1;
+    }
+
+    /* Article title */
+    .news-article-title {
+        font-size: 1.45rem;
+        font-weight: 800;
+        color: #0f172a;
+        line-height: 1.35;
+        margin-bottom: 1.5rem;
+        letter-spacing: -0.3px;
+    }
+
+    /* Lead paragraph */
+    .news-lead {
+        font-size: 1rem;
+        color: #374151;
+        line-height: 1.85;
+        font-weight: 500;
+        margin-bottom: 1.5rem;
+        padding: 1.1rem 1.4rem;
+        background: #eff6ff;
+        border-left: 4px solid #2563eb;
+        border-radius: 0 8px 8px 0;
+        text-align: justify; /* ← ADD THIS */
+    }
+
+    .news-body-text {
+        font-size: 0.95rem;
+        color: #4b5563;
+        line-height: 1.9;
+        margin-bottom: 1.25rem;
+        text-align: justify; /* ← ADD THIS */
+    }
+
+    /* Image caption */
+    .news-caption {
+        font-size: 0.78rem;
+        color: #94a3b8;
+        text-align: justify; /* ← CHANGE from center to justify */
+        margin-top: -0.5rem;
+        margin-bottom: 1.75rem;
+        font-style: italic;
+    }
+
+    /* Tags */
+    .news-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        margin-top: 2rem;
+        padding-top: 1.5rem;
+        border-top: 1px solid #f1f5f9;
+    }
+
+    .news-tag {
+        background: #f1f5f9;
+        color: #475569;
+        border: 1px solid #e2e8f0;
+        border-radius: 6px;
+        font-size: 11px;
+        font-weight: 600;
+        padding: 0.3rem 0.7rem;
+        letter-spacing: 0.3px;
+    }
+
+    /* ── SIDEBAR ── */
+    .news-sidebar {
+        position: static;
+        display: flex;
+        flex-direction: column;
+        gap: 1.25rem;
+    }
+
+    /* Info card */
+    .news-info-card {
+        background: #ffffff;
+        border: 1px solid #e2e8f0;
+        border-radius: 14px;
+        overflow: hidden;
+    }
+
+    .news-info-card-header {
+        background: linear-gradient(135deg, #0f2557, #1e40af);
+        padding: 1rem 1.25rem;
+        display: flex;
+        align-items: center;
+        gap: 0.6rem;
+    }
+
+    .news-info-card-header-title {
+        font-size: 0.8rem;
+        font-weight: 700;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        color: #fff;
+    }
+
+    .news-info-card-body {
+        padding: 1.25rem;
+    }
+
+    .news-info-row {
+        display: flex;
+        align-items: flex-start;
+        gap: 0.75rem;
+        padding: 0.7rem 0;
+        border-bottom: 1px solid #f8fafc;
+    }
+
+        .news-info-row:last-child {
+            border-bottom: none;
+        }
+
+    .news-info-dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: #2563eb;
+        flex-shrink: 0;
+        margin-top: 5px;
+    }
+
+    .news-info-label {
+        font-size: 10px;
+        font-weight: 700;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        color: #94a3b8;
+        margin-bottom: 0.15rem;
+    }
+
+    .news-info-value {
+        font-size: 0.83rem;
+        color: #1e293b;
+        font-weight: 500;
+        line-height: 1.45;
+    }
+
+    /* Achievement badge card */
+    .news-badge-card {
+        background: linear-gradient(145deg, #fffbeb, #fef3c7);
+        border: 1px solid #fde68a;
+        border-radius: 14px;
+        padding: 1.5rem;
+        text-align: center;
+    }
+
+    .news-badge-icon {
+        font-size: 2.5rem;
+        margin-bottom: 0.6rem;
+        display: block;
+    }
+
+    .news-badge-title {
+        font-size: 0.88rem;
+        font-weight: 800;
+        color: #92400e;
+        margin-bottom: 0.3rem;
+        line-height: 1.3;
+    }
+
+    .news-badge-sub {
+        font-size: 0.78rem;
+        color: #b45309;
+        line-height: 1.5;
+    }
+
+    /* Back button */
+    .news-back-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        background: #ffffff;
+        border: 1px solid #e2e8f0;
+        color: #374151;
+        font-size: 0.83rem;
+        font-weight: 600;
+        padding: 0.6rem 1.1rem;
+        border-radius: 8px;
+        text-decoration: none;
+        transition: background 0.15s, border-color 0.15s;
+        width: 100%;
+        justify-content: center;
+    }
+
+        .news-back-btn:hover {
+            background: #f8fafc;
+            border-color: #cbd5e1;
+            color: #374151;
+            text-decoration: none;
+        }
+
+    /* ── RESPONSIVE ── */
+    @@media (max-width: 900px) {
+        .news-layout {
+            grid-template-columns: 1fr;
+        }
+
+        .news-sidebar {
+            position: static;
+        }
+
+        .news-feature-img-wrap {
+            height: 280px;
+        }
+
+        .news-hero {
+            height: 300px;
+        }
+
+        .news-article-body {
+            padding: 1.5rem 1.25rem 2rem;
+        }
+    }
+
+    @@media (max-width: 560px) {
+        .news-content-wrapper {
+            padding: 2rem 1.25rem 3.5rem;
+        }
+
+        .news-feature-img-wrap {
+            height: 220px;
+        }
+
+        .news-article-title {
+            font-size: 1.2rem;
+        }
+    }
+</style>
+<!-- ── HERO ── -->
+<div class="news-hero">
+    <div class="news-hero-bg" style="background-image: url('/images/careerimg.jpg');"></div>
+    <div class="news-hero-overlay"></div>
+    <div class="news-hero-content">
+        <p class="news-breadcrumb">
+            <a href="/News/News">News</a> &nbsp;/&nbsp; Berita Harian
+        </p>
+        <h1 class="news-hero-title">Joint Venture to Build Asia's First LNG Diesel-Powered Platform Support Vessel</h1>
+    </div>
+</div>
+
+<!-- ── MAIN CONTENT ── -->
+<div class="news-content-wrapper">
+    <div class="news-layout">
+
+        <!-- ── ARTICLE ── -->
+        <article class="news-article">
+
+            <!-- Feature Image -->
+            <div class="news-feature-img-wrap">
+                <img src="/images/news/Berita_Harian.jpg"
+                     alt="MoU Signing Ceremony between Synergy Marine, MTCMS Design and Shin Yang Shipyards in Kuala Lumpur"
+                     class="news-feature-img" />
+<<<<<<< HEAD
+                <span class="news-img-tag">🚢 MoU Signing</span>
+=======
+                <span class="news-img-tag">🚢 Press</span>
+>>>>>>> fec671776fc9d2b2005b3d01561056977efa683f
+            </div>
+
+            <div class="news-article-body">
+
+                <!-- Meta -->
+                <div class="news-meta-row">
+                    <div class="news-meta-item">
+                        <span class="news-meta-icon">📅</span>
+                        <span>November 2018</span>
+                    </div>
+                    <div class="news-meta-divider"></div>
+                    <div class="news-meta-item">
+                        <span class="news-meta-icon">✍️</span>
+                        <span>Azzman Abdul Jamal</span>
+                    </div>
+                    <div class="news-meta-divider"></div>
+                    <div class="news-meta-item">
+                        <span class="news-meta-icon">📍</span>
+                        <span>Kuala Lumpur, Malaysia</span>
+                    </div>
+                    <div class="news-meta-divider"></div>
+                    <div class="news-meta-item">
+                        <span class="news-meta-icon">📰</span>
+                        <span>Berita Harian</span>
+                    </div>
+                </div>
+
+                <!-- Title -->
+                <h2 class="news-article-title">
+                    Synergy Marine, MTCMS Design and Shin Yang Shipyards Sign MoU to Build Asia's First LNG Dual Fuel Platform Support Vessel — Project Commences January 2019
+                </h2>
+
+                <!-- Lead -->
+                <p class="news-lead">
+                    Synergy Marine (M) Sdn Bhd has entered into a strategic joint venture with MTCMS Design Sdn Bhd and Shin Yang Shipyards Sdn Bhd to build a Platform Support Vessel (PSV) powered by a combination of Liquefied Natural Gas (LNG) and diesel — making it the first project of its kind in Asia, with the combined construction cost of the LNG and diesel-powered vessel estimated at RM188.75 million.
+                </p>
+
+                <p class="news-body-text">
+                    Executive Chairman of Synergy Marine, Datuk Roslan Ahmad, announced that the construction of this pioneering project will commence in January 2019 and is expected to be completed by December 2020. According to Datuk Roslan, Synergy Marine will invest significantly in the research and development of the vessel's design, leveraging three-dimensional (3D) technology, including advanced digital technology and Virtual Reality (VR) systems, for the purposes of maintenance, emergency training, and operational drills.
+                </p>
+
+                <p class="news-body-text">
+                    The vessel will measure 76.8 metres in length and feature a deck capacity of 600 square metres, purpose-built to offer world-class services to oil and gas companies operating in the global market. The LNG dual fuel engine system is firmly believed to deliver a substantial reduction in the emission of sulphur dioxide, nitrogen dioxide, and carbon dioxide — making this vessel significantly more environmentally friendly compared to conventionally fuelled vessels currently in operation.
+                </p>
+
+                <p class="news-body-text">
+                    Datuk Roslan emphasised these key points during his address at the Memorandum of Understanding (MoU) signing ceremony between Synergy Marine, MTCMS Design, and Shin Yang Shipyards, held in Kuala Lumpur. Also present at the ceremony were the Managing Director and Chief Executive Officer (CEO) of MTCMS Design, Abdul Razak Ismail, as well as the CEO of Shin Yang Shipyards, Captain Ting Hien Liong.
+                </p>
+
+                <p class="news-body-text">
+                    Speaking on the broader context of the reviving marine industry, Datuk Roslan touched on the positive impact of the recovery of oil prices since 2016, which has prompted many global oil and gas companies to recommence exploration and steadily increase production output. He remarked that this was a promising indicator that the marine and shipping industry would begin to recover and grow once again, making it the right moment to position Synergy Marine at the forefront of green maritime technology.
+                </p>
+
+                <p class="news-body-text">
+                    "At this point in time, we are building just one LNG-powered PSV. However, several companies in West Asia have already expressed interest in this project previously. Therefore, we are prepared to build another PSV should there be demand from those markets," Datuk Roslan stated confidently, signalling strong international interest in the venture and Synergy Marine's readiness to scale its green shipbuilding capabilities to meet that demand.
+                </p>
+
+                <!-- Caption -->
+                <p class="news-caption">
+                    (Seated from left) Abdul Razak, Roslan and Hien Liong signing the MoU between Synergy Marine, MTCMS Design and Shin Yang Shipyards, in Kuala Lumpur. | Source: Berita Harian (NSTP), November 2018. Article by Azzman Abdul Jamal.
+                </p>
+
+                <!-- Tags -->
+                <div class="news-tags">
+                    <span class="news-tag">Berita Harian</span>
+                    <span class="news-tag">MoU</span>
+                    <span class="news-tag">LNG</span>
+                    <span class="news-tag">PSV</span>
+                    <span class="news-tag">Dual Fuel</span>
+                    <span class="news-tag">Synergy Marine</span>
+                    <span class="news-tag">MTCMS Design</span>
+                    <span class="news-tag">Shin Yang Shipyards</span>
+                    <span class="news-tag">First in Asia</span>
+                    <span class="news-tag">Green Technology</span>
+                    <span class="news-tag">IMO</span>
+                    <span class="news-tag">Oil &amp; Gas</span>
+                    <span class="news-tag">Malaysia</span>
+                    <span class="news-tag">2018</span>
+                </div>
+
+            </div>
+        </article>
+
+        <!-- ── SIDEBAR ── -->
+        <aside class="news-sidebar">
+
+            <!-- Achievement Highlight -->
+            <div class="news-badge-card">
+                <span class="news-badge-icon">🚢</span>
+                <div class="news-badge-title">Asia's First LNG Dual Fuel PSV Project</div>
+                <div class="news-badge-sub">Synergy Marine · MTCMS Design · Shin Yang Shipyards<br />Kuala Lumpur, November 2018</div>
+            </div>
+
+            <!-- Project Details -->
+            <div class="news-info-card">
+                <div class="news-info-card-header">
+                    <span>📋</span>
+                    <div class="news-info-card-header-title">Project Details</div>
+                </div>
+                <div class="news-info-card-body">
+
+                    <div class="news-info-row">
+                        <div class="news-info-dot"></div>
+                        <div>
+                            <div class="news-info-label">Date</div>
+                            <div class="news-info-value">November 2018</div>
+                        </div>
+                    </div>
+
+                    <div class="news-info-row">
+                        <div class="news-info-dot"></div>
+                        <div>
+                            <div class="news-info-label">Agreement</div>
+                            <div class="news-info-value">Memorandum of Understanding (MoU)</div>
+                        </div>
+                    </div>
+
+                    <div class="news-info-row">
+                        <div class="news-info-dot"></div>
+                        <div>
+                            <div class="news-info-label">Vessel Type</div>
+                            <div class="news-info-value">Platform Support Vessel (PSV)<br /><span style="color:#94a3b8; font-size:0.75rem;">LNG &amp; Diesel Dual Fuel</span></div>
+                        </div>
+                    </div>
+
+                    <div class="news-info-row">
+                        <div class="news-info-dot"></div>
+                        <div>
+                            <div class="news-info-label">Construction Cost</div>
+                            <div class="news-info-value">RM188.75 Million<br /><span style="color:#94a3b8; font-size:0.75rem;">(Est. ~US$45 Million)</span></div>
+                        </div>
+                    </div>
+
+                    <div class="news-info-row">
+                        <div class="news-info-dot"></div>
+                        <div>
+                            <div class="news-info-label">Vessel Length</div>
+                            <div class="news-info-value">76.8 metres</div>
+                        </div>
+                    </div>
+
+                    <div class="news-info-row">
+                        <div class="news-info-dot"></div>
+                        <div>
+                            <div class="news-info-label">Deck Capacity</div>
+                            <div class="news-info-value">600 square metres</div>
+                        </div>
+                    </div>
+
+                    <div class="news-info-row">
+                        <div class="news-info-dot"></div>
+                        <div>
+                            <div class="news-info-label">Ship Operator</div>
+                            <div class="news-info-value">Synergy Marine (M) Sdn Bhd<br /><span style="color:#94a3b8; font-size:0.75rem;">Datuk Roslan Ahmad, Executive Chairman</span></div>
+                        </div>
+                    </div>
+
+                    <div class="news-info-row">
+                        <div class="news-info-dot"></div>
+                        <div>
+                            <div class="news-info-label">Designer</div>
+                            <div class="news-info-value">MTCMS Design Sdn Bhd<br /><span style="color:#94a3b8; font-size:0.75rem;">Abdul Razak Ismail, CEO</span></div>
+                        </div>
+                    </div>
+
+                    <div class="news-info-row">
+                        <div class="news-info-dot"></div>
+                        <div>
+                            <div class="news-info-label">Shipyard</div>
+                            <div class="news-info-value">Shin Yang Shipyards Sdn Bhd<br /><span style="color:#94a3b8; font-size:0.75rem;">Captain Ting Hien Liong, CEO</span></div>
+                        </div>
+                    </div>
+
+                    <div class="news-info-row">
+                        <div class="news-info-dot"></div>
+                        <div>
+                            <div class="news-info-label">Construction Start</div>
+                            <div class="news-info-value">January 2019</div>
+                        </div>
+                    </div>
+
+                    <div class="news-info-row">
+                        <div class="news-info-dot"></div>
+                        <div>
+                            <div class="news-info-label">Expected Completion</div>
+                            <div class="news-info-value">December 2020</div>
+                        </div>
+                    </div>
+
+                    <div class="news-info-row">
+                        <div class="news-info-dot"></div>
+                        <div>
+                            <div class="news-info-label">Journalist</div>
+                            <div class="news-info-value">Azzman Abdul Jamal<br /><span style="color:#94a3b8; font-size:0.75rem;">azzman@nstp.com.my</span></div>
+                        </div>
+                    </div>
+
+                    <div class="news-info-row">
+                        <div class="news-info-dot"></div>
+                        <div>
+                            <div class="news-info-label">Source</div>
+                            <div class="news-info-value">Berita Harian (NSTP)</div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Back button -->
+            <a href="/News/News" class="news-back-btn">
+                ← Back to News
+            </a>
+
+        </aside>
+    </div>
+</div>

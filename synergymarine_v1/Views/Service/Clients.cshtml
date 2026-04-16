@@ -1,0 +1,457 @@
+@{
+    ViewData["Title"] = "Clients";
+}
+
+<style>
+    /* ── HERO ── */
+    .cp-hero {
+        position: relative;
+        width: 100vw;
+        margin-left: calc(-50vw + 50%);
+        height: 380px;
+        overflow: hidden;
+        display: flex;
+        align-items: flex-end;
+        padding-bottom: 2.5rem;
+    }
+
+    .cp-hero-bg {
+        position: absolute;
+        inset: 0;
+        background: url('/images/comp2.png') center center / cover no-repeat;
+        filter: brightness(0.85);
+        transform: scale(1.03);
+        transition: transform 8s ease;
+    }
+
+    .cp-hero:hover .cp-hero-bg { transform: scale(1.0); }
+
+    .cp-hero-overlay {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(to bottom, rgba(10,20,50,0.2) 0%, rgba(10,20,50,0.75) 100%);
+    }
+
+    .cp-hero-content {
+        position: relative;
+        z-index: 2;
+        padding: 0 2rem;
+        max-width: 1140px;
+        margin: 0 auto;
+        width: 100%;
+    }
+
+    .cp-breadcrumb {
+        font-size: 12px;
+        font-weight: 600;
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+        color: #60a5fa;
+        margin-bottom: 0.75rem;
+    }
+
+    .cp-hero-title {
+        font-size: clamp(2rem, 4vw, 3rem);
+        font-weight: 700;
+        color: #ffffff;
+        letter-spacing: -0.5px;
+        line-height: 1.15;
+        margin: 0;
+    }
+
+    /* ── CONTENT WRAPPER ── */
+    .cp-content-wrapper {
+        background: #ffffff;
+        border-radius: 16px 16px 0 0;
+        margin-top: -2rem;
+        position: relative;
+        z-index: 3;
+        box-shadow: 0 -4px 30px rgba(0,0,0,0.08);
+        padding: 3rem 2rem 4rem;
+        max-width: 1140px;
+        margin-left: auto;
+        margin-right: auto;
+        width: 100%;
+    }
+
+    .cp-lead-heading {
+        font-size: 1.35rem;
+        font-weight: 700;
+        color: #1e293b;
+        line-height: 1.4;
+        margin-bottom: 0.5rem;
+        border-left: 4px solid #2563eb;
+        padding-left: 1rem;
+    }
+
+    .cp-sub-text {
+        font-size: 0.95rem;
+        color: #6b7280;
+        margin-bottom: 2rem;
+        padding-left: 1.25rem;
+    }
+
+    .cp-divider {
+        border: none;
+        border-top: 1px solid #e5e7eb;
+        margin-bottom: 2.5rem;
+    }
+
+    /* ── LOGO GRID ── */
+    .logo-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 1.5rem;
+        align-items: center;
+        justify-items: center;
+        margin-bottom: 3rem;
+    }
+
+    .logo-item {
+        width: 100%;
+        height: 100px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid #e5e7eb;
+        border-radius: 10px;
+        padding: 1.25rem;
+        background: #ffffff;
+        transition: all 0.3s ease;
+    }
+
+        .logo-item:hover {
+            box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+            transform: translateY(-3px);
+            border-color: #bfdbfe;
+        }
+
+        .logo-item img {
+            max-width: 100%;
+            max-height: 60px;
+            object-fit: contain;
+            filter: grayscale(100%);
+            opacity: 0.65;
+            transition: all 0.3s ease;
+        }
+
+        .logo-item:hover img {
+            filter: grayscale(0%);
+            opacity: 1;
+        }
+
+    /* Text fallback for logos without images */
+    .logo-text {
+        font-weight: 700;
+        font-size: 0.85rem;
+        color: #94a3b8;
+        letter-spacing: 0.5px;
+        text-align: center;
+        transition: color 0.3s ease;
+    }
+
+    .logo-item:hover .logo-text {
+        color: #1a365d;
+    }
+
+    /* ── BOTTOM SERVICES BANNER ── */
+    .cs-services-banner {
+        display: flex;
+        align-items: center;
+        gap: 3rem;
+        background: #f8fafc;
+        border: 1px solid #e5e7eb;
+        border-radius: 14px;
+        overflow: hidden;
+        border-left: 5px solid #1a365d;
+    }
+
+    .cs-banner-text {
+        flex: 1;
+        padding: 2.5rem;
+    }
+
+        .cs-banner-text h3 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #1a365d;
+            margin-bottom: 0.75rem;
+        }
+
+        .cs-banner-text p {
+            font-size: 0.93rem;
+            color: #4b5563;
+            line-height: 1.8;
+            margin-bottom: 1.25rem;
+        }
+
+    .cs-banner-btn {
+        display: inline-block;
+        background: #1a365d;
+        color: #ffffff;
+        font-size: 13px;
+        font-weight: 600;
+        padding: 0.65rem 1.5rem;
+        border-radius: 6px;
+        text-decoration: none;
+        letter-spacing: 0.5px;
+        transition: all 0.2s ease;
+    }
+        .cs-banner-btn:hover {
+            background: #2563eb;
+            transform: translateY(-1px);
+            color: #ffffff;
+        }
+
+    .cs-banner-image {
+        width: 340px;
+        flex-shrink: 0;
+        height: 220px;
+    }
+
+        .cs-banner-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+    .logo-inner {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .logo-name {
+        margin-top: 8px;
+        font-size: 12px;
+        font-weight: 600;
+        color: #64748b;
+        text-align: center;
+        transition: color 0.3s ease;
+    }
+
+    .logo-item:hover .logo-name {
+        color: #1a365d;
+    }
+    /* ── RESPONSIVE ── */
+    @@media (max-width: 992px) {
+        .logo-grid { grid-template-columns: repeat(3, 1fr); }
+
+        .cs-services-banner { flex-direction: column; gap: 0; }
+        .cs-banner-image { width: 100%; height: 200px; }
+        .cs-banner-text { padding: 2rem; }
+    }
+
+    @@media (max-width: 768px) {
+        .cp-hero { height: 280px; }
+        .logo-grid { grid-template-columns: repeat(2, 1fr); }
+        .cp-content-wrapper { padding: 2rem 1.25rem 3rem; }
+    }
+</style>
+
+<!-- ── HERO ── -->
+<div class="cp-hero">
+    <div class="cp-hero-bg"></div>
+    <div class="cp-hero-overlay"></div>
+    <div class="cp-hero-content">
+        <p class="cp-breadcrumb">Services / Clients</p>
+        <h1 class="cp-hero-title">Our Clients</h1>
+    </div>
+</div>
+
+<!-- ── MAIN CONTENT ── -->
+<div class="cp-content-wrapper">
+
+    <p class="cp-lead-heading">Trusted by Industry Leaders</p>
+    <p class="cp-sub-text">Synergy Marine (M) Sdn Bhd has successfully associated with many prestigious clients in the oil & gas industry.</p>
+    <hr class="cp-divider" />
+
+    <div class="logo-grid">
+
+        <div class="logo-item">
+            <div class="logo-inner">
+                <img src="/images/clients/petronas.png" alt="Petronas" />
+                <p class="logo-name">PETRONAS</p>
+            </div>
+        </div>
+
+        <div class="logo-item">
+            <div class="logo-inner">
+                <img src="/images/clients/petronas.png" alt="Petronas Imagining Energy" />
+                <p class="logo-name">REGAS TERMINAL SUNGAI UDANG</p>
+            </div>
+        </div>
+
+        <div class="logo-item">
+            <div class="logo-inner">
+                <img src="/images/clients/velesto.png" alt="Velesto" />
+                <p class="logo-name">Velesto</p>
+            </div>
+        </div>
+
+        <div class="logo-item">
+            <div class="logo-inner">
+                <img src="/images/clients/Vestigo-logo.png" alt="Vestigo" />
+                <p class="logo-name">Vestigo</p>
+            </div>
+        </div>
+
+        <div class="logo-item">
+            <div class="logo-inner">
+                <img src="/images/clients/cpoc.png" alt="Carigali-PTTEPI Operating Company" />
+                <p class="logo-name">Carigali-PTTEPI Operating Company</p>
+            </div>
+        </div>
+
+        <div class="logo-item">
+            <div class="logo-inner">
+                <img src="/images/clients/jadestone energy.png" alt="Jadestone Energy" />
+                <p class="logo-name">Jadestone Energy</p>
+            </div>
+        </div>
+
+        <div class="logo-item">
+            <div class="logo-inner">
+                <img src="/images/clients/mtc.png" alt="MTC" />
+                <p class="logo-name">MTC</p>
+            </div>
+        </div>
+
+        <div class="logo-item">
+            <div class="logo-inner">
+                <img src="/images/clients/saa.png" alt="SAA Engineering & Marine" />
+                <p class="logo-name">SAA Engineering & Marine</p>
+            </div>
+        </div>
+
+        <div class="logo-item">
+            <div class="logo-inner">
+                <img src="/images/clients/ppjo.jpg" alt="PPJO" />
+                <p class="logo-name">PTTEP JDX & PC JDA Joint Operations</p>
+            </div>
+        </div>
+
+        <div class="logo-item">
+            <div class="logo-inner">
+                <img src="/images/clients/pingpetroleum.jpg" alt="Ping Petroleum" />
+                <p class="logo-name">Ping Petroleum</p>
+            </div>
+        </div>
+
+        <div class="logo-item">
+            <div class="logo-inner">
+                <img src="/images/clients/dialog.jpeg" alt="Dialog" />
+                <p class="logo-name">Dialog</p>
+            </div>
+        </div>
+
+        <div class="logo-item">
+            <div class="logo-inner">
+                <img src="/images/clients/sabahpetroleum.jpeg" alt="Sabah Petroleum" />
+                <p class="logo-name">Sabah Petroleum</p>
+            </div>
+        </div>
+
+        <div class="logo-item">
+            <div class="logo-inner">
+                <img src="/images/clients/petra.jpeg" alt="Petra" />
+                <p class="logo-name">Petra</p>
+            </div>
+        </div>
+
+        @* <div class="logo-item">
+            <div class="logo-inner">
+                <img src="/images/clients/shell.png" alt="Shell" />
+                <p class="logo-name">Shell</p>
+            </div>
+        </div> *@
+
+        @* <div class="logo-item">
+            <div class="logo-inner">
+                <img src="/images/clients/umw.png" alt="UMW" />
+                <p class="logo-name">UMW</p>
+            </div>
+        </div> *@
+
+        @* <div class="logo-item">
+            <div class="logo-inner">
+                <img src="/images/clients/carigali hess.jfif" alt="Carigali Hess" />
+                <p class="logo-name">Carigali Hess</p>
+            </div>
+        </div> *@
+
+        @* <div class="logo-item">
+            <div class="logo-inner">
+                <img src="/images/clients/carimin.jfif" alt="Carimin" />
+                <p class="logo-name">Carimin</p>
+            </div>
+        </div> *@
+
+        @* <div class="logo-item">
+            <div class="logo-inner">
+                <img src="/images/clients/serba dinamik.png" alt="Serba Dinamik" />
+                <p class="logo-name">Serba Dinamik</p>
+            </div>
+        </div> *@
+
+        @* <div class="logo-item">
+            <div class="logo-inner">
+                <img src="/images/clients/sapura.png" alt="Sapura Kencana" />
+                <p class="logo-name">Sapura Kencana</p>
+            </div>
+        </div> *@
+
+        @* <div class="logo-item">
+            <div class="logo-inner">
+                <img src="/images/clients/hess.png" alt="HESS" />
+                <p class="logo-name">HESS</p>
+            </div>
+        </div> *@
+
+        @* <div class="logo-item">
+            <div class="logo-inner">
+                <img src="/images/clients/borneoredtech.jpg" alt="Borneo RedTech" />
+                <p class="logo-name">Borneo RedTech</p>
+            </div>
+        </div> *@
+
+        @* <div class="logo-item">
+            <div class="logo-inner">
+                <img src="/images/clients/tcenginnering.png" alt="TC Engineering" />
+                <p class="logo-name">TC Engineering</p>
+            </div>
+        </div> *@
+
+        @* <div class="logo-item">
+            <div class="logo-inner">
+                <img src="/images/clients/costalenergy.png" alt="Coastal Energy" />
+                <p class="logo-name">Coastal Energy</p>
+            </div>
+        </div> *@
+
+        @* <div class="logo-item">
+            <div class="logo-inner">
+                <img src="/images/clients/hasb.jfif" alt="HASB" />
+                <p class="logo-name">HASB</p>
+            </div>
+        </div> *@
+
+        @* <div class="logo-item">
+            <div class="logo-inner">
+                <img src="/images/clients/petrofac.jfif" alt="Petrofac" />
+                <p class="logo-name">Petrofac</p>
+            </div>
+        </div> *@
+
+        @* <div class="logo-item">
+            <div class="logo-inner">
+                <img src="/images/clients/e.a tech.png" alt="E.A Technique" />
+                <p class="logo-name">E.A Technique</p>
+            </div>
+        </div> *@
+
+    </div>
+ 
+
+</div>

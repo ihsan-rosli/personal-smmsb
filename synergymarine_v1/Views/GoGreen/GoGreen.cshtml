@@ -1,0 +1,264 @@
+﻿@{
+    ViewData["Title"] = "Go Green";
+}
+
+<style>
+    /* ── HERO SECTION ── */
+    .cp-hero {
+        position: relative;
+        width: 100vw;
+        margin-left: calc(-50vw + 50%);
+        height: 380px;
+        overflow: hidden;
+        display: flex;
+        align-items: flex-end;
+        padding-bottom: 2.5rem;
+    }
+
+    .cp-hero-bg {
+        position: absolute;
+        inset: 0;
+        background: url('/images/synergyexplorer.png') center center / cover no-repeat;
+        filter: brightness(0.45);
+        transform: scale(1.03);
+        transition: transform 8s ease;
+    }
+
+    .cp-hero:hover .cp-hero-bg {
+        transform: scale(1.0);
+    }
+
+    .cp-hero-overlay {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(to bottom, rgba(10,20,50,0.2) 0%, rgba(10,20,50,0.75) 100%);
+    }
+
+    .cp-hero-content {
+        position: relative;
+        z-index: 2;
+        padding: 0 2rem;
+        max-width: 1140px;
+        margin: 0 auto;
+        width: 100%;
+    }
+
+    .cp-breadcrumb {
+        font-size: 12px;
+        font-weight: 600;
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+        color: #60a5fa;
+        margin-bottom: 0.75rem;
+    }
+
+    .cp-hero-title {
+        font-size: clamp(2rem, 4vw, 3rem);
+        font-weight: 700;
+        color: #ffffff;
+        letter-spacing: -0.5px;
+        line-height: 1.15;
+        margin: 0;
+    }
+
+    /* ── CONTENT SECTION ── */
+    .cp-content-wrapper {
+        background: #ffffff;
+        border-radius: 16px 16px 0 0;
+        margin-top: -2rem;
+        position: relative;
+        z-index: 3;
+        box-shadow: 0 -4px 30px rgba(0,0,0,0.08);
+        padding: 3rem 2rem 4rem;
+        max-width: 1140px;
+        margin-left: auto;
+        margin-right: auto;
+        width: 100%;
+    }
+
+    .cp-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 3.5rem;
+        align-items: start;
+    }
+
+    /* Left: Text */
+    .cp-text-col {
+    }
+
+    .cp-lead-heading {
+        font-size: 1.35rem;
+        font-weight: 700;
+        color: #1e293b;
+        line-height: 1.4;
+        margin-bottom: 1.5rem;
+        border-left: 4px solid #2563eb;
+        padding-left: 1rem;
+    }
+
+    .cp-body-text {
+        font-size: 0.95rem;
+        color: #4b5563;
+        line-height: 1.85;
+        margin-bottom: 1.25rem;
+    }
+
+    .cp-divider {
+        border: none;
+        border-top: 1px solid #e5e7eb;
+        margin: 1.75rem 0;
+    }
+
+    /* Vessel service tags */
+    .cp-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        margin-top: 1.25rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .cp-tag {
+        background: #eff6ff;
+        color: #1d4ed8;
+        border: 1px solid #bfdbfe;
+        border-radius: 6px;
+        font-size: 12px;
+        font-weight: 600;
+        padding: 0.3rem 0.75rem;
+        letter-spacing: 0.3px;
+    }
+
+    /* Right: Image stack */
+    .cp-image-col {
+        position: sticky;
+        top: 100px;
+    }
+
+    .cp-img-main {
+        width: 100%;
+        border-radius: 12px;
+        object-fit: cover;
+        height: 320px;
+        box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+        display: block;
+    }
+
+    .cp-img-caption {
+        font-size: 12px;
+        color: #9ca3af;
+        text-align: center;
+        margin-top: 0.6rem;
+        letter-spacing: 0.3px;
+    }
+
+    /* Stats row */
+    .cp-stats {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1rem;
+        margin-top: 1.5rem;
+        padding-top: 1.5rem;
+        border-top: 1px solid #e5e7eb;
+    }
+
+    .cp-stat {
+        text-align: center;
+    }
+
+    .cp-stat-number {
+        font-size: 1.75rem;
+        font-weight: 800;
+        color: #1a365d;
+        line-height: 1;
+        display: block;
+    }
+
+    .cp-stat-label {
+        font-size: 11px;
+        color: #6b7280;
+        text-transform: uppercase;
+        letter-spacing: 0.8px;
+        font-weight: 500;
+        margin-top: 0.3rem;
+        display: block;
+    }
+
+    /* Responsive */
+    @@media (max-width: 768px) {
+        .cp-hero {
+            height: 280px;
+        }
+
+        .cp-grid {
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+
+        .cp-image-col {
+            position: static;
+        }
+
+        .cp-img-main {
+            height: 240px;
+        }
+
+        .cp-content-wrapper {
+            padding: 2rem 1.25rem 3rem;
+        }
+    }
+</style>
+
+<!-- ── HERO ── -->
+<div class="cp-hero">
+    <div class="cp-hero-bg"></div>
+    <div class="cp-hero-overlay"></div>
+    <div class="cp-hero-content">
+        <p class="cp-breadcrumb">Go Green </p>
+        <h1 class="cp-hero-title">Synergy Go Green</h1>
+    </div>
+</div>
+
+<!-- ── MAIN CONTENT ── -->
+<div class="cp-content-wrapper">
+    <div class="cp-grid">
+
+        <!-- LEFT: Text -->
+        <div class="cp-text-col">
+
+            <p class="cp-lead-heading">
+                We are striving and supporting vigorously to secure liquefied natural gas
+            </p>
+
+            <p class="cp-body-text">
+                SMMSB is very committed to participate in contributing efforts towards greener environment especially in our core business activities to create clean environment in our country.
+            </p>
+
+            <p class="cp-body-text">
+                We are striving and supporting vigorously to secure liquefied natural gas (LNG) as the replacement for heavy fuel oil (HFO) in global maritime shipping and play active role in global marine and offshore transportation.
+            </p>
+
+            <p class="cp-body-text">
+                LNG is a very clean source of energy compared to other type of gas and the demand has growing rapidly compared to other fossil fuel, also useful for power generation station and other domestic industry markets.
+            </p>
+
+            <p class="cp-body-text">
+                SMMSB high commitment has been conceptualized and materialized to the development of the Malaysia’s first LNG Powered Vessel, a Platform Supply Vessel using dual-fuel LNG and diesel fuel engine system and additional battery hybrid power system to serve and support national and global Oil & Gas industry activities. This high technology vessel definitely will reduce the fuel
+
+                and gas usage consumption and also fulfil the International Maritime Organization global sulphur cap regulations as well as reducing NOx, CO₂ and particulate matter emissions.
+            </p>
+
+
+           
+
+        </div>
+
+        <!-- RIGHT: Image -->
+        <div class="cp-image-col">
+            <img src="/images/lng.jpg" alt="LNG Powered Vessel" class="cp-img-main" />
+            <p class="cp-img-caption">LNG-powered vessel supporting sustainable offshore operations</p>
+        </div>
+
+    </div>
+</div>

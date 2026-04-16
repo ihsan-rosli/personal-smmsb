@@ -1,0 +1,255 @@
+﻿@{
+    ViewData["Title"] = "Our Fleet Specifications";
+}
+
+<style>
+    /* ── HERO SECTION ── */
+    .cp-hero {
+        position: relative;
+        width: 100vw;
+        margin-left: calc(-50vw + 50%);
+        height: 380px;
+        overflow: hidden;
+        display: flex;
+        align-items: flex-end;
+        padding-bottom: 2.5rem;
+    }
+
+    .cp-hero-bg {
+        position: absolute;
+        inset: 0;
+        background: url('/images/2.jpg') center center / cover no-repeat;
+        filter: brightness(0.85);
+        transform: scale(1.03);
+        transition: transform 8s ease;
+    }
+
+    .cp-hero:hover .cp-hero-bg {
+        transform: scale(1.0);
+    }
+
+    .cp-hero-overlay {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(to bottom, rgba(10,20,50,0.2) 0%, rgba(10,20,50,0.75) 100%);
+    }
+
+    .cp-hero-content {
+        position: relative;
+        z-index: 2;
+        padding: 0 2rem;
+        max-width: 1140px;
+        margin: 0 auto;
+        width: 100%;
+    }
+
+    .cp-breadcrumb {
+        font-size: 12px;
+        font-weight: 600;
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+        color: #60a5fa;
+        margin-bottom: 0.75rem;
+    }
+
+    .cp-hero-title {
+        font-size: clamp(2rem, 4vw, 3rem);
+        font-weight: 700;
+        color: #ffffff;
+        letter-spacing: -0.5px;
+        line-height: 1.15;
+        margin: 0;
+    }
+
+    /* ── CONTENT WRAPPER ── */
+    .cp-content-wrapper {
+        background: #ffffff;
+        border-radius: 16px 16px 0 0;
+        margin-top: -2rem;
+        position: relative;
+        z-index: 3;
+        box-shadow: 0 -4px 30px rgba(0,0,0,0.08);
+        padding: 3rem 2rem 4rem;
+        max-width: 1140px;
+        margin-left: auto;
+        margin-right: auto;
+        width: 100%;
+    }
+
+    /* ── SECTION INTRO ── */
+    .dir-section-label {
+        font-size: 12px;
+        font-weight: 600;
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+        color: #2563eb;
+        margin-bottom: 0.5rem;
+    }
+
+    .dir-section-title {
+        font-size: 1.6rem;
+        font-weight: 700;
+        color: #1e293b;
+        margin-bottom: 0.5rem;
+    }
+
+    .dir-section-subtitle {
+        font-size: 0.95rem;
+        color: #6b7280;
+        margin-bottom: 2.5rem;
+        max-width: 540px;
+    }
+
+    .dir-divider {
+        border: none;
+        border-top: 1px solid #e5e7eb;
+        margin-bottom: 2.5rem;
+    }
+
+    /* ── DIRECTORS GRID ── */
+    .dir-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        gap: 2rem;
+    }
+
+    /* ── DIRECTOR CARD ── */
+    .dir-card {
+        background: #ffffff;
+        border: 1px solid #e5e7eb;
+        border-radius: 16px;
+        overflow: hidden;
+        transition: box-shadow 0.3s ease, transform 0.3s ease;
+    }
+
+        .dir-card:hover {
+            box-shadow: 0 12px 40px rgba(0,0,0,0.1);
+            transform: translateY(-4px);
+        }
+
+    .dir-card-img-wrap {
+        width: 100%;
+        height: 340px;
+        overflow: hidden;
+        background: #f8fafc;
+    }
+
+        .dir-card-img-wrap img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: top center;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+
+    .dir-card:hover .dir-card-img-wrap img {
+        transform: scale(1.03);
+    }
+
+    .dir-card-body {
+        padding: 1.75rem 1.75rem 2rem;
+        border-top: 3px solid #dc2626;
+    }
+
+    .dir-name {
+        font-size: 1.15rem;
+        font-weight: 700;
+        color: #1e293b;
+        margin-bottom: 0.2rem;
+    }
+
+    .dir-role {
+        font-size: 12px;
+        font-weight: 600;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        color: #2563eb;
+        margin-bottom: 1.25rem;
+    }
+
+    .dir-bio {
+        font-size: 0.9rem;
+        color: #4b5563;
+        line-height: 1.85;
+    }
+
+    /* ── RESPONSIVE ── */
+    @@media (max-width: 768px) {
+        .cp-hero {
+            height: 280px;
+        }
+
+        .dir-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .cp-content-wrapper {
+            padding: 2rem 1.25rem 3rem;
+        }
+
+        .dir-card-img-wrap {
+            height: 280px;
+        }
+    }
+</style>
+
+<!-- ── HERO ── -->
+<div class="cp-hero">
+    <div class="cp-hero-bg"></div>
+    <div class="cp-hero-overlay"></div>
+    <div class="cp-hero-content">
+        <p class="cp-breadcrumb">Fleet / Our Fleets Specifications</p>
+        <h1 class="cp-hero-title">Our Fleets Specifications</h1>
+    </div>
+</div>
+
+<!-- ── MAIN CONTENT ── -->
+<div class="cp-content-wrapper">
+
+  @*   <p class="dir-section-label">Leadership</p>
+    <h2 class="dir-section-title">Meet the Team Behind Synergy Marine</h2>
+    <p class="dir-section-subtitle">Our experienced leadership team brings decades of expertise in marine, oil & gas, and financial management.</p>
+    <hr class="dir-divider" />
+
+    <div class="dir-grid"> *@
+
+    <div class="dir-grid">
+    <div class="dir-card">
+        <div class="dir-card-img-wrap">
+            <img src="/images/synergyexplorer.png" alt="MV SYNERGY EXPLORER" />
+        </div>
+        <div class="dir-card-body">
+            <p class="dir-name">MV SYNERGY EXPLORER</p>
+            <p class="dir-role">Vessel Specifications</p>
+            <p class="dir-bio">
+                ➤ Length: 70.7m<br />
+                ➤ Breadth: 16.0m<br />
+                ➤ Propulsion: 10,800bhp<br />
+                ➤ Deck Area: 500.0m²<br />
+                ➤ AH/Towing Winch: 300T Pull / 450T Brake<br />
+                ➤ Accommodation: 40 men
+            </p>
+        </div>
+    </div>
+
+    <div class="dir-card">
+        <div class="dir-card-img-wrap">
+            <img src="/images/synergyaurora.png" alt="MV SYNERGY AURORA" />
+        </div>
+        <div class="dir-card-body">
+            <p class="dir-name">MV SYNERGY AURORA</p>
+            <p class="dir-role">Vessel Specifications</p>
+            <p class="dir-bio">
+                ➤ Length: 55.84m<br />
+                ➤ Breadth: 14.60m<br />
+                ➤ Propulsion: 5,150bhp<br />
+                ➤ Deck Area: 350.0m²<br />
+                ➤ Bollard Pull: 60T<br />
+                ➤ Accommodation: 42 men
+            </p>
+        </div>
+    </div>
+    </div>
+    </div>
+</div>

@@ -1,0 +1,127 @@
+is_global = true
+build_property.TargetFramework = net8.0
+build_property.TargetFrameworkIdentifier = .NETCoreApp
+build_property.TargetFrameworkVersion = v8.0
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = true
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = 
+build_property.PlatformNeutralAssembly = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property.RootNamespace = synergymarine_v1
+build_property.RootNamespace = synergymarine_v1
+build_property.ProjectDir = C:\_localrepo\personal\personal-synergy-marine\synergymarine_v1\
+build_property.EnableComHosting = 
+build_property.EnableGeneratedComInterfaceComImportInterop = 
+build_property.RazorLangVersion = 8.0
+build_property.SupportLocalizedComponentNames = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+build_property.MSBuildProjectDirectory = C:\_localrepo\personal\personal-synergy-marine\synergymarine_v1
+build_property._RazorSourceGeneratorDebug = 
+build_property.EffectiveAnalysisLevelStyle = 8.0
+build_property.EnableCodeStyleSeverity = 
+
+[C:/_localrepo/personal/personal-synergy-marine/synergymarine_v1/wwwroot/images/Index (5).cshtml]
+build_metadata.AdditionalFiles.TargetPath = d3d3cm9vdFxpbWFnZXNcSW5kZXggKDUpLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/_localrepo/personal/personal-synergy-marine/synergymarine_v1/Views/About/CompanyProfile.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWJvdXRcQ29tcGFueVByb2ZpbGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/_localrepo/personal/personal-synergy-marine/synergymarine_v1/Views/About/CoreValues.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWJvdXRcQ29yZVZhbHVlcy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/_localrepo/personal/personal-synergy-marine/synergymarine_v1/Views/About/HSE.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWJvdXRcSFNFLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/_localrepo/personal/personal-synergy-marine/synergymarine_v1/Views/About/MdMeeting.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWJvdXRcTWRNZWV0aW5nLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/_localrepo/personal/personal-synergy-marine/synergymarine_v1/Views/About/VisionMission.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWJvdXRcVmlzaW9uTWlzc2lvbi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/_localrepo/personal/personal-synergy-marine/synergymarine_v1/Views/Career/Career.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2FyZWVyXENhcmVlci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/_localrepo/personal/personal-synergy-marine/synergymarine_v1/Views/ContactUs/ContactUs.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29udGFjdFVzXENvbnRhY3RVcy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/_localrepo/personal/personal-synergy-marine/synergymarine_v1/Views/Fleet/FleetOverview.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRmxlZXRcRmxlZXRPdmVydmlldy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/_localrepo/personal/personal-synergy-marine/synergymarine_v1/Views/Fleet/OurFleetSpecifications.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRmxlZXRcT3VyRmxlZXRTcGVjaWZpY2F0aW9ucy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/_localrepo/personal/personal-synergy-marine/synergymarine_v1/Views/GoGreen/GoGreen.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcR29HcmVlblxHb0dyZWVuLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/_localrepo/personal/personal-synergy-marine/synergymarine_v1/Views/Home test/Home.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZSB0ZXN0XEhvbWUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/_localrepo/personal/personal-synergy-marine/synergymarine_v1/Views/Home test/Privacy.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZSB0ZXN0XFByaXZhY3kuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/_localrepo/personal/personal-synergy-marine/synergymarine_v1/Views/Home/Dashboard.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxEYXNoYm9hcmQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/_localrepo/personal/personal-synergy-marine/synergymarine_v1/Views/Home/Home.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxIb21lLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/_localrepo/personal/personal-synergy-marine/synergymarine_v1/Views/License_Cert/License.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTGljZW5zZV9DZXJ0XExpY2Vuc2UuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/_localrepo/personal/personal-synergy-marine/synergymarine_v1/Views/News/News.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTmV3c1xOZXdzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/_localrepo/personal/personal-synergy-marine/synergymarine_v1/Views/News/PTTEPI.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTmV3c1xQVFRFUEkuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/_localrepo/personal/personal-synergy-marine/synergymarine_v1/Views/News/UPEN.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTmV3c1xVUEVOLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/_localrepo/personal/personal-synergy-marine/synergymarine_v1/Views/Service/CapabilitySpectrum.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2VydmljZVxDYXBhYmlsaXR5U3BlY3RydW0uY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/_localrepo/personal/personal-synergy-marine/synergymarine_v1/Views/Service/Clients.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2VydmljZVxDbGllbnRzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/_localrepo/personal/personal-synergy-marine/synergymarine_v1/Views/Shared/Error.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/_localrepo/personal/personal-synergy-marine/synergymarine_v1/Views/Shared/_ValidationScriptsPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/_localrepo/personal/personal-synergy-marine/synergymarine_v1/Views/_ViewImports.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/_localrepo/personal/personal-synergy-marine/synergymarine_v1/Views/_ViewStart.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/_localrepo/personal/personal-synergy-marine/synergymarine_v1/Views/Shared/_Layout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = b-7wzssrlhl7

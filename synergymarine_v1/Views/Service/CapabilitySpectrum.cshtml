@@ -1,0 +1,359 @@
+﻿@{
+    ViewData["Title"] = "Capability Spectrum";
+}
+
+<style>
+    /* ── HERO ── */
+    .cp-hero {
+        position: relative;
+        width: 100vw;
+        margin-left: calc(-50vw + 50%);
+        height: 380px;
+        overflow: hidden;
+        display: flex;
+        align-items: flex-end;
+        padding-bottom: 2.5rem;
+    }
+
+    .cp-hero-bg {
+        position: absolute;
+        inset: 0;
+        background: url('/images/comp5.jpg') center center / cover no-repeat;
+        filter: brightness(0.85);
+        transform: scale(1.03);
+        transition: transform 8s ease;
+    }
+
+    .cp-hero:hover .cp-hero-bg {
+        transform: scale(1.0);
+    }
+
+    .cp-hero-overlay {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(to bottom, rgba(10,20,50,0.2) 0%, rgba(10,20,50,0.75) 100%);
+    }
+
+    .cp-hero-content {
+        position: relative;
+        z-index: 2;
+        padding: 0 2rem;
+        max-width: 1140px;
+        margin: 0 auto;
+        width: 100%;
+    }
+
+    .cp-breadcrumb {
+        font-size: 12px;
+        font-weight: 600;
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+        color: #60a5fa;
+        margin-bottom: 0.75rem;
+    }
+
+    .cp-hero-title {
+        font-size: clamp(2rem, 4vw, 3rem);
+        font-weight: 700;
+        color: #ffffff;
+        letter-spacing: -0.5px;
+        line-height: 1.15;
+        margin: 0;
+    }
+
+    /* ── CONTENT WRAPPER ── */
+    .cp-content-wrapper {
+        background: #ffffff;
+        border-radius: 16px 16px 0 0;
+        margin-top: -2rem;
+        position: relative;
+        z-index: 3;
+        box-shadow: 0 -4px 30px rgba(0,0,0,0.08);
+        padding: 3rem 2rem 4rem;
+        max-width: 1140px;
+        margin-left: auto;
+        margin-right: auto;
+        width: 100%;
+    }
+
+    .cp-lead-heading {
+        font-size: 1.35rem;
+        font-weight: 700;
+        color: #1e293b;
+        line-height: 1.4;
+        margin-bottom: 0.5rem;
+        border-left: 4px solid #dc2626;
+        padding-left: 1rem;
+    }
+
+    .cp-sub-text {
+        font-size: 0.95rem;
+        color: #6b7280;
+        margin-bottom: 2rem;
+        padding-left: 1.25rem;
+    }
+
+    .cp-divider {
+        border: none;
+        border-top: 1px solid #e5e7eb;
+        margin-bottom: 2.5rem;
+    }
+
+    /* ── TWO COLUMN LAYOUT ── */
+    .cs-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 2rem;
+    }
+
+    /* ── ACTIVITY CARD ── */
+    .cs-card {
+        border: 1px solid #e5e7eb;
+        border-radius: 14px;
+        overflow: hidden;
+    }
+
+    .cs-card-header {
+        background: #dc2626;
+        padding: 1.1rem 1.5rem;
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+    }
+
+        .cs-card-header .cs-icon {
+            width: 36px;
+            height: 36px;
+            background: rgba(255,255,255,0.15);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+            .cs-card-header .cs-icon svg {
+                width: 20px;
+                height: 20px;
+                stroke: #ffffff;
+                fill: none;
+                stroke-width: 1.8;
+                stroke-linecap: round;
+                stroke-linejoin: round;
+            }
+
+        .cs-card-header h5 {
+            color: #ffffff;
+            font-size: 1rem;
+            font-weight: 700;
+            margin: 0;
+            letter-spacing: 0.3px;
+        }
+
+    .cs-card-body {
+        padding: 1.25rem 1.5rem 1.5rem;
+        background: #ffffff;
+    }
+
+    .cs-item {
+        display: flex;
+        align-items: center;
+        gap: 0.85rem;
+        padding: 0.7rem 0;
+        border-bottom: 1px solid #f1f5f9;
+        transition: background 0.2s ease;
+        border-radius: 6px;
+        padding-left: 0.5rem;
+        padding-right: 0.5rem;
+    }
+
+        .cs-item:last-child {
+            border-bottom: none;
+        }
+
+        .cs-item:hover {
+            background: #f8fafc;
+        }
+
+    .cs-item-dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: #dc2626;
+        flex-shrink: 0;
+    }
+
+    .cs-item-text {
+        font-size: 0.92rem;
+        color: #374151;
+        font-weight: 500;
+        line-height: 1.4;
+    }
+
+    /* ── BOTTOM STATS ── */
+    .cs-stats {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1rem;
+        margin-top: 2.5rem;
+        padding-top: 2rem;
+        border-top: 1px solid #e5e7eb;
+    }
+
+    .cs-stat {
+        text-align: center;
+        background: #f8fafc;
+        border: 1px solid #e5e7eb;
+        border-radius: 10px;
+        padding: 1.25rem 1rem;
+    }
+
+    .cs-stat-number {
+        font-size: 2rem;
+        font-weight: 800;
+        color: #1a365d;
+        line-height: 1;
+        display: block;
+    }
+
+    .cs-stat-label {
+        font-size: 12px;
+        color: #6b7280;
+        text-transform: uppercase;
+        letter-spacing: 0.8px;
+        font-weight: 500;
+        margin-top: 0.4rem;
+        display: block;
+    }
+
+    /* ── RESPONSIVE ── */
+    @@media (max-width: 768px) {
+        .cp-hero {
+            height: 280px;
+        }
+
+        .cs-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .cs-stats {
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0.75rem;
+        }
+
+        .cs-stat-number {
+            font-size: 1.5rem;
+        }
+
+        .cp-content-wrapper {
+            padding: 2rem 1.25rem 3rem;
+        }
+    }
+</style>
+
+<!-- ── HERO ── -->
+<div class="cp-hero">
+    <div class="cp-hero-bg"></div>
+    <div class="cp-hero-overlay"></div>
+    <div class="cp-hero-content">
+        <p class="cp-breadcrumb">Services / Capability Spectrum</p>
+        <h1 class="cp-hero-title">Capability Spectrum</h1>
+    </div>
+</div>
+
+<!-- ── MAIN CONTENT ── -->
+<div class="cp-content-wrapper">
+
+    <p class="cp-lead-heading">What We Do</p>
+    <p class="cp-sub-text">A comprehensive range of marine and offshore support services delivered with expertise and commitment.</p>
+    <hr class="cp-divider" />
+
+    <div class="cs-grid">
+
+        <!-- Main Activities -->
+        <div class="cs-card">
+            <div class="cs-card-header">
+                <div class="cs-icon">
+                    <svg viewBox="0 0 24 24"><path d="M3 17l4-8 4 4 4-6 4 10" /><path d="M3 21h18" /></svg>
+                </div>
+                <h5>Main Activities</h5>
+            </div>
+            <div class="cs-card-body">
+                <div class="cs-item">
+                    <div class="cs-item-dot"></div>
+                    <span class="cs-item-text">Anchor Handling Tugs / Supply Vessels</span>
+                </div>
+                <div class="cs-item">
+                    <div class="cs-item-dot"></div>
+                    <span class="cs-item-text">Platform Supply Vessels</span>
+                </div>
+                <div class="cs-item">
+                    <div class="cs-item-dot"></div>
+                    <span class="cs-item-text">Straight Supply Vessels</span>
+                </div>
+                <div class="cs-item">
+                    <div class="cs-item-dot"></div>
+                    <span class="cs-item-text">Utility Vessels</span>
+                </div>
+                <div class="cs-item">
+                    <div class="cs-item-dot"></div>
+                    <span class="cs-item-text">Safety Stand-by Vessels</span>
+                </div>
+                <div class="cs-item">
+                    <div class="cs-item-dot"></div>
+                    <span class="cs-item-text">DSV / ROV Vessels</span>
+                </div>
+                <div class="cs-item">
+                    <div class="cs-item-dot"></div>
+                    <span class="cs-item-text">Accommodation Workboat / Workbarge</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Other Activities -->
+        <div class="cs-card">
+            <div class="cs-card-header">
+                <div class="cs-icon">
+                    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" /><path d="M12 8v4l3 3" /></svg>
+                </div>
+                <h5>Other Activities</h5>
+            </div>
+            <div class="cs-card-body">
+                <div class="cs-item">
+                    <div class="cs-item-dot"></div>
+                    <span class="cs-item-text">Ship Agency Services</span>
+                </div>
+                <div class="cs-item">
+                    <div class="cs-item-dot"></div>
+                    <span class="cs-item-text">Crew Change and Handling</span>
+                </div>
+                <div class="cs-item">
+                    <div class="cs-item-dot"></div>
+                    <span class="cs-item-text">Ship Supplies and Provisioning</span>
+                </div>
+                <div class="cs-item">
+                    <div class="cs-item-dot"></div>
+                    <span class="cs-item-text">Crewing and Manning</span>
+                </div>
+                <div class="cs-item">
+                    <div class="cs-item-dot"></div>
+                    <span class="cs-item-text">Logistic Support Services</span>
+                </div>
+                <div class="cs-item">
+                    <div class="cs-item-dot"></div>
+                    <span class="cs-item-text">Ship Management</span>
+                </div>
+                <div class="cs-item">
+                    <div class="cs-item-dot"></div>
+                    <span class="cs-item-text">Marine & Offshore Consultancy</span>
+                </div>
+            </div>
+           
+        </div>
+    </div>
+
+</div>
+
+
+
+</div>

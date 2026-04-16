@@ -1,0 +1,1637 @@
+﻿@{
+    ViewData["Title"] = "Home";
+}
+
+<style>
+    @@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600;700&display=swap');
+
+    :root {
+        --red: #c0392b;
+        --red-dark: #922b21;
+        --red-light: #e74c3c;
+        --blue: #1a3a6b;
+        --blue-mid: #1d4ed8;
+        --blue-light: #3b82f6;
+        --blue-pale: #93c5fd;
+        --white: #ffffff;
+        --off-white: #f0f4f8;
+        --ink: #0d1b2a;
+    }
+
+    /* ═══════════════════════════════════════════
+                               HERO
+                            ═══════════════════════════════════════════ */
+    .hm-hero {
+        position: relative;
+        width: 100vw;
+        margin-left: calc(-50vw + 50%);
+        height: 100vh;
+        min-height: 600px;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .hm-hero-slideshow {
+        position: absolute;
+        inset: 0;
+        z-index: 0;
+    }
+
+    .hm-hero-slide {
+        position: absolute;
+        inset: 0;
+        background-size: cover;
+        background-position: center;
+        opacity: 0;
+        transition: opacity 1.2s ease;
+    }
+
+        .hm-hero-slide.active {
+            opacity: 1;
+        }
+
+    .hm-hero-slide-1 {
+        background-image: url('/images/image slide 1.jpg');
+    }
+
+    .hm-hero-slide-2 {
+        background-image: url('/images/image slide 2.png');
+    }
+
+    .hm-hero-slide-3 {
+        background-image: url('/images/image slide 3.jpg');
+    }
+
+    .hm-hero-slide-4 {
+        background-image: url('/images/image slide 4.jpg');
+    }
+
+    .hm-hero-slide-5 {
+        background-image: url('/images/image slide 5.jpg');
+    }
+
+    .hm-hero-overlay {
+        position: absolute;
+        inset: 0;
+        z-index: 1;
+        background: linear-gradient(135deg, rgba(26,58,107,0.52) 0%, rgba(192,57,43,0.22) 50%, rgba(26,58,107,0.58) 100%);
+    }
+
+    .hm-hero-vignette {
+        position: absolute;
+        inset: 0;
+        z-index: 1;
+        background: radial-gradient(ellipse at center, transparent 40%, rgba(10,20,50,0.18) 100%);
+    }
+
+    .hm-hero-stripe {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 7px;
+        height: 100%;
+        background: linear-gradient(to bottom, var(--red), var(--red-dark));
+        z-index: 3;
+    }
+
+    .hm-hero-content {
+        position: relative;
+        z-index: 3;
+        text-align: center;
+        padding: 0 2rem 5rem;
+        max-width: 900px;
+        width: 100%;
+    }
+
+    .hm-hero-prelabel {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.75rem;
+        font-family: 'DM Sans', sans-serif;
+        font-size: 11px;
+        font-weight: 600;
+        letter-spacing: 3.5px;
+        text-transform: uppercase;
+        color: #fca5a5;
+        margin-bottom: 1.75rem;
+        opacity: 0;
+        animation: fadeSlideUp 0.9s ease 0.2s forwards;
+    }
+
+        .hm-hero-prelabel::before, .hm-hero-prelabel::after {
+            content: '';
+            display: block;
+            width: 28px;
+            height: 1px;
+            background: #fca5a5;
+            opacity: 0.8;
+        }
+
+    .hm-hero-title {
+        font-family: 'Cormorant Garamond', Georgia, serif;
+        font-size: clamp(2.8rem, 4vw, 5.2rem);
+        font-weight: 700;
+        color: #ffffff;
+        line-height: 1.05;
+        letter-spacing: -1px;
+        margin: 0 0 0.5rem;
+        opacity: 0;
+        animation: fadeSlideUp 1s ease 0.4s forwards;
+        text-shadow: 0 2px 20px rgba(0,0,0,0.5), 0 4px 40px rgba(0,0,0,0.3);
+    }
+
+    .hm-hero-divider {
+        width: 60px;
+        height: 3px;
+        background: linear-gradient(to right, var(--red), var(--blue-light));
+        margin: 1.75rem auto;
+        opacity: 0;
+        animation: fadeSlideUp 1s ease 0.6s forwards;
+    }
+
+    .hm-hero-tagline {
+        font-family: 'DM Sans', sans-serif;
+        font-size: clamp(1rem, 2vw, 1.2rem);
+        font-weight: 300;
+        color: rgba(255,255,255,0.93);
+        line-height: 1.7;
+        max-width: 600px;
+        margin: 0 auto 2.5rem;
+        opacity: 0;
+        animation: fadeSlideUp 1s ease 0.8s forwards;
+        text-shadow: 0 1px 12px rgba(0,0,0,0.4);
+    }
+
+        .hm-hero-tagline strong {
+            color: #ffffff;
+            font-weight: 600;
+        }
+
+    .hm-hero-ctas {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 1rem;
+        flex-wrap: wrap;
+        opacity: 0;
+        animation: fadeSlideUp 1s ease 1s forwards;
+    }
+
+    .hm-btn-primary {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        background: var(--red);
+        color: #fff;
+        font-family: 'DM Sans', sans-serif;
+        font-size: 0.875rem;
+        font-weight: 600;
+        padding: 0.85rem 2rem;
+        border-radius: 8px;
+        text-decoration: none;
+        transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+        box-shadow: 0 4px 20px rgba(192,57,43,0.45);
+    }
+
+        .hm-btn-primary:hover {
+            background: var(--red-dark);
+            color: #fff;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 28px rgba(192,57,43,0.55);
+            text-decoration: none;
+        }
+
+    .hm-btn-ghost {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        background: transparent;
+        color: #fff;
+        font-family: 'DM Sans', sans-serif;
+        font-size: 0.875rem;
+        font-weight: 600;
+        padding: 0.85rem 2rem;
+        border-radius: 8px;
+        border: 1.5px solid rgba(255,255,255,0.5);
+        text-decoration: none;
+        transition: background 0.2s, border-color 0.2s, transform 0.15s;
+    }
+
+        .hm-btn-ghost:hover {
+            background: rgba(255,255,255,0.12);
+            border-color: rgba(255,255,255,0.8);
+            color: #fff;
+            transform: translateY(-2px);
+            text-decoration: none;
+        }
+
+    .hm-hero-dots {
+        position: absolute;
+        bottom: 8.5rem;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 4;
+        display: flex;
+        gap: 0.55rem;
+        opacity: 0;
+        animation: fadeIn 1s ease 1.4s forwards;
+    }
+
+    .hm-hero-dot {
+        width: 9px;
+        height: 9px;
+        border-radius: 50%;
+        background: rgba(255,255,255,0.35);
+        cursor: pointer;
+        transition: background 0.3s, transform 0.3s;
+        border: none;
+        padding: 0;
+    }
+
+        .hm-hero-dot.active {
+            background: var(--red);
+            transform: scale(1.35);
+        }
+
+    .hm-hero-stats {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        z-index: 4;
+        background: rgba(26,58,107,0.88);
+        backdrop-filter: blur(12px);
+        border-top: 3px solid var(--red);
+        padding: 1.1rem 2rem;
+        display: flex;
+        justify-content: center;
+        opacity: 0;
+        animation: fadeIn 0.8s ease 1.6s forwards;
+    }
+
+    .hm-stat-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 0 3rem;
+        border-right: 1px solid rgba(255,255,255,0.15);
+    }
+
+        .hm-stat-item:last-child {
+            border-right: none;
+        }
+
+    .hm-stat-num {
+        font-family: 'Cormorant Garamond', serif;
+        font-size: 1.8rem;
+        font-weight: 700;
+        color: #ffffff;
+        line-height: 1;
+    }
+
+    .hm-stat-label {
+        font-family: 'DM Sans', sans-serif;
+        font-size: 10px;
+        font-weight: 600;
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+        color: rgba(255,255,255,0.55);
+        margin-top: 0.3rem;
+    }
+
+    @@keyframes fadeSlideUp {
+        from {
+            opacity: 0;
+            transform: translateY(22px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    @@keyframes fadeIn {
+        from {
+            opacity: 0;
+        }
+
+        to {
+            opacity: 1;
+        }
+    }
+
+    @@media (max-width: 768px) {
+        .hm-hero {
+            min-height: 100svh;
+        }
+
+        .hm-stat-item {
+            padding: 0 1.25rem;
+        }
+
+        .hm-stat-num {
+            font-size: 1.4rem;
+        }
+    }
+
+    @@media (max-width: 480px) {
+        .hm-hero-stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        .hm-stat-item {
+            border-right: none;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            padding: 0.6rem;
+        }
+
+            .hm-stat-item:nth-child(3), .hm-stat-item:nth-child(4) {
+                border-bottom: none;
+            }
+    }
+
+
+    /* ═══════════════════════════════════════════
+                               PURPOSE
+                            ═══════════════════════════════════════════ */
+    .pur {
+        position: relative;
+        width: 100vw;
+        margin-left: calc(-50vw + 50%);
+        background: var(--off-white);
+        padding: 0 0 6rem;
+        overflow: hidden;
+        font-family: 'DM Sans', sans-serif;
+    }
+
+        .pur::before {
+            content: '';
+            display: block;
+            height: 4px;
+            background: linear-gradient(90deg, var(--red) 0%, var(--blue-mid) 100%);
+        }
+
+    .pur-watermark {
+        position: absolute;
+        top: -2rem;
+        right: -1.5rem;
+        font-family: 'Cormorant Garamond', serif;
+        font-size: clamp(14rem, 22vw, 22rem);
+        font-weight: 700;
+        color: rgba(26,58,107,0.045);
+        line-height: 1;
+        pointer-events: none;
+        user-select: none;
+        letter-spacing: -12px;
+        z-index: 0;
+    }
+
+    .pur-header {
+        position: relative;
+        z-index: 1;
+        display: grid;
+        grid-template-columns: 1fr auto;
+        align-items: end;
+        gap: 2rem;
+        max-width: 1180px;
+        margin: 0 auto;
+        padding: 4.5rem 2.5rem 3rem;
+    }
+
+    .pur-eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.65rem;
+        font-size: 10px;
+        font-weight: 700;
+        letter-spacing: 3.5px;
+        text-transform: uppercase;
+        color: var(--red);
+        margin-bottom: 1rem;
+    }
+
+        .pur-eyebrow::before {
+            content: '';
+            display: block;
+            width: 28px;
+            height: 2px;
+            background: var(--red);
+        }
+
+    .pur-title {
+        font-family: 'Cormorant Garamond', serif;
+        font-size: clamp(2rem, 3.5vw, 3.2rem);
+        font-weight: 700;
+        color: var(--ink);
+        line-height: 1.12;
+        letter-spacing: -0.5px;
+        max-width: 600px;
+    }
+
+        .pur-title em {
+            font-style: italic;
+            font-weight: 300;
+            color: var(--blue);
+        }
+
+    .pur-header-right {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        gap: 1rem;
+        padding-bottom: 0.25rem;
+    }
+
+    .pur-sub {
+        font-size: 0.82rem;
+        line-height: 1.7;
+        color: #5a6a80;
+        max-width: 280px;
+        text-align: right;
+    }
+
+    .pur-learn {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.55rem;
+        font-size: 0.75rem;
+        font-weight: 700;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: #fff;
+        background: var(--blue);
+        padding: 0.75rem 1.75rem;
+        border-radius: 4px;
+        text-decoration: none;
+        transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+        box-shadow: 0 4px 18px rgba(26,58,107,0.22);
+    }
+
+        .pur-learn:hover {
+            background: var(--red);
+            color: #fff;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(192,57,43,0.3);
+            text-decoration: none;
+        }
+
+        .pur-learn svg {
+            transition: transform 0.2s;
+        }
+
+        .pur-learn:hover svg {
+            transform: translateX(3px);
+        }
+
+    .pur-grid {
+        position: relative;
+        z-index: 1;
+        max-width: 1180px;
+        margin: 0 auto;
+        padding: 0 2.5rem;
+        display: grid;
+        grid-template-columns: 1.55fr 1fr 1fr;
+        grid-template-rows: auto auto;
+        gap: 1rem;
+    }
+
+    .pur-card {
+        position: relative;
+        overflow: hidden;
+        border-radius: 16px;
+        text-decoration: none;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        cursor: pointer;
+        background: #dde3ed;
+        transition: transform 0.35s cubic-bezier(.22,.68,0,1.2), box-shadow 0.35s ease;
+        box-shadow: 0 2px 16px rgba(0,0,0,0.08);
+    }
+
+        .pur-card:hover {
+            transform: translateY(-5px) scale(1.012);
+            box-shadow: 0 20px 52px rgba(0,0,0,0.17);
+            text-decoration: none;
+        }
+
+    .pur-card-img {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+        transition: transform 0.55s ease;
+    }
+
+    .pur-card:hover .pur-card-img {
+        transform: scale(1.07);
+    }
+
+    .pur-card-scrim {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(to top, rgba(13,27,42,0.92) 0%, rgba(13,27,42,0.45) 45%, rgba(13,27,42,0.0) 100%);
+        transition: background 0.35s ease;
+    }
+
+    .pur-card:hover .pur-card-scrim {
+        background: linear-gradient(to top, rgba(192,57,43,0.90) 0%, rgba(192,57,43,0.50) 48%, rgba(192,57,43,0.0) 100%);
+    }
+
+    .pur-card::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 3px;
+        background: var(--red);
+        transform: scaleX(0);
+        transform-origin: left;
+        transition: transform 0.3s ease;
+    }
+
+    .pur-card:hover::after {
+        transform: scaleX(1);
+    }
+
+    .pur-card-body {
+        position: relative;
+        z-index: 2;
+        padding: 1.5rem 1.4rem 1.6rem;
+    }
+
+    .pur-card-num {
+        font-family: 'Cormorant Garamond', serif;
+        font-size: 0.7rem;
+        font-weight: 600;
+        letter-spacing: 2px;
+        color: rgba(255,255,255,0.4);
+        margin-bottom: 0.65rem;
+    }
+
+    .pur-card-title {
+        font-size: 0.78rem;
+        font-weight: 700;
+        letter-spacing: 1.8px;
+        text-transform: uppercase;
+        color: #fca5a5;
+        margin-bottom: 0.45rem;
+        transition: color 0.2s;
+    }
+
+    .pur-card:hover .pur-card-title {
+        color: #fff;
+    }
+
+    .pur-card-desc {
+        font-size: 0.77rem;
+        color: rgba(255,255,255,0.72);
+        line-height: 1.6;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.35s ease, opacity 0.3s ease;
+        opacity: 0;
+    }
+
+    .pur-card:hover .pur-card-desc {
+        max-height: 60px;
+        opacity: 1;
+    }
+
+    .pur-card-cta {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.35rem;
+        font-size: 0.68rem;
+        font-weight: 700;
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+        color: #fff;
+        margin-top: 0.9rem;
+        opacity: 0;
+        transform: translateY(6px);
+        transition: opacity 0.25s ease 0.05s, transform 0.25s ease 0.05s;
+    }
+
+    .pur-card:hover .pur-card-cta {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    .pur-card--feature {
+        grid-column: 1;
+        grid-row: 1 / 3;
+        height: 560px;
+    }
+
+        .pur-card--feature .pur-card-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.45rem;
+            font-weight: 700;
+            letter-spacing: 0;
+            text-transform: none;
+            color: #fff;
+            line-height: 1.25;
+        }
+
+        .pur-card--feature .pur-card-num {
+            font-size: 0.8rem;
+            color: rgba(255,255,255,0.35);
+        }
+
+        .pur-card--feature .pur-card-desc {
+            max-height: 0;
+        }
+
+        .pur-card--feature:hover .pur-card-desc {
+            max-height: 80px;
+        }
+
+        .pur-card--feature .pur-card-body {
+            padding: 2rem 1.8rem 2.2rem;
+        }
+
+    .pur-feature-tag {
+        position: absolute;
+        top: 1.25rem;
+        left: 1.25rem;
+        z-index: 3;
+        background: var(--red);
+        color: #fff;
+        font-size: 9px;
+        font-weight: 700;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        padding: 0.3rem 0.8rem;
+        border-radius: 50px;
+    }
+
+    .pur-card--sm {
+        height: 270px;
+    }
+
+    .pur-card--strip {
+        grid-column: 2 / 4;
+        grid-row: 2;
+        height: 270px;
+        flex-direction: row;
+        align-items: flex-end;
+        justify-content: flex-start;
+    }
+
+        .pur-card--strip .pur-card-scrim {
+            background: linear-gradient(to right, rgba(13,27,42,0.94) 0%, rgba(13,27,42,0.5) 55%, rgba(13,27,42,0.0) 100%);
+        }
+
+        .pur-card--strip:hover .pur-card-scrim {
+            background: linear-gradient(to right, rgba(192,57,43,0.92) 0%, rgba(192,57,43,0.5) 55%, rgba(192,57,43,0.0) 100%);
+        }
+
+        .pur-card--strip .pur-card-body {
+            padding: 1.8rem 2rem;
+            max-width: 340px;
+        }
+
+    @@media (max-width: 900px) {
+        .pur-grid {
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: auto;
+        }
+
+        .pur-card--feature {
+            grid-column: 1 / 3;
+            grid-row: auto;
+            height: 320px;
+        }
+
+        .pur-card--strip {
+            grid-column: 1 / 3;
+            grid-row: auto;
+        }
+
+        .pur-card--sm {
+            height: 230px;
+        }
+    }
+
+    @@media (max-width: 700px) {
+        .pur-header {
+            grid-template-columns: 1fr;
+            padding: 3.5rem 1.5rem 2.5rem;
+        }
+
+        .pur-header-right {
+            align-items: flex-start;
+        }
+
+        .pur-sub {
+            text-align: left;
+        }
+
+        .pur-grid {
+            padding: 0 1.5rem;
+        }
+    }
+
+    @@media (max-width: 480px) {
+        .pur-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .pur-card--feature {
+            grid-column: 1;
+            height: 280px;
+        }
+
+        .pur-card--strip {
+            grid-column: 1;
+            height: 220px;
+        }
+
+        .pur-card--sm {
+            height: 200px;
+        }
+    }
+
+
+    /* ═══════════════════════════════════════════
+                               COMPANY SHOWREEL
+                            ═══════════════════════════════════════════ */
+    .showreel {
+        position: relative;
+        width: 100vw;
+        margin-left: calc(-50vw + 50%);
+        background: var(--ink);
+        overflow: hidden;
+    }
+
+    .showreel-deco {
+        position: absolute;
+        inset: 0;
+        overflow: hidden;
+        pointer-events: none;
+        z-index: 0;
+    }
+
+        .showreel-deco::before {
+            content: '';
+            position: absolute;
+            top: -60px;
+            left: -80px;
+            width: 340px;
+            height: 340px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(192,57,43,0.18) 0%, transparent 70%);
+        }
+
+        .showreel-deco::after {
+            content: '';
+            position: absolute;
+            bottom: -80px;
+            right: -80px;
+            width: 400px;
+            height: 400px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(26,58,107,0.35) 0%, transparent 70%);
+        }
+
+    .showreel::before {
+        content: '';
+        display: block;
+        height: 4px;
+        background: linear-gradient(90deg, var(--red) 0%, var(--blue-mid) 50%, var(--red) 100%);
+        background-size: 200% 100%;
+        animation: shimmer 3s linear infinite;
+    }
+
+    @@keyframes shimmer {
+        0% {
+            background-position: 0% 0;
+        }
+
+        100% {
+            background-position: 200% 0;
+        }
+    }
+
+    .showreel-inner {
+        position: relative;
+        z-index: 1;
+        max-width: 1180px;
+        margin: 0 auto;
+        padding: 5rem 2.5rem;
+        display: grid;
+        grid-template-columns: 1fr 1.75fr;
+        gap: 4rem;
+        align-items: center;
+    }
+
+    .showreel-eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.65rem;
+        font-family: 'DM Sans', sans-serif;
+        font-size: 10px;
+        font-weight: 700;
+        letter-spacing: 3.5px;
+        text-transform: uppercase;
+        color: #fca5a5;
+        margin-bottom: 1.5rem;
+    }
+
+        .showreel-eyebrow::before {
+            content: '';
+            display: block;
+            width: 28px;
+            height: 2px;
+            background: var(--red);
+        }
+
+    .showreel-heading {
+        font-family: 'Cormorant Garamond', serif;
+        font-size: clamp(2rem, 3vw, 3rem);
+        font-weight: 700;
+        color: #ffffff;
+        line-height: 1.1;
+        letter-spacing: -0.5px;
+        margin: 0 0 1.5rem;
+    }
+
+        .showreel-heading em {
+            font-style: italic;
+            font-weight: 300;
+            color: var(--blue-pale);
+        }
+
+    .showreel-body {
+        font-family: 'DM Sans', sans-serif;
+        font-size: 0.875rem;
+        line-height: 1.8;
+        color: rgba(255,255,255,0.6);
+        margin-bottom: 2rem;
+        max-width: 340px;
+    }
+
+    .showreel-features {
+        list-style: none;
+        padding: 0;
+        margin: 0 0 2.25rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0.65rem;
+    }
+
+        .showreel-features li {
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.8rem;
+            color: rgba(255,255,255,0.75);
+            display: flex;
+            align-items: center;
+            gap: 0.65rem;
+        }
+
+            .showreel-features li::before {
+                content: '';
+                display: inline-block;
+                width: 6px;
+                height: 6px;
+                border-radius: 50%;
+                background: var(--red);
+                flex-shrink: 0;
+            }
+
+    .showreel-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.65rem;
+        font-family: 'DM Sans', sans-serif;
+        font-size: 0.78rem;
+        font-weight: 700;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: #fff;
+        background: var(--red);
+        padding: 0.85rem 2rem;
+        border-radius: 6px;
+        text-decoration: none;
+        transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+        box-shadow: 0 4px 20px rgba(192,57,43,0.4);
+    }
+
+        .showreel-btn:hover {
+            background: var(--red-dark);
+            color: #fff;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 28px rgba(192,57,43,0.55);
+            text-decoration: none;
+        }
+
+    .showreel-player {
+        position: relative;
+    }
+
+        .showreel-player::before {
+            content: '';
+            position: absolute;
+            top: -14px;
+            right: -14px;
+            bottom: 14px;
+            left: 14px;
+            border-radius: 18px;
+            border: 2px solid rgba(192,57,43,0.3);
+            z-index: 0;
+        }
+
+    .showreel-video-wrap {
+        position: relative;
+        z-index: 1;
+        border-radius: 16px;
+        overflow: hidden;
+        box-shadow: 0 30px 80px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.06);
+        background: #000;
+        cursor: pointer;
+    }
+
+        .showreel-video-wrap video {
+            width: 100%;
+            height: 100%;
+            display: block;
+            aspect-ratio: 16/9;
+            object-fit: cover;
+        }
+
+    .showreel-overlay {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(13,27,42,0.42);
+        transition: background 0.3s ease, opacity 0.3s ease;
+        z-index: 2;
+    }
+
+    .showreel-video-wrap.playing .showreel-overlay {
+        background: transparent;
+        opacity: 0;
+    }
+
+    .showreel-video-wrap.playing:hover .showreel-overlay {
+        background: rgba(13,27,42,0.3);
+        opacity: 1;
+    }
+
+    .showreel-play-btn {
+        position: relative;
+        width: 72px;
+        height: 72px;
+        border-radius: 50%;
+        background: var(--red);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 3px solid rgba(255,255,255,0.25);
+        transition: transform 0.25s cubic-bezier(.22,.68,0,1.2), background 0.2s, box-shadow 0.2s;
+        box-shadow: 0 8px 32px rgba(192,57,43,0.55);
+        flex-shrink: 0;
+        cursor: pointer;
+    }
+
+        .showreel-play-btn:hover {
+            transform: scale(1.12);
+            background: var(--red-dark);
+            box-shadow: 0 12px 40px rgba(192,57,43,0.7);
+        }
+
+        .showreel-play-btn::before {
+            content: '';
+            position: absolute;
+            width: 72px;
+            height: 72px;
+            border-radius: 50%;
+            border: 2px solid rgba(192,57,43,0.5);
+            animation: pulse-ring 2s ease-out infinite;
+        }
+
+    @@keyframes pulse-ring {
+        0% {
+            transform: scale(1);
+            opacity: 0.9;
+        }
+
+        100% {
+            transform: scale(1.8);
+            opacity: 0;
+        }
+    }
+
+    .showreel-play-icon {
+        width: 26px;
+        height: 26px;
+        fill: #ffffff;
+        margin-left: 4px;
+    }
+
+    .showreel-pause-icon {
+        width: 22px;
+        height: 22px;
+        fill: #ffffff;
+        display: none;
+    }
+
+    .showreel-video-wrap.playing .showreel-play-icon {
+        display: none;
+    }
+
+    .showreel-video-wrap.playing .showreel-pause-icon {
+        display: block;
+    }
+
+    .showreel-video-wrap.playing .showreel-play-btn::before {
+        animation: none;
+    }
+
+    .showreel-caption {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0.9rem 1rem 0;
+    }
+
+    .showreel-caption-left {
+        font-family: 'DM Sans', sans-serif;
+        font-size: 0.72rem;
+        color: rgba(255,255,255,0.35);
+        letter-spacing: 0.5px;
+    }
+
+    .showreel-caption-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+        font-family: 'DM Sans', sans-serif;
+        font-size: 9px;
+        font-weight: 700;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: var(--red);
+        border: 1px solid rgba(192,57,43,0.35);
+        border-radius: 50px;
+        padding: 0.25rem 0.75rem;
+    }
+
+        .showreel-caption-badge::before {
+            content: '';
+            display: block;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--red);
+            animation: live-blink 1.5s ease-in-out infinite;
+        }
+
+    @@keyframes live-blink {
+        0%, 100% {
+            opacity: 1;
+        }
+
+        50% {
+            opacity: 0.2;
+        }
+    }
+
+    @@media (max-width: 900px) {
+        .showreel-inner {
+            grid-template-columns: 1fr;
+            gap: 3rem;
+            padding: 4rem 2rem;
+        }
+
+        .showreel-body {
+            max-width: 100%;
+        }
+
+        .showreel-player::before {
+            display: none;
+        }
+    }
+
+    @@media (max-width: 480px) {
+        .showreel-inner {
+            padding: 3rem 1.5rem;
+        }
+
+        .showreel-play-btn {
+            width: 56px;
+            height: 56px;
+        }
+
+            .showreel-play-btn::before {
+                width: 56px;
+                height: 56px;
+            }
+    }
+
+
+    /* ═══════════════════════════════════════════
+                               CLIENTS
+                            ═══════════════════════════════════════════ */
+    .hm-clients {
+        position: relative;
+        width: 100vw;
+        margin-left: calc(-50vw + 50%);
+        padding: 4rem 0 4rem;
+        background: #ffffff;
+        overflow: hidden;
+    }
+
+        .hm-clients::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(to right, var(--red), var(--blue-mid));
+            border-radius: 0 0 4px 4px;
+        }
+
+    .hm-clients-header {
+        text-align: center;
+        margin-bottom: 2.75rem;
+        padding: 0 2rem;
+    }
+
+    .hm-clients-sup {
+        font-family: 'DM Sans', sans-serif;
+        font-size: 10px;
+        font-weight: 700;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        color: #64748b;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.65rem;
+        margin-bottom: 0.75rem;
+    }
+
+        .hm-clients-sup::before, .hm-clients-sup::after {
+            content: '';
+            display: block;
+            width: 28px;
+            height: 1px;
+            background: #cbd5e1;
+        }
+
+    .hm-clients-title {
+        font-family: 'Cormorant Garamond', Georgia, serif;
+        font-size: clamp(1.6rem, 3vw, 2.2rem);
+        font-weight: 700;
+        color: var(--blue);
+        letter-spacing: -0.3px;
+        margin: 0;
+    }
+
+        .hm-clients-title span {
+            color: var(--red);
+        }
+
+    .hm-clients-track-wrap {
+        position: relative;
+        width: 100%;
+        overflow: hidden;
+    }
+
+        .hm-clients-track-wrap::before, .hm-clients-track-wrap::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 120px;
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        .hm-clients-track-wrap::before {
+            left: 0;
+            background: linear-gradient(to right, #ffffff, transparent);
+        }
+
+        .hm-clients-track-wrap::after {
+            right: 0;
+            background: linear-gradient(to left, #ffffff, transparent);
+        }
+
+    .hm-clients-track {
+        display: flex;
+        align-items: center;
+        width: max-content;
+        animation: clientsScroll 28s linear infinite;
+    }
+
+        .hm-clients-track:hover {
+            animation-play-state: paused;
+        }
+
+    @@keyframes clientsScroll {
+        0% {
+            transform: translateX(0);
+        }
+
+        100% {
+            transform: translateX(-50%);
+        }
+    }
+
+    .hm-client-logo {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        width: 160px;
+        height: 72px;
+        margin: 0 1.25rem;
+        padding: 0.75rem 1.25rem;
+        border-radius: 12px;
+        border: 1px solid #e2e8f0;
+        background: #ffffff;
+        transition: border-color 0.25s, box-shadow 0.25s, transform 0.25s;
+    }
+
+        .hm-client-logo:hover {
+            border-color: var(--red);
+            box-shadow: 0 6px 20px rgba(192,57,43,0.12);
+            transform: translateY(-3px);
+        }
+
+        .hm-client-logo img {
+            max-width: 110px;
+            max-height: 44px;
+            width: auto;
+            height: auto;
+            object-fit: contain;
+            filter: none;
+        }
+
+    .hm-clients-footer {
+        text-align: center;
+        margin-top: 2.5rem;
+        padding: 0 2rem;
+    }
+
+    .hm-clients-count {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-family: 'DM Sans', sans-serif;
+        font-size: 0.78rem;
+        font-weight: 500;
+        color: #94a3b8;
+    }
+
+        .hm-clients-count::before, .hm-clients-count::after {
+            content: '';
+            display: block;
+            width: 20px;
+            height: 1px;
+            background: #e2e8f0;
+        }
+
+    @@media (max-width: 640px) {
+        .hm-clients-track-wrap::before, .hm-clients-track-wrap::after {
+            width: 50px;
+        }
+
+        .hm-client-logo {
+            width: 130px;
+            height: 60px;
+            margin: 0 0.85rem;
+        }
+    }
+</style>
+
+<!-- ═══════════════════════════════════════════
+     HERO
+═══════════════════════════════════════════ -->
+<div class="hm-hero">
+    <div class="hm-hero-slideshow">
+        <video class="hm-hero-slide active"
+               autoplay
+               muted
+               loop
+               playsinline
+               style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:1;">
+            <source src="/videos/FINAL2.mp4" type="video/mp4" />
+        </video>
+    </div>
+    <div class="hm-hero-overlay"></div>
+    <div class="hm-hero-vignette"></div>
+    <div class="hm-hero-stripe"></div>
+    <div class="hm-hero-content">
+        <div class="hm-hero-prelabel" style="color:white;"><b>Est. 2012 — Shah Alam, Malaysia</b></div>
+        <h1 class="hm-hero-title">SYNERGY MARINE (M) SDN BHD</h1>
+        <div class="hm-hero-divider"></div>
+        <p class="hm-hero-tagline">We provide comprehensive <strong>Offshore Support Vessel (OSV)</strong> services, backed by an experienced management team.</p>
+        <div class="hm-hero-ctas">
+            <a href="/about/company-profile" class="hm-btn-primary">Discover More &rarr;</a>
+            <a href="/service/CapabilitySpectrum" class="hm-btn-ghost">Our Services</a>
+        </div>
+    </div>
+    <div class="hm-hero-stats">
+        <div class="hm-stat-item"><span class="hm-stat-num">2012</span><span class="hm-stat-label">Established</span></div>
+        <div class="hm-stat-item"><span class="hm-stat-num">7+</span><span class="hm-stat-label">Vessel Types</span></div>
+        <div class="hm-stat-item"><span class="hm-stat-num">O&amp;G</span><span class="hm-stat-label">Industry Focus</span></div>
+        <div class="hm-stat-item"><span class="hm-stat-num">100%</span><span class="hm-stat-label">Bumiputera</span></div>
+    </div>
+</div>
+
+<script>
+    (function () {
+        var slides = document.querySelectorAll('.hm-hero-slide');
+        var dots = document.querySelectorAll('.hm-hero-dot');
+        var current = 0, timer;
+        function goTo(i) { slides[current].classList.remove('active'); dots[current].classList.remove('active'); current = i; slides[current].classList.add('active'); dots[current].classList.add('active'); }
+        function next() { goTo((current + 1) % slides.length); }
+        function start() { timer = setInterval(next, 5000); }
+        dots.forEach(function (d) { d.addEventListener('click', function () { clearInterval(timer); goTo(parseInt(this.dataset.index)); start(); }); });
+        start();
+    })();
+</script>
+
+
+<!-- ═══════════════════════════════════════════
+     PURPOSE
+═══════════════════════════════════════════ -->
+<section class="pur">
+    <div class="pur-watermark">SM</div>
+    <div class="pur-header">
+        <div>
+            <div class="pur-eyebrow">Our Purpose</div>
+            <h2 class="pur-title">
+                A great track record &amp;<br />
+                <em>a promising future.</em>
+            </h2>
+        </div>
+        <div class="pur-header-right">
+            <p class="pur-sub">Dedicated to satisfying customer needs and building trust, confidence, and loyalty since 2012.</p>
+            <a href="/About/CompanyProfile" class="pur-learn">
+                Learn More
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                    <path d="M3 7h8M7 3l4 4-4 4" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+            </a>
+        </div>
+    </div>
+    <div class="pur-grid">
+
+        <!-- Card 1: HSE Policies -->
+        <a href="/About/HSE" class="pur-card pur-card--feature">
+            <span class="pur-feature-tag">Featured</span>
+
+            <img class="pur-card-img" src="/images/image slide 1.jpg" alt="HSE Policies">
+
+            <div class="pur-card-scrim"></div>
+
+            <div class="pur-card-body">
+                <div class="pur-card-num">01 / 05</div>
+                <div class="pur-card-title">HSE Policies</div>
+                <div class="pur-card-desc">
+                    Our commitment to Health, Safety &amp; Environment underpins every operation we conduct at sea and onshore.
+                </div>
+
+                <span class="pur-card-cta">
+                    Read More
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+                        <path d="M2 6h8M6 2l4 4-4 4"
+                              stroke="#fff"
+                              stroke-width="1.5"
+                              stroke-linecap="round"
+                              stroke-linejoin="round" />
+                    </svg>
+                </span>
+            </div>
+        </a>
+
+        <!-- Card 2: MD's Greetings -->
+        <a href="/About/MdMeeting" class="pur-card pur-card--sm">
+            <img class="pur-card-img" src="/images/image slide 2.jpg" alt="MD Greetings">
+
+            <div class="pur-card-scrim"></div>
+            <div class="pur-card-body">
+                <div class="pur-card-num">02</div>
+                <div class="pur-card-title">MD's Greetings</div>
+                <div class="pur-card-desc">A message from our Managing Director on our journey since 2012.</div>
+                <span class="pur-card-cta">Read More &rarr;</span>
+            </div>
+        </a>
+
+        <!-- Card 3: Vision & Mission -->
+        <a href="/About/VisionMission" class="pur-card pur-card--sm">
+            <img class="pur-card-img" src="/images/image slide 3.jpg" alt="Vision Mission">
+
+            <div class="pur-card-scrim"></div>
+            <div class="pur-card-body">
+                <div class="pur-card-num">03</div>
+                <div class="pur-card-title">Vision &amp; Mission</div>
+                <div class="pur-card-desc">Established in 2012 as a proud Bumiputera-owned OSV services company.</div>
+                <span class="pur-card-cta">Read More &rarr;</span>
+            </div>
+        </a>
+
+        <!-- Card 4: Capability Spectrum -->
+        <a href="/Service/CapabilitySpectrum" class="pur-card pur-card--strip">
+            <img class="pur-card-img" src="/images/image slide 4.jpg" alt="Capability Spectrum">
+
+            <div class="pur-card-scrim"></div>
+            <div class="pur-card-body">
+                <div class="pur-card-num">04 &amp; 05</div>
+                <div class="pur-card-title">Capability Spectrum</div>
+                <div class="pur-card-desc">Explore our full range of offshore support activities and the vision that drives us forward.</div>
+
+                <span class="pur-card-cta">
+                    Explore
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+                        <path d="M2 6h8M6 2l4 4-4 4"
+                              stroke="#fff"
+                              stroke-width="1.5"
+                              stroke-linecap="round"
+                              stroke-linejoin="round" />
+                    </svg>
+                </span>
+            </div>
+        </a>
+</section>
+
+<script>
+    (function () {
+        var videos = document.querySelectorAll('.pur-card-img[data-src]');
+
+        if ('IntersectionObserver' in window) {
+            var observer = new IntersectionObserver(function (entries) {
+                entries.forEach(function (entry) {
+                    if (entry.isIntersecting) {
+                        var vid = entry.target;
+                        vid.src = vid.dataset.src;
+                        vid.load();
+                        vid.play().catch(function () {});
+                        observer.unobserve(vid);
+                    }
+                });
+            }, { rootMargin: '100px' });
+
+            videos.forEach(function (v) { observer.observe(v); });
+        } else {
+            // Fallback for older browsers
+            videos.forEach(function (v) {
+                v.src = v.dataset.src;
+                v.load();
+            });
+        }
+    })();
+</script>
+
+
+<!-- ═══════════════════════════════════════════
+     COMPANY SHOWREEL
+     File path: /videos/FINAL.mp4
+═══════════════════════════════════════════ -->
+<section class="showreel">
+    <div class="showreel-deco"></div>
+
+    <div class="showreel-inner">
+
+        <!-- Left: descriptive text -->
+        <div class="showreel-text">
+            <div class="showreel-eyebrow">Company Showreel</div>
+            <h2 class="showreel-heading">
+                Witness our <em>operations</em><br />in action.
+            </h2>
+            <p class="showreel-body">
+                From offshore support missions to vessel management, see how Synergy Marine delivers excellence across every operation — safely and efficiently.
+            </p>
+            <ul class="showreel-features">
+                <li>Offshore Support Vessel (OSV) operations</li>
+                <li>Experienced crew &amp; management team</li>
+                <li>End-to-end marine logistics solutions</li>
+                <li>Strict HSE compliance &amp; best practices</li>
+            </ul>
+        </div>
+
+        <!-- Right: video player -->
+        <div class="showreel-player">
+            <div class="showreel-video-wrap" id="showreelWrap">
+                <video id="showreelVideo" preload="metadata" playsinline>
+                    <source src="/videos/FINAL.mp4" type="video/mp4" />
+                    Your browser does not support HTML5 video.
+                </video>
+
+                <div class="showreel-overlay" id="showreelOverlay">
+                    <button class="showreel-play-btn" id="showreelPlayBtn" aria-label="Play company video">
+                        <svg class="showreel-play-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M8 5v14l11-7z" />
+                        </svg>
+                        <svg class="showreel-pause-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <div class="showreel-caption">
+                <span class="showreel-caption-left">Synergy Marine (M) Sdn Bhd &mdash; Company Video</span>
+                <span class="showreel-caption-badge">Official</span>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<script>
+    (function () {
+        var wrap    = document.getElementById('showreelWrap');
+        var video   = document.getElementById('showreelVideo');
+        var btn     = document.getElementById('showreelPlayBtn');
+        var overlay = document.getElementById('showreelOverlay');
+
+        function togglePlay() {
+            if (video.paused) {
+                video.play();
+                wrap.classList.add('playing');
+            } else {
+                video.pause();
+                wrap.classList.remove('playing');
+            }
+        }
+
+        btn.addEventListener('click', function (e) { e.stopPropagation(); togglePlay(); });
+        overlay.addEventListener('click', togglePlay);
+        video.addEventListener('ended', function () { wrap.classList.remove('playing'); });
+    })();
+</script>
+
+
+<!-- ═══════════════════════════════════════════
+     CLIENTS
+═══════════════════════════════════════════ -->
+<section class="hm-clients">
+    <div class="hm-clients-header">
+        <div class="hm-clients-sup">Trusted By</div>
+        <h2 class="hm-clients-title">Our <span>Clients</span></h2>
+    </div>
+    <div class="hm-clients-track-wrap">
+        <div class="hm-clients-track">
+            <div class="hm-client-logo"><img src="/images/clients/hess.png" alt="Hess" onerror="this.style.display='none'" /></div>
+            <div class="hm-client-logo"><img src="/images/clients/jadestone energy.png" alt="Jadestone Energy" onerror="this.style.display='none'" /></div>
+            <div class="hm-client-logo"><img src="/images/clients/mtc.png" alt="MTC" onerror="this.style.display='none'" /></div>
+            <div class="hm-client-logo"><img src="/images/clients/borneoredtech.jpg" alt="Borneo Redtech" onerror="this.style.display='none'" /></div>
+            <div class="hm-client-logo"><img src="/images/clients/carigali hess.jfif" alt="Carigali Hess" onerror="this.style.display='none'" /></div>
+            <div class="hm-client-logo"><img src="/images/clients/carimin.jfif" alt="Carimin" onerror="this.style.display='none'" /></div>
+            <div class="hm-client-logo"><img src="/images/clients/costalenergy.png" alt="Coastal Energy" onerror="this.style.display='none'" /></div>
+            <div class="hm-client-logo"><img src="/images/clients/cpoc.png" alt="CPOC" onerror="this.style.display='none'" /></div>
+            <div class="hm-client-logo"><img src="/images/clients/e.a tech.png" alt="E.A. Technique" onerror="this.style.display='none'" /></div>
+            <div class="hm-client-logo"><img src="/images/clients/hasb.jfif" alt="HASB" onerror="this.style.display='none'" /></div>
+            <div class="hm-client-logo"><img src="/images/clients/murphy.png" alt="Murphy" onerror="this.style.display='none'" /></div>
+            <div class="hm-client-logo"><img src="/images/clients/petronas.png" alt="Petronas" onerror="this.style.display='none'" /></div>
+            <div class="hm-client-logo"><img src="/images/clients/petrofac.jfif" alt="Petrofac" onerror="this.style.display='none'" /></div>
+            <div class="hm-client-logo"><img src="/images/clients/pingpetroleum.jpg" alt="Ping Petroleum" onerror="this.style.display='none'" /></div>
+            <div class="hm-client-logo"><img src="/images/clients/ppjo.jpg" alt="PPJO" onerror="this.style.display='none'" /></div>
+            <div class="hm-client-logo"><img src="/images/clients/saa.png" alt="SAA" onerror="this.style.display='none'" /></div>
+            <div class="hm-client-logo"><img src="/images/clients/sapura.png" alt="Sapura" onerror="this.style.display='none'" /></div>
+            <div class="hm-client-logo"><img src="/images/clients/serba dinamik.png" alt="Serba Dinamik" onerror="this.style.display='none'" /></div>
+            <div class="hm-client-logo"><img src="/images/clients/shell.png" alt="Shell" onerror="this.style.display='none'" /></div>
+            <div class="hm-client-logo"><img src="/images/clients/umw.png" alt="UMW" onerror="this.style.display='none'" /></div>
+            <!-- duplicate set for seamless loop -->
+            <div class="hm-client-logo"><img src="/images/clients/hess.png" alt="Hess" onerror="this.style.display='none'" /></div>
+            <div class="hm-client-logo"><img src="/images/clients/jadestone energy.png" alt="Jadestone Energy" onerror="this.style.display='none'" /></div>
+            <div class="hm-client-logo"><img src="/images/clients/mtc.png" alt="MTC" onerror="this.style.display='none'" /></div>
+            <div class="hm-client-logo"><img src="/images/clients/borneoredtech.jpg" alt="Borneo Redtech" onerror="this.style.display='none'" /></div>
+            <div class="hm-client-logo"><img src="/images/clients/carigali hess.jfif" alt="Carigali Hess" onerror="this.style.display='none'" /></div>
+            <div class="hm-client-logo"><img src="/images/clients/carimin.jfif" alt="Carimin" onerror="this.style.display='none'" /></div>
+            <div class="hm-client-logo"><img src="/images/clients/costalenergy.png" alt="Coastal Energy" onerror="this.style.display='none'" /></div>
+            <div class="hm-client-logo"><img src="/images/clients/cpoc.png" alt="CPOC" onerror="this.style.display='none'" /></div>
+            <div class="hm-client-logo"><img src="/images/clients/e.a tech.png" alt="E.A. Technique" onerror="this.style.display='none'" /></div>
+            <div class="hm-client-logo"><img src="/images/clients/hasb.jfif" alt="HASB" onerror="this.style.display='none'" /></div>
+            <div class="hm-client-logo"><img src="/images/clients/murphy.png" alt="Murphy" onerror="this.style.display='none'" /></div>
+            <div class="hm-client-logo"><img src="/images/clients/petronas.png" alt="Petronas" onerror="this.style.display='none'" /></div>
+            <div class="hm-client-logo"><img src="/images/clients/petrofac.jfif" alt="Petrofac" onerror="this.style.display='none'" /></div>
+            <div class="hm-client-logo"><img src="/images/clients/pingpetroleum.jpg" alt="Ping Petroleum" onerror="this.style.display='none'" /></div>
+            <div class="hm-client-logo"><img src="/images/clients/ppjo.jpg" alt="PPJO" onerror="this.style.display='none'" /></div>
+            <div class="hm-client-logo"><img src="/images/clients/saa.png" alt="SAA" onerror="this.style.display='none'" /></div>
+            <div class="hm-client-logo"><img src="/images/clients/sapura.png" alt="Sapura" onerror="this.style.display='none'" /></div>
+            <div class="hm-client-logo"><img src="/images/clients/serba dinamik.png" alt="Serba Dinamik" onerror="this.style.display='none'" /></div>
+            <div class="hm-client-logo"><img src="/images/clients/shell.png" alt="Shell" onerror="this.style.display='none'" /></div>
+            <div class="hm-client-logo"><img src="/images/clients/umw.png" alt="UMW" onerror="this.style.display='none'" /></div>
+        </div>
+    </div>
+    <div class="hm-clients-footer">
+        <span class="hm-clients-count">20+ trusted clients &amp; partners</span>
+    </div>
+</section>
