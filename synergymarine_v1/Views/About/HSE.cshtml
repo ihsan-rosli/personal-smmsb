@@ -217,6 +217,30 @@
             margin-bottom: 1.25rem;
         }
 
+        .policy-desc .policy-section-title {
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: #1a365d;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            margin-top: 1.5rem;
+            margin-bottom: 0.75rem;
+            border-bottom: 2px solid #e5e7eb;
+            padding-bottom: 0.4rem;
+        }
+
+        .policy-desc ul {
+            margin: 0 0 1.25rem 0;
+            padding-left: 1.4rem;
+        }
+
+            .policy-desc ul li {
+                font-size: 0.93rem;
+                line-height: 1.85;
+                color: #4b5563;
+                margin-bottom: 0.5rem;
+            }
+
     /* ── RESPONSIVE ── */
     @@media (max-width: 768px) {
         .cp-hero {
@@ -266,64 +290,78 @@
 <!-- ── MAIN CONTENT ── -->
 <div class="cp-content-wrapper">
 
-    <p class="cp-lead-heading">We provides for safe practices in ship operation</p>
-    <p class="cp-sub-text">Ensuring the highest standards of safety, health, and environmental care in all our operations.</p>
-    
+    <p class="cp-lead-heading">We provide for safe practices in ship operation</p>
+    <p class="cp-sub-text">Ensuring the highest standards of safety, health, security and environmental care in all our operations.</p>
 
     <!-- Tab Buttons -->
     <div class="tab-buttons">
-        <button class="tab-btn active" onclick="openPolicy(event, 'policy1')">Health & Safety</button>
-        <button class="tab-btn" onclick="openPolicy(event, 'policy2')">Anti-Corruption</button>
+        <button class="tab-btn active" onclick="openPolicy(event, 'policy1')">Safety Management</button>
+        <button class="tab-btn" onclick="openPolicy(event, 'policy2')">HSSE Policy</button>
         <button class="tab-btn" onclick="openPolicy(event, 'policy3')">Drug & Alcohol</button>
-        <button class="tab-btn" onclick="openPolicy(event, 'policy4')">Environment</button>
-        <button class="tab-btn" onclick="openPolicy(event, 'policy5')">Ethics</button>
-        <button class="tab-btn" onclick="openPolicy(event, 'policy6')">Personnel</button>
-        <button class="tab-btn" onclick="openPolicy(event, 'policy7')">Security</button>
-        <button class="tab-btn" onclick="openPolicy(event, 'policy8')">Stop Work</button>
-    </div>
+        <button class="tab-btn" onclick="openPolicy(event, 'policy4')">Ethics & Personnel</button>
+
 
     <!-- Tab Contents -->
     <div class="hse-container">
 
+        <!-- TAB 1: Safety Management System Policy -->
         <div id="policy1" class="tab-content active">
             <div class="policy-image">
-                <img src="~/images/hse/health&safetypolicy.jpg" alt="Health and Safety" />
+                <img src="~/images/hse/health&safetypolicy.jpg" alt="Safety Management System" />
             </div>
             <div class="policy-desc">
-                <h3>Health & Safety Policy</h3>
-                <span class="policy-tag">HSE</span>
-                <p>SYNERGY MARINE consider health and safety to be equal in importance to all other primary business objectives. Company management, to the most senior level, are fully committed to creating and maintaining a safe and healthy working environment, ensuring safety at sea and the prevention of human injury or loss of life.</p>
-                <p>Within the Company's Safety Management System (SMS) has been developed for the onshore and offshore management of vessels in compliance with the ISM Code, international and flag state legislation and all other applicable mandatory rules and regulations.</p>
-                <p>Our SMS provides for safe practices in ship operation and preparation for responding to emergency situations. We have identified clear lines of communication between shore based and shipboard personnel and throughout the organisation.</p>
-                
-                <p>By establishing practical safeguards against all identified risks, the number of accidents, incidents and hazardous occurrences or situations is minimised. All such events are reported, lessons learned, and appropriate steps taken to avoid recurrence.</p>
-                <p>Through a process of internal communication and auditing, the Company will ensure that all employees are made aware of this Policy and that they familiarise themselves with, understand, and comply with Company health and safety instructions and procedures relevant to their own roles and responsibilities.</p>
-                <p>All employees from the Managing Director to each individual at the work site, including any contractor or other person employed, are responsible for the effect that their own actions and omissions have on the health and safety of themselves and others.</p>
-                <p>The effectiveness and suitability of our Safety Management System, and those operating it, are regularly reviewed by all levels of management and a process for continual improvement implemented and maintained.</p>
+                <h3>Safety Management System Policy</h3>
+                <span class="policy-tag">SMS</span>
+                <p>Synergy Marine (M) Sdn Bhd (SMMSB) shall set up an effective and appropriate Safety Management System (SMS) to ensure that quality and reliability of the management services of the ship maintained by the company, for safe and reliable operation and environmental protection. The Company shall maintain this policy, and always aim to improve the services.</p>
+                <p>SMMSB has established the Safety Management System complying with the requirements of International Safety Management Code (ISM Code) for achieving this policy. The established Safety Management System is applicable to all related departments and to ships owned or managed by the company.</p>
+
+                <p class="policy-section-title">SMS Objectives</p>
+                <ul>
+                    <li>Ensure safety at sea, prevention of human injury or loss of life, and avoidance of damage to the environment, in particular, to the marine environment, and to property.</li>
+                    <li>Provide for the safe practices in ship operation and a safe working environment.</li>
+                    <li>Assess all identified risks to its ships, personnel ashore and the environment and establish appropriate safeguards.</li>
+                    <li>Continuously improve safety management skills of personnel ashore and aboard ships, including preparing for emergencies related to safety and environmental protection.</li>
+                    <li>Ensure compliance with mandatory rules and regulations and that applicable codes, guidelines and standards recommended by the International Maritime Organization (IMO), Administrations, Classification Societies, and Maritime Industry organizations are taken into account.</li>
+                </ul>
+
+                <p>All employees are to adhere to this policy.</p>
             </div>
         </div>
 
+        <!-- TAB 2: HSSE Policy -->
         <div id="policy2" class="tab-content">
             <div class="policy-image">
-                <img src="~/images/hse/health&safetypolicy.jpg" alt="Anti Corruption" />
+                <img src="~/images/hse/health&safetypolicy.jpg" alt="HSSE Policy" />
             </div>
             <div class="policy-desc">
-                <h3>Global Anti-Corruption Policy</h3>
-                <span class="policy-tag">Ethics</span>
-                <p>SYNERGY MARINE is committed to the highest standards of ethics and integrity and it is our policy to fully comply with global anti-corruption and anti-bribery laws. This Global Anti-Corruption Policy supports the Synergy Marine's Code of Conduct and provides clear rules and guidance for handling situations that may involve corruption.</p>
-                <p>The Policy applies to all individuals working for, or on behalf of, Synergy Marine. Compliance with this Policy is mandatory, and failure to comply may result in disciplinary action up to termination of employment.</p>
-                
-                
-                <br />
-                <p><b>ANTI-CORRUPTION LAW</b></p><p>
-                 
-                    Synergy Marine has a legal and ethical obligation to reject corruption in all its forms. This means that we must actively seek to comply with the anti-corruption laws in all of the countries where we conduct business. Where local laws conflict, the higher standard must be followed.
+                <h3>Health, Safety, Security & Environmental Policy</h3>
+                <span class="policy-tag">HSSE</span>
+                <p>Synergy Marine (M) Sdn Bhd (SMMSB) is fully committed to Health, Safety, Security and Environment excellence in all its business activities wherever it operates. SMMSB will comply with all applicable Rules and Regulation requirements and maintain best practices in Occupational Safety and Health Standards.</p>
+                <p>It has been the company's vision and aspiration to achieve zero injury to people, zero damage to property and zero pollution to the environment as a long-term goal, as well as to detect security threats and take preventive measures against security incidents affecting ships.</p>
 
-                    Synergy Marine and its personnel worldwide are subject to numerous anti-corruption and anti-bribery laws, including the Norwegian Penal Code, the Singapore Prevention of Corruption Act (“PCA”), the UK Bribery Act 2010 (“UKBA”) and the US Foreign Corrupt Practices Act (“FCPA”).
-                </p>
+                <p class="policy-section-title">Company Objectives</p>
+                <ul>
+                    <li>Provide for safe practices in ship operation and a safe working environment.</li>
+                    <li>Establish practical safeguards against all identified risks so that the number of accidents, incidents and hazardous occurrences is minimised.</li>
+                    <li>Continuously improve the safety management skills of personnel ashore and onboard ships, including preparing for emergencies related both to safety and environmental protection.</li>
+                    <li>Compliance with mandatory rules and regulations.</li>
+                    <li>Ensure that applicable codes, guidelines and standards recommended by the Organization, Administrations, classification society and maritime industry organization are taken into account.</li>
+                </ul>
+
+                <p class="policy-section-title">These Objectives Will Be Achieved By</p>
+                <ul>
+                    <li>Implementing and continuously improving the SMMSB Safety Management System.</li>
+                    <li>Actively promoting employee participation in measures aimed at improving safety and protecting the environment.</li>
+                    <li>Keeping all personnel fully informed of any known or potential hazards that may affect themselves, their colleagues, the ship and the environment. All events are reported, lessons learned from incidents or accidents are shared to prevent recurrence.</li>
+                    <li>Empowering and reinforcing the right of employees and contractor staff to use the Stop Work Authority (SWA).</li>
+                    <li>Continuously reviewing all mandatory rules, regulations, industry codes and operating procedures relevant to specific ship types and trade to ensure effectiveness and continual improvement.</li>
+                </ul>
+
+                <p>SMMSB requires its employees, visitors and contractors to strictly adhere to this policy at all times.</p>
             </div>
         </div>
 
+        <!-- TAB 3: Drug & Alcohol Policy -->
         <div id="policy3" class="tab-content">
             <div class="policy-image">
                 <img src="~/images/hse/health&safetypolicy.jpg" alt="Drug and Alcohol" />
@@ -331,93 +369,31 @@
             <div class="policy-desc">
                 <h3>Drug & Alcohol Policy</h3>
                 <span class="policy-tag">Safety</span>
-                <p>Our health, safety and welfare can be seriously affected by the consumption of alcohol and/or controlled drugs. The use, consumption, supply, possession, concealment, transportation, purchase, manufacture, promotion or sale of, or being under the influence of 'Prohibited Substances' is forbidden.</p>
-                <p>The consumption of alcohol on-board ship is forbidden, as is being sufficiently under the influence of alcohol so as to potentially compromise the safety of self or others. This applies to all persons who work, visit and/or perform services on vessels owned or managed by the company.</p>
-                
-                <p>A violation of this Policy by any individual of the Company is likely to result in the individual being summarily dismissed. A violation by third party personnel will result in the offending party or parties being removed from the vessel.</p>
-                <p>
-                    The Company has the right to conduct breath testing, blood analysis and/or urine testing and/or search a person and their personal possessions at any time.
-
-                   
-                   
-                </p>
-                <p>
-                    The Company has provided a procedure ‘Drug and Alcohol Control’, detailing the enforcement of this Policy in SMS Section 06.
-                </p>
-                <p>
-                    SYNERGY MARINE has a policy of routine, random and “with cause” drug and alcohol testing.
-                </p>
+                <p>Synergy Marine (M) Sdn Bhd is committed to the health, safety and welfare of personnel. The health, safety and welfare of personnel can be seriously affected by the consumption of alcohol, un-prescribed controlled drugs and other substance abuse.</p>
+                <p>SMMSB has <strong>Zero Tolerance</strong> to drugs and alcohol use and/or possession of equipment in the workplace.</p>
+                <p>Therefore, the use, consumption, supply, possession, concealment, transportation, purchase, manufacture, promotion or sale of un-prescribed drugs and alcohol is <strong>strictly prohibited</strong> on SMMSB vessels (Owned or Managed) and office (shore base).</p>
+                <p>A violation of this Policy by any individual of the Company is likely to result in the individual being summarily dismissed or terminated from employment. A violation by third party personnel will result in the offending party or parties being removed from the vessel.</p>
+                <p>SMMSB <strong>reserves the right</strong> to conduct breath testing, blood analysis and/or urine testing and/or search a person and their personal possessions at any time.</p>
+                <p>All SMMSB personnel shall not consume drugs and alcohol in any country where the consumption of drugs and alcohol is forbidden by law.</p>
             </div>
         </div>
 
+        <!-- TAB 4: Ethics Policy -->
         <div id="policy4" class="tab-content">
-            <div class="policy-image">
-                <img src="~/images/hse/health&safetypolicy.jpg" alt="Environmental Protection" />
-            </div>
-            <div class="policy-desc">
-                <h3>Environmental Protection Policy</h3>
-                <span class="policy-tag">Environment</span>
-                <p>SYNERGY MARINE is fully committed to the prevention of damage to the environment, incorporating legislative requirements and information about significant impacts, in particular to the marine environment. We achieve this by minimising harmful operational indirect and accidental discharges and controlling our consumption of natural resources.</p>
-                <p>We focus on areas of our operations where our actions have the greatest potential for adverse environmental impact and we minimise this potential by evaluating environmental risks, segregating garbage and waste, planning voyages carefully, and providing pollution response equipment.</p>
-                
-           
-                <p>All employees from the Managing Director to each individual at the work site, including any contractor or other person employed, are responsible for the impact that their own actions and omissions have on the environment.</p>
-           
-            
-            </div>
-        </div>
-
-        <div id="policy5" class="tab-content">
             <div class="policy-image">
                 <img src="~/images/hse/health&safetypolicy.jpg" alt="Ethics" />
             </div>
             <div class="policy-desc">
-                <h3>Ethics Policy</h3>
+                    <h3>Ethics & Personnel Policy</h3>
                 <span class="policy-tag">Integrity</span>
-                <p>It is our company policy to conduct business in an honest and ethical way, and without the use of corrupt practices or acts of bribery to obtain an unfair advantage, ensuring our activities remain consistent with the applicable laws and regulations of the countries in which we operate.</p>
-                <p>We will maintain a culture of openness, trust and integrity in all our business objectives. Bribery and corruption harm the societies in which the acts are committed. Such behaviour undermines the economy, brings disorder to the markets and curtails development.</p>
-                <p>All employees are expected to be honest in their dealings with our clients, vendors, all other stakeholders and with each other, respecting individual rights and ensuring that their actions are free from discrimination, corruption, libel, slander or harassment.</p>
-                <p>This is not only our cultural commitment but is also a legal requirement.</p>
+                <p>Synergy Marine (M) Sdn Bhd is committed to conducting business in an honest and ethical way, and without the use of corrupt practices or acts of bribery to obtain an unfair advantage, ensuring our activities remain consistent with the applicable laws and regulations of the countries in which we operate.</p>
+                <p>Bribery and corruption harm the societies in which the acts are committed. Such behaviour undermines the economy, brings disorder to the markets and curtails development.</p>
+                <p>All employees are expected to be honest in their dealings with clients, vendors, all other stakeholders and with each other, respecting individual rights and ensuring that their actions are free from discrimination, racism, corruption, and slander.</p>
+                <p>Through a process of internal communication and auditing, the Company ensures that all employees are made aware of this Policy and that they familiarise themselves with, understand, and comply with associated instructions and procedures.</p>
             </div>
         </div>
 
-        <div id="policy6" class="tab-content">
-            <div class="policy-image">
-                <img src="~/images/hse/health&safetypolicy.jpg" alt="Personnel" />
-            </div>
-            <div class="policy-desc">
-                <h3>Personnel Policy</h3>
-                <span class="policy-tag">People</span>
-                <p>SYNERGY MARINE is fully committed to maintaining its reputation as a 'company of choice' for people wishing to work in the marine industry. We provide an environment where quality, integrity, innovation and excellence are rewarded by career development opportunities.</p>
-                <p>Within the Company's SMS, a Human Resources Department has been developed in line with 'best practices' and in compliance with regulatory, legal and customer requirements. We provide a competent, motivated and stable workforce by recruiting qualified individuals.</p>
-                <p>All employees are treated fairly and with respect at all times and ensure that there is no discrimination on grounds of sex, race, age, religion, sexuality and disability.</p>
-            </div>
-        </div>
 
-        <div id="policy7" class="tab-content">
-            <div class="policy-image">
-                <img src="~/images/hse/health&safetypolicy.jpg" alt="Security" />
-            </div>
-            <div class="policy-desc">
-                <h3>Security Policy</h3>
-                <span class="policy-tag">Security</span>
-                <p>SYNERGY MARINE is committed to ensuring that effective security measures are implemented on-board company owned and managed ships in compliance with the International Maritime Organisation's (IMO) amendments to Safety of Life at Sea (SOLAS) Chapter XI-2 and Parts A&amp;B of the International Ship and Port Facility Security Code (ISPS).</p>
-                <p>The Company has appointed a land based Company Security Officer who has the responsibility and authority to develop, implement and maintain effective security practices. The Master has the overriding authority and responsibility to make decisions regarding the security of the ship.</p>
-            </div>
-        </div>
-
-        <div id="policy8" class="tab-content">
-            <div class="policy-image">
-                <img src="~/images/hse/health&safetypolicy.jpg" alt="Stop Work Authority" />
-            </div>
-            <div class="policy-desc">
-                <h3>Stop Work Authority</h3>
-                <span class="policy-tag">Safety</span>
-                <p>Stop Work Authority (SWA) is the right and duty of each employee to stop a job that is unsafe or that is felt to be unsafe. Any employee can shut down or suspend any job if it is thought that an unsafe working condition exists at any time or at any place.</p>
-                <p>If you or any employee is in doubt whether any health, safety or environmental aspect of any operation is proceeding properly, it is your duty to stop the operation immediately until the condition can be improved or the doubt is resolved. Stopping unsafe work prevents people from being injured and helps avoid accidents.</p>
-                <p>SYNERGY MARINE will fully support any good faith use of the SWA.</p>
-            </div>
-        </div>
 
     </div>
 </div>

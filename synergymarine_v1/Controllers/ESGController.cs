@@ -2,9 +2,9 @@
 
 namespace synergymarine_v1.Controllers
 {
-    public class GoGreenController : Controller
+    public class ESGController : Controller
     {
-        public IActionResult GoGreen()
+        public IActionResult ESG()
         {
             return View();
         }
