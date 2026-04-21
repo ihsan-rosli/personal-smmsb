@@ -778,7 +778,7 @@
         ══════════════════════════════════════════
         HIDDEN VIDEO ELEMENT FOR BACKGROUND MUSIC
         - autoplay + muted   → browser allows it
-        - JS unmutes it immediately on 'playing'  
+        - JS unmutes it immediately on 'playing'
         - Result: sound plays automatically!
         - Place audio.mp3 in: wwwroot/audio/
         ══════════════════════════════════════════
@@ -1019,7 +1019,12 @@
         });
 
         // ══════════════════════════════════════════════════════════════
-        //  BACKGROUND MUSIC — Hidden <video> autoplay trick
+        //  BACKGROUND MUSIC — seamless cross-page continuity
+        //  Strategy:
+        //    1. Save currentTime to sessionStorage every 250ms + on unload
+        //    2. On new page: seek to saved time BEFORE calling play()
+        //    3. Attempt play immediately (works if browser already unlocked)
+        //    4. If blocked, wait for first user interaction then retry
         // ══════════════════════════════════════════════════════════════
         (function () {
             const video = document.getElementById('bgMusic');
@@ -1041,51 +1046,63 @@
                 }
             }
 
+            // Save playback position frequently so cross-page resume is accurate
             setInterval(function () {
                 if (!video.paused) {
                     sessionStorage.setItem('musicTime', video.currentTime);
                 }
-            }, 500);
+            }, 250);
 
+            // Save right before the page unloads (most accurate snapshot)
             window.addEventListener('beforeunload', function () {
                 sessionStorage.setItem('musicTime', video.currentTime);
                 sessionStorage.setItem('musicMuted', video.muted);
             });
 
-            video.addEventListener('playing', function onFirstPlay() {
-                video.removeEventListener('playing', onFirstPlay);
-                if (savedTime > 0) { video.currentTime = savedTime; }
-                video.muted = savedMuted;
+            // Core play function: seek to saved position THEN play, THEN apply mute pref
+            function attemptPlay() {
+                if (savedTime > 0) {
+                    video.currentTime = savedTime;
+                }
+                video.muted  = false;   // must be unmuted before play() or browser may block
                 video.volume = 1;
-                updateBtn(savedMuted);
+
+                return video.play().then(function () {
+                    // Restore user's mute preference after play has started
+                    video.muted = savedMuted;
+                    updateBtn(savedMuted);
+                });
+            }
+
+            // Try to play immediately (succeeds on page 2+ once browser has unlocked audio)
+            attemptPlay().catch(function () {
+                // First visit or browser blocked autoplay — show muted state, wait for gesture
+                updateBtn(true);
+
+                var events = ['click', 'scroll', 'touchstart', 'keydown', 'mousemove'];
+                function tryPlay() {
+                    attemptPlay().then(function () {
+                        events.forEach(function (ev) {
+                            document.removeEventListener(ev, tryPlay);
+                        });
+                    }).catch(function () {});
+                }
+                events.forEach(function (ev) {
+                    document.addEventListener(ev, tryPlay, { passive: true });
+                });
             });
 
-            setTimeout(function () {
-                if (video.paused) {
-                    updateBtn(true);
-                    var events = ['click', 'scroll', 'touchstart', 'keydown', 'mousemove'];
-                    function tryPlay() {
-                        video.muted = false;
-                        video.volume = 1;
-                        video.play().then(function () {
-                            updateBtn(savedMuted);
-                            video.muted = savedMuted;
-                            events.forEach(function (ev) { document.removeEventListener(ev, tryPlay); });
-                        }).catch(function () {});
-                    }
-                    events.forEach(function (ev) { document.addEventListener(ev, tryPlay, { passive: true }); });
-                }
-            }, 1000);
-
+            // Toggle mute/unmute button
             btn.addEventListener('click', function (e) {
                 e.stopPropagation();
                 var nowMuted = !video.muted;
-                video.muted = nowMuted;
+                video.muted  = nowMuted;
                 sessionStorage.setItem('musicMuted', nowMuted);
                 updateBtn(nowMuted);
                 if (video.paused) { video.play().catch(function () {}); }
             });
 
+            // Set initial button state while play is still pending
             updateBtn(savedMuted);
         })();
     </script>
