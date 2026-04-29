@@ -147,7 +147,13 @@ namespace synergymarine_v1.Controllers
 
         }
 
+        public IActionResult MOSVAMembership2026()
+        {
+            return View();
 
+        }
+
+        
     }
 
 
