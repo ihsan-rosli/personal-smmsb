@@ -141,6 +141,12 @@ namespace synergymarine_v1.Controllers
 
         }
 
+        public IActionResult Ogsepartnersday2026()
+        {
+            return View();
+
+        }
+
 
     }
 

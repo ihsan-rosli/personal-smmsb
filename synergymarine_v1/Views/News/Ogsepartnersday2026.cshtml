@@ -1,5 +1,5 @@
 ﻿@{
-    ViewData["Title"] = "We're officially online!";
+    ViewData["Title"] = "PETRONAS OGSE Partners Day 2026 — Empowering Resilience";
 }
 
 <style>
@@ -18,7 +18,7 @@
     .news-hero-bg {
         position: absolute;
         inset: 0;
-        background: url('/images/synergyexplorer.png') center center / cover no-repeat;
+        background: url('/images/4.jpg') center center / cover no-repeat;
         filter: brightness(0.85);
         transform: scale(1.03);
         transition: transform 8s ease;
@@ -102,7 +102,6 @@
         border: 1px solid #e2e8f0;
     }
 
-    /* Feature image */
     .news-feature-img-wrap {
         width: 100%;
         height: 420px;
@@ -124,12 +123,11 @@
         transform: scale(1.02);
     }
 
-    /* Category tag over image */
     .news-img-tag {
         position: absolute;
         top: 1.25rem;
         left: 1.25rem;
-        background: #1d4ed8;
+        background: #7c3aed;
         color: #fff;
         font-size: 10px;
         font-weight: 700;
@@ -139,12 +137,10 @@
         border-radius: 20px;
     }
 
-    /* Article body */
     .news-article-body {
         padding: 2rem 2.25rem 2.5rem;
     }
 
-    /* Meta row */
     .news-meta-row {
         display: flex;
         align-items: center;
@@ -164,9 +160,7 @@
         font-weight: 500;
     }
 
-    .news-meta-icon {
-        font-size: 0.9rem;
-    }
+    .news-meta-icon { font-size: 0.9rem; }
 
     .news-meta-divider {
         width: 4px;
@@ -175,7 +169,6 @@
         background: #cbd5e1;
     }
 
-    /* Article title */
     .news-article-title {
         font-size: 1.45rem;
         font-weight: 800;
@@ -185,7 +178,6 @@
         letter-spacing: -0.3px;
     }
 
-    /* Lead paragraph */
     .news-lead {
         font-size: 1rem;
         color: #374151;
@@ -196,7 +188,7 @@
         background: #eff6ff;
         border-left: 4px solid #2563eb;
         border-radius: 0 8px 8px 0;
-        text-align: justify; /* ← ADD THIS */
+        text-align: justify;
     }
 
     .news-body-text {
@@ -204,20 +196,18 @@
         color: #4b5563;
         line-height: 1.9;
         margin-bottom: 1.25rem;
-        text-align: justify; /* ← ADD THIS */
+        text-align: justify;
     }
 
-    /* Image caption */
     .news-caption {
         font-size: 0.78rem;
         color: #94a3b8;
-        text-align: justify; /* ← CHANGE from center to justify */
+        text-align: justify;
         margin-top: -0.5rem;
         margin-bottom: 1.75rem;
         font-style: italic;
     }
 
-    /* Tags */
     .news-tags {
         display: flex;
         flex-wrap: wrap;
@@ -246,7 +236,6 @@
         gap: 1.25rem;
     }
 
-    /* Info card */
     .news-info-card {
         background: #ffffff;
         border: 1px solid #e2e8f0;
@@ -270,9 +259,7 @@
         color: #fff;
     }
 
-    .news-info-card-body {
-        padding: 1.25rem;
-    }
+    .news-info-card-body { padding: 1.25rem; }
 
     .news-info-row {
         display: flex;
@@ -282,9 +269,7 @@
         border-bottom: 1px solid #f8fafc;
     }
 
-        .news-info-row:last-child {
-            border-bottom: none;
-        }
+        .news-info-row:last-child { border-bottom: none; }
 
     .news-info-dot {
         width: 8px;
@@ -311,10 +296,9 @@
         line-height: 1.45;
     }
 
-    /* Achievement badge card */
     .news-badge-card {
-        background: linear-gradient(145deg, #fffbeb, #fef3c7);
-        border: 1px solid #fde68a;
+        background: linear-gradient(145deg, #f5f3ff, #ede9fe);
+        border: 1px solid #c4b5fd;
         border-radius: 14px;
         padding: 1.5rem;
         text-align: center;
@@ -329,18 +313,17 @@
     .news-badge-title {
         font-size: 0.88rem;
         font-weight: 800;
-        color: #92400e;
+        color: #4c1d95;
         margin-bottom: 0.3rem;
         line-height: 1.3;
     }
 
     .news-badge-sub {
         font-size: 0.78rem;
-        color: #b45309;
+        color: #6d28d9;
         line-height: 1.5;
     }
 
-    /* Back button */
     .news-back-btn {
         display: inline-flex;
         align-items: center;
@@ -365,52 +348,29 @@
             text-decoration: none;
         }
 
-    /* ── RESPONSIVE ── */
     @@media (max-width: 900px) {
-        .news-layout {
-            grid-template-columns: 1fr;
-        }
-
-        .news-sidebar {
-            position: static;
-        }
-
-        .news-feature-img-wrap {
-            height: 280px;
-        }
-
-        .news-hero {
-            height: 300px;
-        }
-
-        .news-article-body {
-            padding: 1.5rem 1.25rem 2rem;
-        }
+        .news-layout { grid-template-columns: 1fr; }
+        .news-feature-img-wrap { height: 280px; }
+        .news-hero { height: 300px; }
+        .news-article-body { padding: 1.5rem 1.25rem 2rem; }
     }
 
     @@media (max-width: 560px) {
-        .news-content-wrapper {
-            padding: 2rem 1.25rem 3.5rem;
-        }
-
-        .news-feature-img-wrap {
-            height: 220px;
-        }
-
-        .news-article-title {
-            font-size: 1.2rem;
-        }
+        .news-content-wrapper { padding: 2rem 1.25rem 3.5rem; }
+        .news-feature-img-wrap { height: 220px; }
+        .news-article-title { font-size: 1.2rem; }
     }
 </style>
+
 <!-- ── HERO ── -->
 <div class="news-hero">
-    <div class="news-hero-bg" style="background-image: url('/images/5.jpg');"></div>
+    <div class="news-hero-bg" style="background-image: url('/images/4.jpg');"></div>
     <div class="news-hero-overlay"></div>
     <div class="news-hero-content">
         <p class="news-breadcrumb">
-            <a href="/News/News">News</a> &nbsp;/&nbsp; We’re Officially Online!
+            <a href="/News/News">News</a> &nbsp;/&nbsp; PETRONAS OGSE Partners Day 2026
         </p>
-        <h1 class="news-hero-title">We’re Officially Online!</h1>
+        <h1 class="news-hero-title">PETRONAS OGSE Partners Day 2026 — Empowering Resilience</h1>
     </div>
 </div>
 
@@ -423,10 +383,10 @@
 
             <!-- Feature Image -->
             <div class="news-feature-img-wrap">
-                <img src="/images/twinsfleet.png"
-                     alt="Synergy Marine MoU Signing with MTCMS Design and Shin Yang Shipping Corporation – Kuala Lumpur"
+                <img src="/images/news/ogse_partners_day_2026.jpg"
+                     alt="PETRONAS OGSE Partners Day 2026 — Empowering Resilience, Kuala Lumpur Convention Centre"
                      class="news-feature-img" />
-                <span class="news-img-tag">🚢 Online</span>
+                <span class="news-img-tag">📌 Event</span>
             </div>
 
             <div class="news-article-body">
@@ -435,50 +395,75 @@
                 <div class="news-meta-row">
                     <div class="news-meta-item">
                         <span class="news-meta-icon">📅</span>
-                        <span>September 29, 2025</span>
+                        <span>April 23, 2026</span>
                     </div>
                     <div class="news-meta-divider"></div>
                     <div class="news-meta-item">
                         <span class="news-meta-icon">🏢</span>
-                        <span>Business &amp; Energy</span>
+                        <span>Industry Engagement</span>
                     </div>
                     <div class="news-meta-divider"></div>
                     <div class="news-meta-item">
                         <span class="news-meta-icon">📍</span>
-                        <span>Selangor, Malaysia</span>
+                        <span>Kuala Lumpur Convention Centre</span>
                     </div>
                     <div class="news-meta-divider"></div>
                     <div class="news-meta-item">
-                        <span class="news-meta-icon">📰</span>
-                        <span>Synergy Marine</span>
+                        <span class="news-meta-icon">🏛️</span>
+                        <span>PETRONAS / MPRC</span>
                     </div>
                 </div>
 
                 <!-- Title -->
-               @*  <h2 class="news-article-title">
-                    Synergy Marine (M) Sdn Bhd Invests US$45 Million to Build Its First Liquefied Natural Gas (LNG) Powered Platform Supply Vessel — The First of Its Kind in Malaysia and Across Asia
-                </h2> *@
+                <h2 class="news-article-title">
+                    Synergy Marine (M) Sdn Bhd Honoured to Participate in PETRONAS OGSE Partners Day 2026 — Empowering Resilience
+                </h2>
 
                 <!-- Lead -->
                 <p class="news-lead">
-                    Welcome to the official page of Synergy Marine (M) Sdn Bhd.
+                    Synergy Marine (M) Sdn Bhd was honoured to be part of the PETRONAS OGSE Partners Day 2026, held on 23 April 2026 at the Kuala Lumpur Convention Centre — a landmark event that brought together key stakeholders across Malaysia's Oil &amp; Gas Services and Equipment (OGSE) ecosystem under the theme of <strong>Empowering Resilience</strong>.
                 </p>
 
                 <p class="news-body-text">
-                   
-                    We are committed to providing safe, reliable, and sustainable marine support services for the oil & gas industry.
-                    Follow us as we share updates on our journey in marine excellence, ESG initiatives, safety culture, and industry insights.
+                    Representing the company at this significant industry gathering were our Directors, Yg Berbahagia Dato' Dr. Roslan Ahmad and En. Asmawi Ilias. Their attendance underscores Synergy Marine's continued commitment to active engagement within Malaysia's upstream oil and gas services community and reinforces the company's standing as a trusted partner within the PETRONAS vendor and supplier network.
                 </p>
 
-          
+                <p class="news-body-text">
+                    The OGSE Partners Day 2026 served as a vital platform for dialogue and collaboration between PETRONAS and its ecosystem of local contractors, service providers, and equipment suppliers. Centered on the themes of resilience, competitiveness, and the energy transition, the event highlighted the industry's ongoing transformation and underscored the collective responsibility of the OGSE community in navigating future challenges — from energy security to decarbonisation.
+                </p>
+
+                <p class="news-body-text">
+                    Notably, the Malaysia Petroleum Resources Corporation (MPRC) led several impactful sessions aligned with the National OGSE Industry Blueprint 2021–2030, covering critical areas including sustainability initiatives, long-term industry growth strategies, and capacity building for local players. These sessions provided invaluable insight into the direction of Malaysia's energy sector and the role that OGSE companies play in delivering national energy objectives.
+                </p>
+
+                <p class="news-body-text">
+                    For Synergy Marine, participation in events such as OGSE Partners Day 2026 reflects our ongoing dedication to industry engagement, professional development, and positioning the company at the forefront of Malaysia's evolving energy landscape. As an Offshore Support Vessel (OSV) operator and integrated ship management company, Synergy Marine recognises the significance of the energy transition agenda and remains committed to aligning our operations and fleet strategy with sustainability principles and national energy priorities.
+                </p>
+
+                <p class="news-body-text">
+                    Synergy Marine extends its sincere appreciation to PETRONAS and MPRC for organising this impactful and forward-looking event. We look forward to continued collaboration and partnership as we collectively chart a resilient and sustainable course for Malaysia's OGSE industry.
+                </p>
+
+                <!-- Caption -->
+                <p class="news-caption">
+                    Dato' Dr. Roslan Ahmad and En. Asmawi Ilias representing Synergy Marine (M) Sdn Bhd at the PETRONAS OGSE Partners Day 2026, held on 23 April 2026 at the Kuala Lumpur Convention Centre. | Source: Synergy Marine (M) Sdn Bhd.
+                </p>
 
                 <!-- Tags -->
                 <div class="news-tags">
-                    <span class="news-tag">SynergyMarine</span>
-                    <span class="news-tag">MarineSupport </span>
-                    <span class="news-tag">OilAndGas </span>
+                    <span class="news-tag">PETRONAS</span>
+                    <span class="news-tag">OGSE 2026</span>
+                    <span class="news-tag">Empowering Resilience</span>
+                    <span class="news-tag">Synergy Marine</span>
+                    <span class="news-tag">MPRC</span>
+                    <span class="news-tag">Energy Transition</span>
+                    <span class="news-tag">Sustainability</span>
+                    <span class="news-tag">Oil &amp; Gas</span>
+                    <span class="news-tag">OSV</span>
                     <span class="news-tag">ESG</span>
-                
+                    <span class="news-tag">Malaysia</span>
+                    <span class="news-tag">2026</span>
+                    <span class="news-tag">KLCC</span>
                 </div>
 
             </div>
@@ -487,18 +472,18 @@
         <!-- ── SIDEBAR ── -->
         <aside class="news-sidebar">
 
-            <!-- Achievement Highlight -->
+            <!-- Event Highlight Badge -->
             <div class="news-badge-card">
-                <span class="news-badge-icon">🚢</span>
-                <div class="news-badge-title">We Are Officially Online</div>
-                <div class="news-badge-sub">Synergy Marine <br />Selangor, Malaysia, September 29, 2025</div>
+                <span class="news-badge-icon">🤝</span>
+                <div class="news-badge-title">PETRONAS OGSE Partners Day 2026</div>
+                <div class="news-badge-sub">Empowering Resilience<br />Kuala Lumpur Convention Centre</div>
             </div>
 
-            <!-- Project Details -->
+            <!-- Event Details -->
             <div class="news-info-card">
                 <div class="news-info-card-header">
                     <span>📋</span>
-                    <div class="news-info-card-header-title">Project Details</div>
+                    <div class="news-info-card-header-title">Event Details</div>
                 </div>
                 <div class="news-info-card-body">
 
@@ -506,8 +491,61 @@
                         <div class="news-info-dot"></div>
                         <div>
                             <div class="news-info-label">Date</div>
-                            <div class="news-info-value">September 29, 2025
-                               </div>
+                            <div class="news-info-value">23 April 2026</div>
+                        </div>
+                    </div>
+
+                    <div class="news-info-row">
+                        <div class="news-info-dot"></div>
+                        <div>
+                            <div class="news-info-label">Venue</div>
+                            <div class="news-info-value">Kuala Lumpur Convention Centre (KLCC)</div>
+                        </div>
+                    </div>
+
+                    <div class="news-info-row">
+                        <div class="news-info-dot"></div>
+                        <div>
+                            <div class="news-info-label">Theme</div>
+                            <div class="news-info-value">Empowering Resilience</div>
+                        </div>
+                    </div>
+
+                    <div class="news-info-row">
+                        <div class="news-info-dot"></div>
+                        <div>
+                            <div class="news-info-label">Organiser</div>
+                            <div class="news-info-value">PETRONAS &amp; MPRC</div>
+                        </div>
+                    </div>
+
+                    <div class="news-info-row">
+                        <div class="news-info-dot"></div>
+                        <div>
+                            <div class="news-info-label">Representing Synergy Marine</div>
+                            <div class="news-info-value">
+                                Dato' Dr. Roslan Ahmad<br />
+                                <span style="color:#94a3b8; font-size:0.75rem;">En. Asmawi Ilias</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="news-info-row">
+                        <div class="news-info-dot"></div>
+                        <div>
+                            <div class="news-info-label">Key Agenda</div>
+                            <div class="news-info-value">
+                                National OGSE Blueprint 2021–2030<br />
+                                <span style="color:#94a3b8; font-size:0.75rem;">Energy Transition &amp; Sustainability</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="news-info-row">
+                        <div class="news-info-dot"></div>
+                        <div>
+                            <div class="news-info-label">Category</div>
+                            <div class="news-info-value">Industry Event &amp; Engagement</div>
                         </div>
                     </div>
 
