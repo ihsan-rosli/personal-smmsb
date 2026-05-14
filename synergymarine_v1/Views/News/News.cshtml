@@ -20,12 +20,13 @@
         inset: 0;
         background: url('/images/3.jpg') center center / cover no-repeat;
         filter: brightness(0.85);
-        /* removed transform scale – saves a composite layer on load */
         transition: transform 8s ease;
         will-change: transform;
     }
 
-    .ni-hero:hover .ni-hero-bg { transform: scale(1.03); }
+    .ni-hero:hover .ni-hero-bg {
+        transform: scale(1.03);
+    }
 
     .ni-hero-overlay {
         position: absolute;
@@ -132,7 +133,6 @@
         text-decoration: none;
         transition: box-shadow 0.2s, transform 0.2s, border-color 0.2s;
         cursor: pointer;
-        /* GPU-composited layer only on hover, not by default */
     }
 
         .ni-card-featured:hover {
@@ -142,9 +142,17 @@
             text-decoration: none;
         }
 
-        .ni-card-featured .ni-thumb-wrap { height: 300px; }
-        .ni-card-featured .ni-card-body  { padding: 1.75rem; }
-        .ni-card-featured .ni-card-title { font-size: 1.2rem; }
+        .ni-card-featured .ni-thumb-wrap {
+            height: 300px;
+        }
+
+        .ni-card-featured .ni-card-body {
+            padding: 1.75rem;
+        }
+
+        .ni-card-featured .ni-card-title {
+            font-size: 1.2rem;
+        }
 
     /* ── CARD GRID ── */
     .ni-grid {
@@ -164,12 +172,8 @@
         flex-direction: column;
         text-decoration: none;
         transition: box-shadow 0.2s, transform 0.2s, border-color 0.2s;
-        /*
-         * content-visibility: auto lets the browser skip layout/paint
-         * for off-screen cards until they scroll into view.
-         */
         content-visibility: auto;
-        contain-intrinsic-size: 0 340px; /* approximate card height */
+        contain-intrinsic-size: 0 340px;
     }
 
         .ni-card:hover {
@@ -196,12 +200,13 @@
         object-position: top center;
         transition: transform 0.45s ease;
         display: block;
-        /* avoids layout-shift jank while the image loads */
         will-change: transform;
     }
 
     .ni-card:hover .ni-thumb,
-    .ni-card-featured:hover .ni-thumb { transform: scale(1.05); }
+    .ni-card-featured:hover .ni-thumb {
+        transform: scale(1.05);
+    }
 
     /* Category pill */
     .ni-cat-pill {
@@ -215,17 +220,33 @@
         padding: 0.3rem 0.75rem;
         border-radius: 20px;
         color: #fff;
-        /* pills don't need their own layer */
     }
 
-        .ni-cat-pill.award   { background: #d97706; }
-        .ni-cat-pill.media   { background: #0f766e; }
-        .ni-cat-pill.event   { background: #7c3aed; }
-        .ni-cat-pill.company { background: #1d4ed8; }
-        .ni-cat-pill.press   { background: #be185d; }
-        .ni-cat-pill.csr     { background: #15803d; }
+        .ni-cat-pill.award {
+            background: #d97706;
+        }
 
-    /* Read-more overlay – use opacity only (cheaper than background repaint) */
+        .ni-cat-pill.media {
+            background: #0f766e;
+        }
+
+        .ni-cat-pill.event {
+            background: #7c3aed;
+        }
+
+        .ni-cat-pill.company {
+            background: #1d4ed8;
+        }
+
+        .ni-cat-pill.press {
+            background: #be185d;
+        }
+
+        .ni-cat-pill.csr {
+            background: #15803d;
+        }
+
+    /* Read-more overlay */
     .ni-hover-overlay {
         position: absolute;
         inset: 0;
@@ -237,7 +258,9 @@
     }
 
     .ni-card:hover .ni-hover-overlay,
-    .ni-card-featured:hover .ni-hover-overlay { background: rgba(15,37,87,0.42); }
+    .ni-card-featured:hover .ni-hover-overlay {
+        background: rgba(15,37,87,0.42);
+    }
 
     .ni-read-label {
         background: rgba(255,255,255,0.95);
@@ -254,7 +277,10 @@
     }
 
     .ni-card:hover .ni-read-label,
-    .ni-card-featured:hover .ni-read-label { opacity: 1; transform: translateY(0); }
+    .ni-card-featured:hover .ni-read-label {
+        opacity: 1;
+        transform: translateY(0);
+    }
 
     /* Card body */
     .ni-card-body {
@@ -318,7 +344,9 @@
     }
 
     .ni-card:hover .ni-card-cta,
-    .ni-card-featured:hover .ni-card-cta { gap: 0.6rem; }
+    .ni-card-featured:hover .ni-card-cta {
+        gap: 0.6rem;
+    }
 
     /* Section label */
     .ni-section-label {
@@ -346,14 +374,27 @@
 
     /* Responsive */
     @@media (max-width: 960px) {
-        .ni-featured { grid-template-columns: 1fr; }
-        .ni-grid     { grid-template-columns: repeat(2, 1fr); }
+        .ni-featured {
+            grid-template-columns: 1fr;
+        }
+
+        .ni-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
     }
 
     @@media (max-width: 600px) {
-        .ni-grid { grid-template-columns: 1fr; }
-        .ni-hero { height: 280px; }
-        .ni-content-wrapper { padding: 2rem 1.25rem 3.5rem; }
+        .ni-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .ni-hero {
+            height: 280px;
+        }
+
+        .ni-content-wrapper {
+            padding: 2rem 1.25rem 3.5rem;
+        }
     }
 </style>
 
@@ -448,6 +489,31 @@
     </div>
 
     <div class="ni-grid" data-grid="company-news">
+
+        <!-- ★ NEW: Dato' Dr. Roslan — MOSVA President Appointment -->
+        <a href="/News/MOSVAPresident2026" class="ni-card" data-category="award">
+            <div class="ni-thumb-wrap">
+                <img src="/images/news/congrats_dato.jpg"
+                     alt="Congratulations Dato' Dr. Roslan Ahmad — MOSVA President"
+                     class="ni-thumb"
+                     width="400" height="200"
+                     loading="lazy"
+                     decoding="async" />
+                <span class="ni-cat-pill award">🏆 Award</span>
+                <div class="ni-hover-overlay"><span class="ni-read-label">Read More →</span></div>
+            </div>
+            <div class="ni-card-body">
+                <div class="ni-card-source">MOSVA</div>
+                <div class="ni-card-meta">
+                    <span>2026</span>
+                    <div class="ni-card-meta-dot"></div>
+                    <span>Industry Leadership</span>
+                </div>
+                <div class="ni-card-title">Congratulations to Dato' Dr. Roslan Ahmad on His Appointment as MOSVA President</div>
+                <div class="ni-card-excerpt">Synergy Marine extends heartfelt congratulations to our Managing Director on his appointment as President of the Malaysia OSV Owners' Association (MOSVA) — a testament to his leadership and long-standing contributions to Malaysia's maritime industry.</div>
+                <span class="ni-card-cta">Read More →</span>
+            </div>
+        </a>
 
         <a href="/News/OfficiallyOnline" class="ni-card" data-category="company">
             <div class="ni-thumb-wrap">
@@ -559,7 +625,32 @@
 
     <div class="ni-grid" data-grid="events">
 
-         <a href="/News/MOSVAMembership2026" class="ni-card" data-category="event">
+        <!-- ★ NEW: MOSVA AGM 2026 -->
+        <a href="/News/MOSVAAGM2026" class="ni-card" data-category="event">
+            <div class="ni-thumb-wrap">
+                <img src="/images/news/mosva_agm_2026.jpg"
+                     alt="MOSVA Annual General Meeting 2026"
+                     class="ni-thumb"
+                     width="400" height="200"
+                     loading="lazy"
+                     decoding="async" />
+                <span class="ni-cat-pill event">📌 Event</span>
+                <div class="ni-hover-overlay"><span class="ni-read-label">Read More →</span></div>
+            </div>
+            <div class="ni-card-body">
+                <div class="ni-card-source">MOSVA</div>
+                <div class="ni-card-meta">
+                    <span>2026</span>
+                    <div class="ni-card-meta-dot"></div>
+                    <span>Annual General Meeting</span>
+                </div>
+                <div class="ni-card-title">MOSVA Annual General Meeting 2026 — A New Leadership Chapter</div>
+                <div class="ni-card-excerpt">Synergy Marine was honoured to attend the MOSVA AGM 2026, marking a new leadership era with Dato' Dr. Roslan Ahmad elected as MOSVA President alongside the newly appointed EXCO line-up, preceded by technical presentations from MPM, PETRONAS, Caterpillar, and industry partners.</div>
+                <span class="ni-card-cta">Read More →</span>
+            </div>
+        </a>
+@* 
+        <a href="/News/MOSVAMembership2026" class="ni-card" data-category="event">
             <div class="ni-thumb-wrap">
                 <img src="/images/news/mosva2026.jpg"
                      alt="MOSVA Certificate of Membership 2026"
@@ -581,10 +672,9 @@
                 <div class="ni-card-excerpt">Synergy Marine (M) Sdn Bhd confirms its continued Ordinary Membership with the Malaysia OSV Owners' Association (MOSVA), valid from 1st January to 31st December 2026 — a proud member since 22nd May 2020.</div>
                 <span class="ni-card-cta">Read More →</span>
             </div>
-        </a>
- 
+        </a> *@
 
-           <a href="/News/OGSEPartnersDay2026" class="ni-card" data-category="event">
+        <a href="/News/OGSEPartnersDay2026" class="ni-card" data-category="event">
             <div class="ni-thumb-wrap">
                 <img src="/images/news/ogse_partners_day_2026.jpg"
                      alt="PETRONAS OGSE Partners Day 2026"
@@ -607,7 +697,6 @@
                 <span class="ni-card-cta">Read More →</span>
             </div>
         </a>
- 
 
         <a href="/News/TotalEnergiesSuppliersDay2025" class="ni-card" data-category="event">
             <div class="ni-thumb-wrap">
@@ -875,38 +964,10 @@
             </div>
         </a>
 
-      @*   <a href="/News/OSJ" class="ni-card" data-category="media">
-            <div class="ni-thumb-wrap">
-                <img src="/images/news/Offshore_Support_Journal.jpg"
-                     alt="Offshore Support Journal"
-                     class="ni-thumb"
-                     width="400" height="200"
-                     loading="lazy"
-                     decoding="async" />
- *@
-     @*    <!-- Focus Malaysia -->
-        <a href="/News/FM" class="ni-card" data-category="press">
-            <div class="ni-thumb-wrap">
-                <img src="/images/news/Focus Malaysia.jpg" alt="Focus Malaysia" class="ni-thumb" />
-                <span class="ni-cat-pill press">📰 Press</span>
-                <div class="ni-hover-overlay"><span class="ni-read-label">Read More →</span></div>
-            </div>
-            <div class="ni-card-body">
-                <div class="ni-card-source">Focus Malaysia</div>
-                <div class="ni-card-meta">
-                    <span>November 15, 2018</span>
-                </div>
-                <div class="ni-card-title">Malaysia's first LNG-powered vessel shipbuilding</div>
-                <div class="ni-card-excerpt">A milestone moment as Malaysia embarks on building its first LNG-powered platform supply vessel through a three-party collaboration.</div>
-                <span class="ni-card-cta">Read More →</span>
-            </div>
-        </a>
- *@
         <!-- Offshore Support Journal -->
         <a href="/News/OSJ" class="ni-card" data-category="media">
             <div class="ni-thumb-wrap">
                 <img src="/images/news/Offshore_Support_Journal.jpg" alt="Offshore Support Journal" class="ni-thumb" />
-
                 <span class="ni-cat-pill media">🌐 International</span>
                 <div class="ni-hover-overlay"><span class="ni-read-label">Read More →</span></div>
             </div>
@@ -994,7 +1055,6 @@
                 <span class="ni-card-cta">Read More →</span>
             </div>
         </a>
-       
 
     </div>
 

@@ -153,7 +153,19 @@ namespace synergymarine_v1.Controllers
 
         }
 
+        public IActionResult MOSVAPresident2026()
+        {
+            return View();
+
+        }
         
+
+                    public IActionResult MOSVAAGM2026()
+        {
+            return View();
+
+        }
+
     }
 
 
